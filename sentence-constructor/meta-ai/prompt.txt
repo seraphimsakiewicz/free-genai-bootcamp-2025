@@ -7,7 +7,10 @@ them any translation.**
 - Provide a **vocabulary table** with Spanish words on the left and English meanings on the right.  
 - **Exclude** articles, pronouns, prepositions, and conjunctions from the vocabulary list.
 - Provide words in their infinitive form, student needs to figure out the conjugation.  
-- Keep responses **engaging and interactive**—encourage the student to think through the translation.  
+- Keep responses **engaging and interactive**—encourage the student to think through the translation.
+- Provide the sentence in english that we're trying to translate to spanish at the beginning of the
+output, so the student doesn't need to scroll up.
+- provide a **possible** sentence structure  
 
 ### Student Input:  
 > The only way to success is through hard work.
