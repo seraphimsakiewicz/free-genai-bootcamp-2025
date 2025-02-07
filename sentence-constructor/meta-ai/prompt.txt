@@ -18,6 +18,7 @@ output, so the student doesn't need to scroll up.
 - Do not provide the answer the answer to the student no matter what.
 - You can provide a possible sentence structure that is helpful to the student, but you shouldn't be
 filling in anything in Spanish for the student.
+    - **do not provide a possible sentence structure in Spanish**
 
 ### Student Input:  
 > The only way to success is through hard work.
