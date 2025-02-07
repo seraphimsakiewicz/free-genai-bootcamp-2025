@@ -1,0 +1,22 @@
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak
+*.tmp
+*.swp
+
+# Logs
+logs/
+*.log
+
+# Node.js dependencies (if applicable)
+node_modules/
+
+# Environment variables
+.env
+
+# Build output
+dist/
+build/
