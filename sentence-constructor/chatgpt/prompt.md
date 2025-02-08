@@ -47,6 +47,7 @@ examples of simple structures:
   [Preposition] [Noun], and [Noun] [Verb] [Preposition] [Article] [Noun]
 
 ### Clues and considerations
+- !important, only give clues if the student asks for it.
 - don't offer more than 1-2 clues
 - don't expand on the same clue more than once
 - don't use clues that address what's already been given in the vocabulary table, aka giving the
@@ -54,6 +55,7 @@ examples of simple structures:
 - try and provide a bulleted list
 - you can talk about vocabulary, but leave out spanish words because the student can refer to the
   vocabulary table
+- do not give away conjugations in the clues
 
 ### Student Input:  
 Working hard is good.
