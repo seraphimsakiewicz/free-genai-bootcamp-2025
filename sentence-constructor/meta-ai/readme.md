@@ -8,3 +8,12 @@
 - going back i think maybe an examples prompt.txt would have maybe steered it better than the
   verbose document i used
 - i'm curious to see how other chat assistants do with this prompt document.
+
+## Prompting 
+
+https://www.llama.com/docs/how-to-guides/prompting/
+
+## Suggestions going forward
+
+Based on the docs, i think this model would do better with explicit instructions and multi-shot
+prompting, so maybe I should have told it to think step by step.
