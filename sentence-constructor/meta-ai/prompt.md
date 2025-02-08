@@ -30,12 +30,14 @@ Formatted output will contain three parts
 
 ### Sentence Structure
 - do not provide tenses or conjugations in the sentence structure
-- remember to ensure the sentences are per the given level above.
+- remember to ensure the sentences will be given in a B1 level of Spanish.
+- do not provide spanish translations in the sentence structures
+- only provide the conceptual examples being pointed to in the examples below
 
 examples of simple structures:
-- The bird is black -> [Article] [Noun] [Verb] [Noun]
-- Put the garbage in the garden. -> [Verb] [Article] [Preposition] [Article] [Noun]
-- The raven is looking at the garden, and it is looking at the flowers.  [Article] [Noun] [Verb] [Verb] [Preposition] [Object], and [Subject] [Verb] [Preposition] [Object].
+- El pájaro es negro. -> [Article] [Noun] [Verb] [Adjective]
+- Ponga la basura en el jardín. -> [Verb] [Article] [Noun] [Preposition] [Article] [Noun]
+- El cuervo está mirando al jardín, y él mira a las flores. -> [Article] [Noun] [Verb] [Verb] [Preposition] [Object], and [Subject] [Verb] [Preposition] [Object]
 
 ### Clues and considerations
 - don't offer more than 1-2 clues
@@ -47,4 +49,4 @@ examples of simple structures:
   vocabulary table
 
 ### Student Input:  
-The only way to success is through hard work.
+Working hard is good.
