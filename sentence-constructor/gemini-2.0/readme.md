@@ -13,7 +13,8 @@ https://support.google.com/a/users/answer/14200040?hl=en
 
 ## Chat Assistant
 
-I used https://t3.chat/chat and set it to flash lite preview there.
+I used https://t3.chat/chat and set it to flash lite preview there. He offers unlimited free chats
+with flash lite there since it's so cheap, I just had to make an account.
 
 For some reason, Google only wants you to try Flash Lite in their AI studio which gives you more
 control than we need for the scope of this assignment. 
