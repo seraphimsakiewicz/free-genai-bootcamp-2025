@@ -62,6 +62,6 @@ Your output must be in **two parts**:
 -   Inform the student they can ask for a clue if needed.
 ---
 
-### Example Student Input
+### Student Input
 
 **Working hard is good.**
