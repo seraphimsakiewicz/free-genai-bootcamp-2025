@@ -156,6 +156,8 @@ def load(app):
       return jsonify({"error": str(e)}), 500
 
   # todo GET /groups/:id/words/raw
+  # responsible for providing a payload to the language apps that we're using such as on / ?group_id={}&session_id={}
+  # returns JSON structure of raw json data for the language apps to use
 
   @app.route('/groups/<int:id>/study_sessions', methods=['GET'])
   @cross_origin()

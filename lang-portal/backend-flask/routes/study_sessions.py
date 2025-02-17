@@ -5,6 +5,7 @@ import math
 
 def load(app):
   # todo /study_sessions POST
+  # creates a study session in the database to track the words that the user has reviewed
 
   @app.route('/api/study-sessions', methods=['GET'])
   @cross_origin()
@@ -152,7 +153,7 @@ def load(app):
       return jsonify({"error": str(e)}), 500
 
   # todo POST /study_sessions/:id/review
-
+# what the language learning app reports back to submit whether an answer was right or wrong.
   @app.route('/api/study-sessions/reset', methods=['POST'])
   @cross_origin()
   def reset_study_sessions():
