@@ -27,7 +27,7 @@ export default function Breadcrumbs() {
   const location = useLocation()
   const { currentGroup, currentWord, currentStudyActivity } = useNavigation()
   const pathnames = location.pathname.split('/').filter((x) => x)
-  
+
   // If we're at root, show dashboard
   if (pathnames.length === 0) {
     pathnames.push('')
@@ -35,13 +35,13 @@ export default function Breadcrumbs() {
 
   const breadcrumbItems = pathnames.map((name, index) => {
     let displayName = routeMappings[name] || name
-    
+
     // Use group, word, or activity name for the last item if available
     if (index === pathnames.length - 1 || (name !== 'launch' && index === pathnames.length - 2)) {
       if (currentGroup && name === currentGroup.id.toString()) {
         displayName = currentGroup.group_name
       } else if (currentWord && name === currentWord.id.toString()) {
-        displayName = currentWord.kanji
+        displayName = currentWord.spanish
       } else if (currentStudyActivity && name === currentStudyActivity.id.toString()) {
         displayName = currentStudyActivity.title
       }

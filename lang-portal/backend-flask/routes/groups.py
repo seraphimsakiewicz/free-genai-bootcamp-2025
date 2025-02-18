@@ -113,7 +113,7 @@ def load(app):
 
       # Query to fetch words with pagination and sorting
       cursor.execute(f'''
-        SELECT w.*, 
+        SELECT w.id, w.spanish, w.pronunciation, w.english, w.parts_of_speech,
                COALESCE(wr.correct_count, 0) as correct_count,
                COALESCE(wr.wrong_count, 0) as wrong_count
         FROM words w
@@ -140,9 +140,10 @@ def load(app):
       for word in words:
         words_data.append({
           "id": word["id"],
-          "kanji": word["kanji"],
-          "romaji": word["romaji"],
+          "spanish": word["spanish"],
+          "pronunciation": word["pronunciation"],
           "english": word["english"],
+          "parts_of_speech": word["parts_of_speech"],
           "correct_count": word["correct_count"],
           "wrong_count": word["wrong_count"]
         })

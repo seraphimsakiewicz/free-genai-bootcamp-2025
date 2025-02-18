@@ -8,7 +8,7 @@ Frontend Developer
 
 We are building a japanese langauge learning web-app which serves the following purposes:
 - A portal to launch study activities
-- to store, group and explore japanese vocabulary
+- to store, group and explore Spanish vocabulary
 - to review study progress
 
 The web-app is intended for desktop only, so we don't have to be concerned with mobile layouts.
@@ -23,18 +23,10 @@ The web-app is intended for desktop only, so we don't have to be concerned with 
 
 ## Frontend Routes
 
-This is a list of routes for our web-app we are building
-Each of these routes are a page and we'll describe them
-in more details under the pages heading.
+This is a list of routes for our web-app we are building Each of these routes are a page and we'll
+describe them in more details under the pages heading.
 
-/dashboard
-/study-activties
-/study-activties/:id
-/words
-/words/:id
-/groups
-/groups/:id
-/sessions
+/dashboard /study-activties /study-activties/:id /words /words/:id /groups /groups/:id /sessions
 /settings
 
 The default route / should forward to /dashboard
@@ -53,14 +45,11 @@ There will be a horizontal navigation bar with the following links:
 
 ### Breadcrumbs
 
-Beneath the navigation there will be breadcrumbs so users can easily
-see where they are. Examples of breadcrumbs
+Beneath the navigation there will be breadcrumbs so users can easily see where they are. Examples of
+breadcrumbs
 
-Dashboard
-Study Activities > Adventure MUD
-Study Activities > Typing Tutor
-Words > 始める
-Word Groups > Core Verbs
+Dashboard Study Activities > Adventure MUD Study Activities > Typing Tutor Words > To Start Word
+Groups > Core Verbs
 
 ## Pages
 
@@ -82,14 +71,13 @@ A card has a:
 - "Launch" button
 - "View" button
 
-The Launch button will open a new address in a new tab.
-Study activities are their own apps, but in order for them
-to launch they need to be provided a group_id
+The Launch button will open a new address in a new tab. Study activities are their own apps, but in
+order for them to launch they need to be provided a group_id
 
 eg. localhost:8081?group_id=4
 
-This page requires no pagination because there is unlikely
-to be more than 20 possible study actvities
+This page requires no pagination because there is unlikely to be more than 20 possible study
+actvities
 
 The View button will go to the Student Activities Show Page.
 
@@ -116,10 +104,10 @@ There will be a list of sessions for this study activity
 The route for this page /words
 
 This is table of words with the following cells:
-- Japanese: The japanese word with Kanji
+- Spanish: The Spanish word
   - This will also contain a small button to play the sound of the word
-  - The japanese word will be a link to the Words Show page
-- Romaji: The romaji version of the word
+  - The Spanish word will be a link to the Words Show page
+- Pronunciation: The pronunciation of the word
 - English: The english version of the word
 - \# Correct: Number of correct word review items
 - \# Wrong: Number of wrong word review items
@@ -131,8 +119,9 @@ There needs to be pagination
   - Page 1 of 3: With the current page bolded
   - Next button: greyed ouf if you canno go any further forwarded
 
-All table headings should be sortable, If you click it will toggle between ASC and DESC.
-An ascii arrow should indicate direction and the column being sorted with ASC pointing down and DESC pointing up.
+All table headings should be sortable, If you click it will toggle between ASC and DESC. An ascii
+arrow should indicate direction and the column being sorted with ASC pointing down and DESC pointing
+up.
 
 ## Words Show
 
@@ -153,8 +142,8 @@ This page contains the same sorting and paginating logic as the Words Index page
 
 The route for this page /words-groups/:id
 
-This has the same components as Words Index but its scoped to only show
-words that are associated with this group.
+This has the same components as Words Index but its scoped to only show words that are associated
+with this group.
 
 ## Sessions Index
 
@@ -168,7 +157,7 @@ This page contains the same sorting and paginating logic as the Words Index page
 
 The route for this page /settings
 
-Reset History Button: This has a button that allows us to reset the entire database.
-We need to confirm this action in a dialog and type the word reset me to confirm.
+Reset History Button: This has a button that allows us to reset the entire database. We need to
+confirm this action in a dialog and type the word reset me to confirm.
 
 Dark Mode Toggle: This is a toggle that changes from light to dark theme.

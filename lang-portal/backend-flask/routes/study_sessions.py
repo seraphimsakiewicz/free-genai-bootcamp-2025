@@ -102,14 +102,18 @@ def load(app):
       # Get the words reviewed in this session with their review status
       cursor.execute('''
         SELECT 
-          w.*,
+          w.id,
+          w.spanish,
+          w.pronunciation,
+          w.english,
+          w.parts_of_speech,
           COALESCE(SUM(CASE WHEN wri.correct = 1 THEN 1 ELSE 0 END), 0) as session_correct_count,
           COALESCE(SUM(CASE WHEN wri.correct = 0 THEN 1 ELSE 0 END), 0) as session_wrong_count
         FROM words w
         JOIN word_review_items wri ON wri.word_id = w.id
         WHERE wri.study_session_id = ?
         GROUP BY w.id
-        ORDER BY w.kanji
+        ORDER BY w.spanish
         LIMIT ? OFFSET ?
       ''', (id, per_page, offset))
       
@@ -138,9 +142,10 @@ def load(app):
         },
         'words': [{
           'id': word['id'],
-          'kanji': word['kanji'],
-          'romaji': word['romaji'],
+          'spanish': word['spanish'],
+          'pronunciation': word['pronunciation'],
           'english': word['english'],
+          'parts_of_speech': word['parts_of_speech'],
           'correct_count': word['session_correct_count'],
           'wrong_count': word['session_wrong_count']
         } for word in words],

@@ -13,7 +13,7 @@ export default function WordShow() {
   useEffect(() => {
     const loadWord = async () => {
       if (!id) return
-      
+
       setIsLoading(true)
       setError(null)
       try {
@@ -60,13 +60,13 @@ export default function WordShow() {
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
         <div className="p-6 space-y-4">
           <div>
-            <h2 className="text-lg font-semibold text-gray-800 dark:text-white">Japanese</h2>
-            <p className="mt-1 text-3xl text-gray-600 dark:text-gray-300">{word.kanji}</p>
+            <h2 className="text-lg font-semibold text-gray-800 dark:text-white">Spanish</h2>
+            <p className="mt-1 text-3xl text-gray-600 dark:text-gray-300">{word.spanish}</p>
           </div>
 
           <div>
-            <h2 className="text-lg font-semibold text-gray-800 dark:text-white">Romaji</h2>
-            <p className="mt-1 text-xl text-gray-600 dark:text-gray-300">{word.romaji}</p>
+            <h2 className="text-lg font-semibold text-gray-800 dark:text-white">Pronunciation</h2>
+            <p className="mt-1 text-xl text-gray-600 dark:text-gray-300">{word.pronunciation}</p>
           </div>
 
           <div>

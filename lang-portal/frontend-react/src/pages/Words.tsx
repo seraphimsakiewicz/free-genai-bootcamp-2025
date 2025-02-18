@@ -4,7 +4,7 @@ import WordsTable, { WordSortKey } from '../components/WordsTable'
 
 export default function Words() {
   const [words, setWords] = useState<Word[]>([])
-  const [sortKey, setSortKey] = useState<WordSortKey>('kanji')
+  const [sortKey, setSortKey] = useState<WordSortKey>('spanish')
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
@@ -50,8 +50,8 @@ export default function Words() {
   return (
     <div className="space-y-4">
       <h1 className="text-2xl font-bold text-gray-800 dark:text-white">Words</h1>
-      
-      <WordsTable 
+
+      <WordsTable
         words={words}
         sortKey={sortKey}
         sortDirection={sortDirection}

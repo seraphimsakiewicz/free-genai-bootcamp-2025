@@ -3,7 +3,7 @@ import json
 from flask import g
 
 class Db:
-  def __init__(self, database='words.db'):
+  def __init__(self, database='instance/words.db'):
     self.database = database
     self.connection = None
 
@@ -38,25 +38,36 @@ class Db:
 
   def setup_tables(self,cursor):
     # Create the necessary tables
+    print("Checking database connection...")
+    test_cursor = self.get().cursor()
+    test_cursor.execute("PRAGMA database_list;")  # Lists active databases
+    print("Active databases:", test_cursor.fetchall())
+    print("Running setup_tables...")
     cursor.execute(self.sql('setup/create_table_words.sql'))
+    print("create_table_words.sql executed")
     self.get().commit()
 
     cursor.execute(self.sql('setup/create_table_word_reviews.sql'))
+    print("create_table_word_reviews.sql executed")
     self.get().commit()
 
     cursor.execute(self.sql('setup/create_table_word_review_items.sql'))
+    print("create_table_word_review_items.sql executed")
     self.get().commit()
 
     cursor.execute(self.sql('setup/create_table_groups.sql'))
     self.get().commit()
 
     cursor.execute(self.sql('setup/create_table_word_groups.sql'))
+    print("create_table_word_groups.sql executed")
     self.get().commit()
 
     cursor.execute(self.sql('setup/create_table_study_activities.sql'))
+    print("create_table_study_activities.sql executed")
     self.get().commit()
 
     cursor.execute(self.sql('setup/create_table_study_sessions.sql'))
+    print("create_table_study_sessions.sql executed")
     self.get().commit()
 
   def import_study_activities_json(self,cursor,data_json_path):
@@ -80,12 +91,15 @@ class Db:
 
       # Insert some sample words (verbs) from JSON file and associate with the group
       words = self.load_json(data_json_path)
+      
+      # breakpoint()
+      # print('words', words)
 
       for word in words:
         # Insert the word into the words table
         cursor.execute('''
-          INSERT INTO words (kanji, romaji, english, parts) VALUES (?, ?, ?, ?)
-        ''', (word['kanji'], word['romaji'], word['english'], json.dumps(word['parts'])))
+          INSERT INTO words (spanish, pronunciation, english, parts_of_speech) VALUES (?, ?, ?, ?)
+        ''', (word['spanish'], word['pronunciation'], word['english'], json.dumps(word['parts_of_speech'])))
         
         # Get the last inserted word's ID
         word_id = cursor.lastrowid

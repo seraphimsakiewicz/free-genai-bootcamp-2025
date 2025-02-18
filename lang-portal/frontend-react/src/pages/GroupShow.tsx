@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { 
-  fetchGroupDetails, 
-  fetchGroupStudySessions, 
+import {
+  fetchGroupDetails,
+  fetchGroupStudySessions,
   fetchGroupWords,
-  type GroupDetails, 
+  type GroupDetails,
   type StudySession,
   type StudySessionSortKey,
-  type Word 
+  type Word
 } from '../services/api'
 import WordsTable, { type WordSortKey } from '../components/WordsTable'
 import StudySessionsTable from '../components/StudySessionsTable'
@@ -20,7 +20,7 @@ export default function GroupShow() {
   const { setCurrentGroup } = useNavigation()
   const [words, setWords] = useState<Word[]>([])
   const [studySessions, setStudySessions] = useState<StudySession[]>([])
-  const [wordSortKey, setWordSortKey] = useState<WordSortKey>('kanji')
+  const [wordSortKey, setWordSortKey] = useState<WordSortKey>('spanish')
   const [wordSortDirection, setWordSortDirection] = useState<'asc' | 'desc'>('asc')
   const [sessionSortKey, setSessionSortKey] = useState<StudySessionSortKey>('startTime')
   const [sessionSortDirection, setSessionSortDirection] = useState<'asc' | 'desc'>('desc')
@@ -34,14 +34,14 @@ export default function GroupShow() {
   useEffect(() => {
     const loadData = async () => {
       if (!id) return
-      
+
       setIsLoading(true)
       setError(null)
       try {
         const groupData = await fetchGroupDetails(parseInt(id, 10))
         setGroup(groupData)
         setCurrentGroup(groupData)
-        
+
         const [wordsData, sessionsData] = await Promise.all([
           fetchGroupWords(
             parseInt(id, 10),
@@ -56,7 +56,7 @@ export default function GroupShow() {
             sessionSortDirection
           )
         ])
-        
+
         setWords(wordsData.words)
         setWordsTotalPages(wordsData.total_pages)
         setStudySessions(sessionsData.study_sessions)
