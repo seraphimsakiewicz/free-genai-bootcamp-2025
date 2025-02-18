@@ -4,8 +4,7 @@ from datetime import datetime
 import math
 
 def load(app):
-  # todo /study_sessions POST
-  # creates a study session in the database to track the words that the user has reviewed
+
 
   @app.route('/api/study-sessions', methods=['GET'])
   @cross_origin()
@@ -20,30 +19,19 @@ def load(app):
 
       # Get total count
       cursor.execute('''
-        SELECT COUNT(*) as count 
-        FROM study_sessions ss
-        JOIN groups g ON g.id = ss.group_id
-        JOIN study_activities sa ON sa.id = ss.study_activity_id
+        SELECT COUNT(*) as count FROM study_sessions ss JOIN groups g ON g.id = ss.group_id JOIN
+        study_activities sa ON sa.id = ss.study_activity_id
       ''')
       total_count = cursor.fetchone()['count']
 
       # Get paginated sessions
       cursor.execute('''
         SELECT 
-          ss.id,
-          ss.group_id,
-          g.name as group_name,
-          sa.id as activity_id,
-          sa.name as activity_name,
-          ss.created_at,
-          COUNT(wri.id) as review_items_count
-        FROM study_sessions ss
-        JOIN groups g ON g.id = ss.group_id
-        JOIN study_activities sa ON sa.id = ss.study_activity_id
-        LEFT JOIN word_review_items wri ON wri.study_session_id = ss.id
-        GROUP BY ss.id
-        ORDER BY ss.created_at DESC
-        LIMIT ? OFFSET ?
+          ss.id, ss.group_id, g.name as group_name, sa.id as activity_id, sa.name as activity_name,
+          ss.created_at, COUNT(wri.id) as review_items_count
+        FROM study_sessions ss JOIN groups g ON g.id = ss.group_id JOIN study_activities sa ON sa.id
+        = ss.study_activity_id LEFT JOIN word_review_items wri ON wri.study_session_id = ss.id GROUP
+        BY ss.id ORDER BY ss.created_at DESC LIMIT ? OFFSET ?
       ''', (per_page, offset))
       sessions = cursor.fetchall()
 
@@ -75,19 +63,11 @@ def load(app):
       # Get session details
       cursor.execute('''
         SELECT 
-          ss.id,
-          ss.group_id,
-          g.name as group_name,
-          sa.id as activity_id,
-          sa.name as activity_name,
-          ss.created_at,
-          COUNT(wri.id) as review_items_count
-        FROM study_sessions ss
-        JOIN groups g ON g.id = ss.group_id
-        JOIN study_activities sa ON sa.id = ss.study_activity_id
-        LEFT JOIN word_review_items wri ON wri.study_session_id = ss.id
-        WHERE ss.id = ?
-        GROUP BY ss.id
+          ss.id, ss.group_id, g.name as group_name, sa.id as activity_id, sa.name as activity_name,
+          ss.created_at, COUNT(wri.id) as review_items_count
+        FROM study_sessions ss JOIN groups g ON g.id = ss.group_id JOIN study_activities sa ON sa.id
+        = ss.study_activity_id LEFT JOIN word_review_items wri ON wri.study_session_id = ss.id WHERE
+        ss.id = ? GROUP BY ss.id
       ''', (id,))
       
       session = cursor.fetchone()
@@ -102,29 +82,19 @@ def load(app):
       # Get the words reviewed in this session with their review status
       cursor.execute('''
         SELECT 
-          w.id,
-          w.spanish,
-          w.pronunciation,
-          w.english,
-          w.parts_of_speech,
-          COALESCE(SUM(CASE WHEN wri.correct = 1 THEN 1 ELSE 0 END), 0) as session_correct_count,
-          COALESCE(SUM(CASE WHEN wri.correct = 0 THEN 1 ELSE 0 END), 0) as session_wrong_count
-        FROM words w
-        JOIN word_review_items wri ON wri.word_id = w.id
-        WHERE wri.study_session_id = ?
-        GROUP BY w.id
-        ORDER BY w.spanish
-        LIMIT ? OFFSET ?
+          w.id, w.spanish, w.pronunciation, w.english, w.parts_of_speech, COALESCE(SUM(CASE WHEN
+          wri.correct = 1 THEN 1 ELSE 0 END), 0) as session_correct_count, COALESCE(SUM(CASE WHEN
+          wri.correct = 0 THEN 1 ELSE 0 END), 0) as session_wrong_count
+        FROM words w JOIN word_review_items wri ON wri.word_id = w.id WHERE wri.study_session_id = ?
+        GROUP BY w.id ORDER BY w.spanish LIMIT ? OFFSET ?
       ''', (id, per_page, offset))
       
       words = cursor.fetchall()
 
       # Get total count of words
       cursor.execute('''
-        SELECT COUNT(DISTINCT w.id) as count
-        FROM words w
-        JOIN word_review_items wri ON wri.word_id = w.id
-        WHERE wri.study_session_id = ?
+        SELECT COUNT(DISTINCT w.id) as count FROM words w JOIN word_review_items wri ON wri.word_id
+        = w.id WHERE wri.study_session_id = ?
       ''', (id,))
       
       total_count = cursor.fetchone()['count']
@@ -174,5 +144,47 @@ def load(app):
       app.db.commit()
       
       return jsonify({"message": "Study history cleared successfully"}), 200
+    except Exception as e:
+      return jsonify({"error": str(e)}), 500
+
+  @app.route('/api/study-sessions', methods=['POST'])
+  @cross_origin()
+  def create_study_session():
+    try:
+      # Get JSON data from request
+      data = request.get_json()
+      
+      # Validate required fields
+      if 'group_id' not in data or 'study_activity_id' not in data:
+        return jsonify({"error": "Missing required fields: group_id and study_activity_id"}), 400
+            
+      group_id = data['group_id']
+      study_activity_id = data['study_activity_id']
+      
+      cursor = app.db.cursor()
+      
+      # Verify that group exists
+      cursor.execute('SELECT id FROM groups WHERE id = ?', (group_id,))
+      if not cursor.fetchone():
+        return jsonify({"error": "Group not found"}), 404
+            
+      # Verify that study activity exists
+      cursor.execute('SELECT id FROM study_activities WHERE id = ?', (study_activity_id,))
+      if not cursor.fetchone():
+        return jsonify({"error": "Study activity not found"}), 404
+            
+      # Create new study session
+      cursor.execute('''
+        INSERT INTO study_sessions (group_id, study_activity_id) VALUES (?, ?)
+      ''', (group_id, study_activity_id))
+      
+      # Get the ID of the newly created session
+      session_id = cursor.lastrowid
+      
+      # Commit the transaction
+      app.db.commit()
+      
+      return jsonify({"session_id": session_id}), 201
+      
     except Exception as e:
       return jsonify({"error": str(e)}), 500

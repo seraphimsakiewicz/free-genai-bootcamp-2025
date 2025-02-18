@@ -157,8 +157,85 @@ def load(app):
       return jsonify({"error": str(e)}), 500
 
   # todo GET /groups/:id/words/raw
-  # responsible for providing a payload to the language apps that we're using such as on / ?group_id={}&session_id={}
+  # responsible for providing a payload to the language apps that we're using such as on /
+  # ?group_id={}&session_id={} (on the frontend)
   # returns JSON structure of raw json data for the language apps to use
+  @app.route('/groups/<int:id>/words/raw', methods=['GET'])
+  @cross_origin()
+  def get_group_words_raw(id):
+      try:
+          cursor = app.db.cursor()
+          session_id = request.args.get('session_id')
+
+          # First, check if the group exists
+          cursor.execute('SELECT name FROM groups WHERE id = ?', (id,))
+          group = cursor.fetchone()
+          if not group:
+              return jsonify({"error": "Group not found"}), 404
+
+          # If session_id is provided, verify it exists and belongs to this group
+          if session_id:
+              cursor.execute('''
+                  SELECT id FROM study_sessions 
+                  WHERE id = ? AND group_id = ?
+              ''', (session_id, id))
+              if not cursor.fetchone():
+                  return jsonify({"error": "Invalid session ID for this group"}), 404
+
+          # Get all words for this group with their review history
+          cursor.execute('''
+              SELECT 
+                  w.id,
+                  w.spanish,
+                  w.pronunciation,
+                  w.english,
+                  w.parts_of_speech,
+                  COALESCE(wr.correct_count, 0) as total_correct_count,
+                  COALESCE(wr.wrong_count, 0) as total_wrong_count,
+                  COALESCE(ss_reviews.correct_count, 0) as session_correct_count,
+                  COALESCE(ss_reviews.wrong_count, 0) as session_wrong_count
+              FROM words w
+              JOIN word_groups wg ON w.id = wg.word_id
+              LEFT JOIN word_reviews wr ON w.id = wr.word_id
+              LEFT JOIN (
+                  SELECT 
+                      word_id,
+                      SUM(CASE WHEN correct = 1 THEN 1 ELSE 0 END) as correct_count,
+                      SUM(CASE WHEN correct = 0 THEN 1 ELSE 0 END) as wrong_count
+                  FROM word_review_items
+                  WHERE study_session_id = ?
+                  GROUP BY word_id
+              ) ss_reviews ON w.id = ss_reviews.word_id
+              WHERE wg.group_id = ?
+              ORDER BY w.spanish
+          ''', (session_id if session_id else None, id))
+          
+          words = cursor.fetchall()
+
+          return jsonify({
+              'group_id': id,
+              'group_name': group['name'],
+              'session_id': session_id,
+              'words': [{
+                  'id': word['id'],
+                  'spanish': word['spanish'],
+                  'pronunciation': word['pronunciation'],
+                  'english': word['english'],
+                  'parts_of_speech': word['parts_of_speech'],
+                  'stats': {
+                      'total': {
+                          'correct': word['total_correct_count'],
+                          'wrong': word['total_wrong_count']
+                      },
+                      'session': {
+                          'correct': word['session_correct_count'],
+                          'wrong': word['session_wrong_count']
+                      }
+                  }
+              } for word in words]
+          })
+      except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
   @app.route('/groups/<int:id>/study_sessions', methods=['GET'])
   @cross_origin()

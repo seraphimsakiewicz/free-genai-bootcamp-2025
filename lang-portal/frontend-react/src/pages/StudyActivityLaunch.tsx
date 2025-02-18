@@ -63,22 +63,25 @@ export default function StudyActivityLaunch() {
 
   const handleLaunch = async () => {
     if (!launchData?.activity || !selectedGroup) return;
-    
+
     try {
       // Create a study session first
       const result = await createStudySession(parseInt(selectedGroup), launchData.activity.id);
       const sessionId = result.session_id;
-      
+
       // Replace any instances of $group_id with the actual group id and add session_id
       const launchUrl = new URL(launchData.activity.launch_url);
       launchUrl.searchParams.set('group_id', selectedGroup);
       launchUrl.searchParams.set('session_id', sessionId.toString());
-      
-      // Open the modified URL in a new tab
-      window.open(launchUrl.toString(), '_blank');
-      
-      // Navigate to the session show page
-      navigate(`/sessions/${sessionId}`);
+
+       // Debug log
+       console.log('Attempting to launch activity at URL:', launchUrl.toString());
+
+      // Navigate to the launch URL in the same window instead of opening a new tab
+      window.location.href = launchUrl.toString();
+
+      // Note: The navigation to sessions/${sessionId} won't happen now since we're redirecting the
+      // current window to the launch URL
     } catch (error) {
       console.error('Failed to launch activity:', error);
     }
@@ -99,7 +102,7 @@ export default function StudyActivityLaunch() {
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       <h1 className="text-2xl font-bold">{launchData.activity.title}</h1>
-      
+
       <div className="space-y-4">
         <div className="space-y-2">
           <label className="text-sm font-medium">Select Word Group</label>
@@ -117,7 +120,7 @@ export default function StudyActivityLaunch() {
           </Select>
         </div>
 
-        <Button 
+        <Button
           onClick={handleLaunch}
           disabled={!selectedGroup}
           className="w-full"

@@ -162,7 +162,7 @@ export const createStudySession = async (
   groupId: number,
   studyActivityId: number
 ): Promise<{ session_id: number }> => {
-  const response = await fetch(`${API_BASE_URL}/study_sessions`, {
+  const response = await fetch(`${API_BASE_URL}/api/study-sessions`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
