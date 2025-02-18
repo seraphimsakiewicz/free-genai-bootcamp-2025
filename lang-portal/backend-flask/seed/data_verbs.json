@@ -140,26 +140,6 @@
     }
   },
   {
-    "spanish": "ir de compras",
-    "pronunciation": "ir de COM-pras",
-    "english": "to shop",
-    "parts_of_speech": {
-      "type": "verb",
-      "conjugation": "irregular",
-      "forms": {
-        "infinitive": "ir de compras",
-        "present": {
-          "yo": "voy de compras",
-          "tú": "vas de compras",
-          "él/ella/usted": "va de compras",
-          "nosotros": "vamos de compras",
-          "vosotros": "vais de compras",
-          "ellos/ellas/ustedes": "van de compras"
-        }
-      }
-    }
-  },
-  {
     "spanish": "volver",
     "pronunciation": "vol-VER",
     "english": "to return",
@@ -195,26 +175,6 @@
           "nosotros": "escribimos",
           "vosotros": "escribís",
           "ellos/ellas/ustedes": "escriben"
-        }
-      }
-    }
-  },
-  {
-    "spanish": "hacer turismo",
-    "pronunciation": "a-cer tu-RIS-mo",
-    "english": "to sightsee",
-    "parts_of_speech": {
-      "type": "verb",
-      "conjugation": "irregular",
-      "forms": {
-        "infinitive": "hacer turismo",
-        "present": {
-          "yo": "hago turismo",
-          "tú": "haces turismo",
-          "él/ella/usted": "hace turismo",
-          "nosotros": "hacemos turismo",
-          "vosotros": "hacéis turismo",
-          "ellos/ellas/ustedes": "hacen turismo"
         }
       }
     }
@@ -275,26 +235,6 @@
           "nosotros": "hacemos",
           "vosotros": "hacéis",
           "ellos/ellas/ustedes": "hacen"
-        }
-      }
-    }
-  },
-  {
-    "spanish": "comer",
-    "pronunciation": "co-MER",
-    "english": "to eat",
-    "parts_of_speech": {
-      "type": "verb",
-      "conjugation": "regular -er",
-      "forms": {
-        "infinitive": "comer",
-        "present": {
-          "yo": "como",
-          "tú": "comes",
-          "él/ella/usted": "come",
-          "nosotros": "comemos",
-          "vosotros": "coméis",
-          "ellos/ellas/ustedes": "comen"
         }
       }
     }
@@ -575,26 +515,6 @@
           "nosotros": "nos encontramos",
           "vosotros": "os encontráis",
           "ellos/ellas/ustedes": "se encuentran"
-        }
-      }
-    }
-  },
-  {
-    "spanish": "bajarse",
-    "pronunciation": "ba-JAR-se",
-    "english": "to get off (vehicle)",
-    "parts_of_speech": {
-      "type": "verb",
-      "conjugation": "reflexive",
-      "forms": {
-        "infinitive": "bajarse",
-        "present": {
-          "yo": "me bajo",
-          "tú": "te bajas",
-          "él/ella/usted": "se baja",
-          "nosotros": "nos bajamos",
-          "vosotros": "os bajáis",
-          "ellos/ellas/ustedes": "se bajan"
         }
       }
     }
@@ -1040,26 +960,6 @@
     }
   },
   {
-    "spanish": "poder ver",
-    "pronunciation": "po-DER ver",
-    "english": "to be able to see",
-    "parts_of_speech": {
-      "type": "verb",
-      "conjugation": "irregular",
-      "forms": {
-        "infinitive": "poder ver",
-        "present": {
-          "yo": "puedo ver",
-          "tú": "puedes ver",
-          "él/ella/usted": "puede ver",
-          "nosotros": "podemos ver",
-          "vosotros": "podéis ver",
-          "ellos/ellas/ustedes": "pueden ver"
-        }
-      }
-    }
-  },
-  {
     "spanish": "hacer",
     "pronunciation": "a-CER",
     "english": "to make",
@@ -1140,26 +1040,6 @@
     }
   },
   {
-    "spanish": "estar en problemas",
-    "pronunciation": "es-TAR en pro-BLE-mas",
-    "english": "to be troubled",
-    "parts_of_speech": {
-      "type": "verb",
-      "conjugation": "irregular",
-      "forms": {
-        "infinitive": "estar en problemas",
-        "present": {
-          "yo": "estoy en problemas",
-          "tú": "estás en problemas",
-          "él/ella/usted": "está en problemas",
-          "nosotros": "estamos en problemas",
-          "vosotros": "estáis en problemas",
-          "ellos/ellas/ustedes": "están en problemas"
-        }
-      }
-    }
-  },
-  {
     "spanish": "nadar",
     "pronunciation": "na-DAR",
     "english": "to swim",
@@ -1215,26 +1095,6 @@
           "nosotros": "conducimos",
           "vosotros": "conducís",
           "ellos/ellas/ustedes": "conducen"
-        }
-      }
-    }
-  },
-  {
-    "spanish": "encontrarse",
-    "pronunciation": "en-con-TRAR-se",
-    "english": "to meet; to fit",
-    "parts_of_speech": {
-      "type": "verb",
-      "conjugation": "reflexive",
-      "forms": {
-        "infinitive": "encontrarse",
-        "present": {
-          "yo": "me encuentro",
-          "tú": "te encuentras",
-          "él/ella/usted": "se encuentra",
-          "nosotros": "nos encontramos",
-          "vosotros": "os encontráis",
-          "ellos/ellas/ustedes": "se encuentran"
         }
       }
     }
