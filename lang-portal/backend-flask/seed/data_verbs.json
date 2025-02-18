@@ -1,572 +1,1242 @@
 [
   {
-    "kanji": "払う",
-    "romaji": "harau",
+    "spanish": "pagar",
+    "pronunciation": "pah-GAHR",
     "english": "to pay",
-    "parts": [
-      { "kanji": "払", "romaji": ["ha","ra"] },
-      { "kanji": "う", "romaji": ["u"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -ar",
+      "forms": {
+        "infinitive": "pagar",
+        "present": {
+          "yo": "pago",
+          "tú": "pagas",
+          "él/ella/usted": "paga",
+          "nosotros": "pagamos",
+          "vosotros": "pagáis",
+          "ellos/ellas/ustedes": "pagan"
+        }
+      }
+    }
   },
   {
-    "kanji": "行く",
-    "romaji": "iku",
+    "spanish": "ir",
+    "pronunciation": "eer",
     "english": "to go",
-    "parts": [
-      { "kanji": "行", "romaji": ["i"] },
-      { "kanji": "く", "romaji": ["ku"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "irregular",
+      "forms": {
+        "infinitive": "ir",
+        "present": {
+          "yo": "voy",
+          "tú": "vas",
+          "él/ella/usted": "va",
+          "nosotros": "vamos",
+          "vosotros": "vais",
+          "ellos/ellas/ustedes": "van"
+        }
+      }
+    }
   },
   {
-    "kanji": "運動する",
-    "romaji": "undousuru",
-    "english": "to exercise",
-    "parts": [
-      { "kanji": "運", "romaji": ["un"] },
-      { "kanji": "動", "romaji": ["do","u"] },
-      { "kanji": "す", "romaji": ["su"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
-  },
-  {
-    "kanji": "起きる",
-    "romaji": "okiru",
-    "english": "to wake up",
-    "parts": [
-      { "kanji": "起", "romaji": ["o"] },
-      { "kanji": "き", "romaji": ["ki"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
-  },
-  {
-    "kanji": "買い物する",
-    "romaji": "kaimonosuru",
-    "english": "to shop",
-    "parts": [
-      { "kanji": "買", "romaji": ["ka"] },
-      { "kanji": "い", "romaji": ["i"] },
-      { "kanji": "物", "romaji": ["mo", "no"] },
-      { "kanji": "す", "romaji": ["su"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
-  },
-  {
-    "kanji": "帰る",
-    "romaji": "kaeru",
-    "english": "to return",
-    "parts": [
-      { "kanji": "帰", "romaji": ["ka", "e"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
-  },
-  {
-    "kanji": "書く",
-    "romaji": "kaku",
-    "english": "to write",
-    "parts": [
-      { "kanji": "書", "romaji": ["ka"] },
-      { "kanji": "く", "romaji": ["ku"] }
-    ]
-  },
-  {
-    "kanji": "観光する",
-    "romaji": "kankousuru",
-    "english": "to sightsee",
-    "parts": [
-      { "kanji": "観", "romaji": ["kan"] },
-      { "kanji": "光", "romaji": ["kou"] },
-      { "kanji": "す", "romaji": ["su"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
-  },
-  {
-    "kanji": "聞く",
-    "romaji": "kiku",
-    "english": "to listen",
-    "parts": [
-      { "kanji": "聞", "romaji": ["ki"] },
-      { "kanji": "く", "romaji": ["ku"] }
-    ]
-  },
-  {
-    "kanji": "来る",
-    "romaji": "kuru",
-    "english": "to come",
-    "parts": [
-      { "kanji": "来", "romaji": ["ku"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
-  },
-  {
-    "kanji": "する",
-    "romaji": "suru",
-    "english": "to do",
-    "parts": [
-      { "kanji": "す", "romaji": ["su"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
-  },
-  {
-    "kanji": "食べる",
-    "romaji": "taberu",
+    "spanish": "comer",
+    "pronunciation": "koh-MEHR",
     "english": "to eat",
-    "parts": [
-      { "kanji": "食", "romaji": ["ta"] },
-      { "kanji": "べ", "romaji": ["be"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -er",
+      "forms": {
+        "infinitive": "comer",
+        "present": {
+          "yo": "como",
+          "tú": "comes",
+          "él/ella/usted": "come",
+          "nosotros": "comemos",
+          "vosotros": "coméis",
+          "ellos/ellas/ustedes": "comen"
+        }
+      }
+    }
   },
   {
-    "kanji": "寝る",
-    "romaji": "neru",
-    "english": "to sleep",
-    "parts": [
-      { "kanji": "寝", "romaji": ["ne"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
-  },
-  {
-    "kanji": "飲む",
-    "romaji": "nomu",
-    "english": "to drink",
-    "parts": [
-      { "kanji": "飲", "romaji": ["no"] },
-      { "kanji": "む", "romaji": ["mu"] }
-    ]
-  },
-  {
-    "kanji": "乗る",
-    "romaji": "noru",
-    "english": "to ride",
-    "parts": [
-      { "kanji": "乗", "romaji": ["no"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
-  },
-  {
-    "kanji": "話す",
-    "romaji": "hanasu",
+    "spanish": "hablar",
+    "pronunciation": "ah-BLAHR",
     "english": "to speak",
-    "parts": [
-      { "kanji": "話", "romaji": ["ha", "na"] },
-      { "kanji": "す", "romaji": ["su"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -ar",
+      "forms": {
+        "infinitive": "hablar",
+        "present": {
+          "yo": "hablo",
+          "tú": "hablas",
+          "él/ella/usted": "habla",
+          "nosotros": "hablamos",
+          "vosotros": "habláis",
+          "ellos/ellas/ustedes": "hablan"
+        }
+      }
+    }
   },
   {
-    "kanji": "勉強する",
-    "romaji": "benkyousuru",
+    "spanish": "ser",
+    "pronunciation": "sehr",
+    "english": "to be",
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "irregular",
+      "forms": {
+        "infinitive": "ser",
+        "present": {
+          "yo": "soy",
+          "tú": "eres",
+          "él/ella/usted": "es",
+          "nosotros": "somos",
+          "vosotros": "sois",
+          "ellos/ellas/ustedes": "son"
+        }
+      }
+    }
+  },
+  {
+    "spanish": "ejercitarse",
+    "pronunciation": "e-her-ci-TAR-se",
+    "english": "to exercise",
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "reflexive",
+      "forms": {
+        "infinitive": "ejercitarse",
+        "present": {
+          "yo": "me ejercito",
+          "tú": "te ejercitas",
+          "él/ella/usted": "se ejercita",
+          "nosotros": "nos ejercitamos",
+          "vosotros": "os ejercitáis",
+          "ellos/ellas/ustedes": "se ejercitan"
+        }
+      }
+    }
+  },
+  {
+    "spanish": "despertarse",
+    "pronunciation": "des-per-TAR-se",
+    "english": "to wake up",
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "reflexive",
+      "forms": {
+        "infinitive": "despertarse",
+        "present": {
+          "yo": "me despierto",
+          "tú": "te despiertas",
+          "él/ella/usted": "se despierta",
+          "nosotros": "nos despertamos",
+          "vosotros": "os despertáis",
+          "ellos/ellas/ustedes": "se despiertan"
+        }
+      }
+    }
+  },
+  {
+    "spanish": "ir de compras",
+    "pronunciation": "ir de COM-pras",
+    "english": "to shop",
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "irregular",
+      "forms": {
+        "infinitive": "ir de compras",
+        "present": {
+          "yo": "voy de compras",
+          "tú": "vas de compras",
+          "él/ella/usted": "va de compras",
+          "nosotros": "vamos de compras",
+          "vosotros": "vais de compras",
+          "ellos/ellas/ustedes": "van de compras"
+        }
+      }
+    }
+  },
+  {
+    "spanish": "volver",
+    "pronunciation": "vol-VER",
+    "english": "to return",
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "irregular",
+      "forms": {
+        "infinitive": "volver",
+        "present": {
+          "yo": "vuelvo",
+          "tú": "vuelves",
+          "él/ella/usted": "vuelve",
+          "nosotros": "volvemos",
+          "vosotros": "volvéis",
+          "ellos/ellas/ustedes": "vuelven"
+        }
+      }
+    }
+  },
+  {
+    "spanish": "escribir",
+    "pronunciation": "es-cri-BIR",
+    "english": "to write",
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -ir",
+      "forms": {
+        "infinitive": "escribir",
+        "present": {
+          "yo": "escribo",
+          "tú": "escribes",
+          "él/ella/usted": "escribe",
+          "nosotros": "escribimos",
+          "vosotros": "escribís",
+          "ellos/ellas/ustedes": "escriben"
+        }
+      }
+    }
+  },
+  {
+    "spanish": "hacer turismo",
+    "pronunciation": "a-cer tu-RIS-mo",
+    "english": "to sightsee",
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "irregular",
+      "forms": {
+        "infinitive": "hacer turismo",
+        "present": {
+          "yo": "hago turismo",
+          "tú": "haces turismo",
+          "él/ella/usted": "hace turismo",
+          "nosotros": "hacemos turismo",
+          "vosotros": "hacéis turismo",
+          "ellos/ellas/ustedes": "hacen turismo"
+        }
+      }
+    }
+  },
+  {
+    "spanish": "escuchar",
+    "pronunciation": "es-cu-CHAR",
+    "english": "to listen",
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -ar",
+      "forms": {
+        "infinitive": "escuchar",
+        "present": {
+          "yo": "escucho",
+          "tú": "escuchas",
+          "él/ella/usted": "escucha",
+          "nosotros": "escuchamos",
+          "vosotros": "escucháis",
+          "ellos/ellas/ustedes": "escuchan"
+        }
+      }
+    }
+  },
+  {
+    "spanish": "venir",
+    "pronunciation": "ve-NIR",
+    "english": "to come",
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "irregular",
+      "forms": {
+        "infinitive": "venir",
+        "present": {
+          "yo": "vengo",
+          "tú": "vienes",
+          "él/ella/usted": "viene",
+          "nosotros": "venimos",
+          "vosotros": "venís",
+          "ellos/ellas/ustedes": "vienen"
+        }
+      }
+    }
+  },
+  {
+    "spanish": "hacer",
+    "pronunciation": "a-CER",
+    "english": "to do",
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "irregular",
+      "forms": {
+        "infinitive": "hacer",
+        "present": {
+          "yo": "hago",
+          "tú": "haces",
+          "él/ella/usted": "hace",
+          "nosotros": "hacemos",
+          "vosotros": "hacéis",
+          "ellos/ellas/ustedes": "hacen"
+        }
+      }
+    }
+  },
+  {
+    "spanish": "comer",
+    "pronunciation": "co-MER",
+    "english": "to eat",
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -er",
+      "forms": {
+        "infinitive": "comer",
+        "present": {
+          "yo": "como",
+          "tú": "comes",
+          "él/ella/usted": "come",
+          "nosotros": "comemos",
+          "vosotros": "coméis",
+          "ellos/ellas/ustedes": "comen"
+        }
+      }
+    }
+  },
+  {
+    "spanish": "dormir",
+    "pronunciation": "dor-MIR",
+    "english": "to sleep",
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "irregular",
+      "forms": {
+        "infinitive": "dormir",
+        "present": {
+          "yo": "duermo",
+          "tú": "duermes",
+          "él/ella/usted": "duerme",
+          "nosotros": "dormimos",
+          "vosotros": "dormís",
+          "ellos/ellas/ustedes": "duermen"
+        }
+      }
+    }
+  },
+  {
+    "spanish": "beber",
+    "pronunciation": "be-BER",
+    "english": "to drink",
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -er",
+      "forms": {
+        "infinitive": "beber",
+        "present": {
+          "yo": "bebo",
+          "tú": "bebes",
+          "él/ella/usted": "bebe",
+          "nosotros": "bebemos",
+          "vosotros": "bebéis",
+          "ellos/ellas/ustedes": "beben"
+        }
+      }
+    }
+  },
+  {
+    "spanish": "montar",
+    "pronunciation": "mon-TAR",
+    "english": "to ride",
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -ar",
+      "forms": {
+        "infinitive": "montar",
+        "present": {
+          "yo": "monto",
+          "tú": "montas",
+          "él/ella/usted": "monta",
+          "nosotros": "montamos",
+          "vosotros": "montáis",
+          "ellos/ellas/ustedes": "montan"
+        }
+      }
+    }
+  },
+  {
+    "spanish": "hablar",
+    "pronunciation": "a-BLAR",
+    "english": "to speak",
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -ar",
+      "forms": {
+        "infinitive": "hablar",
+        "present": {
+          "yo": "hablo",
+          "tú": "hablas",
+          "él/ella/usted": "habla",
+          "nosotros": "hablamos",
+          "vosotros": "habláis",
+          "ellos/ellas/ustedes": "hablan"
+        }
+      }
+    }
+  },
+  {
+    "spanish": "estudiar",
+    "pronunciation": "es-tu-DIAR",
     "english": "to study",
-    "parts": [
-      { "kanji": "勉", "romaji": ["be","n"] },
-      { "kanji": "強", "romaji": ["kyo","u"] },
-      { "kanji": "す", "romaji": ["su"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -ar",
+      "forms": {
+        "infinitive": "estudiar",
+        "present": {
+          "yo": "estudio",
+          "tú": "estudias",
+          "él/ella/usted": "estudia",
+          "nosotros": "estudiamos",
+          "vosotros": "estudiáis",
+          "ellos/ellas/ustedes": "estudian"
+        }
+      }
+    }
   },
   {
-    "kanji": "見る",
-    "romaji": "miru",
+    "spanish": "ver",
+    "pronunciation": "ver",
     "english": "to see",
-    "parts": [
-      { "kanji": "見", "romaji": ["mi"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "irregular",
+      "forms": {
+        "infinitive": "ver",
+        "present": {
+          "yo": "veo",
+          "tú": "ves",
+          "él/ella/usted": "ve",
+          "nosotros": "vemos",
+          "vosotros": "veis",
+          "ellos/ellas/ustedes": "ven"
+        }
+      }
+    }
   },
   {
-    "kanji": "読む",
-    "romaji": "yomu",
+    "spanish": "leer",
+    "pronunciation": "le-ER",
     "english": "to read",
-    "parts": [
-      { "kanji": "読", "romaji": ["yo"] },
-      { "kanji": "む", "romaji": ["mu"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -er",
+      "forms": {
+        "infinitive": "leer",
+        "present": {
+          "yo": "leo",
+          "tú": "lees",
+          "él/ella/usted": "lee",
+          "nosotros": "leemos",
+          "vosotros": "leéis",
+          "ellos/ellas/ustedes": "leen"
+        }
+      }
+    }
   },
   {
-    "kanji": "掛ける",
-    "romaji": "kakeru",
+    "spanish": "colgar",
+    "pronunciation": "col-GAR",
     "english": "to hang; to call (phone)",
-    "parts": [
-      { "kanji": "掛", "romaji": ["ka"] },
-      { "kanji": "け", "romaji": ["ke"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "irregular",
+      "forms": {
+        "infinitive": "colgar",
+        "present": {
+          "yo": "cuelgo",
+          "tú": "cuelgas",
+          "él/ella/usted": "cuelga",
+          "nosotros": "colgamos",
+          "vosotros": "colgáis",
+          "ellos/ellas/ustedes": "cuelgan"
+        }
+      }
+    }
   },
   {
-    "kanji": "借りる",
-    "romaji": "kariru",
-    "english": "to borrow",
-    "parts": [
-      { "kanji": "借", "romaji": ["ka", "ri"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
-  },
-  {
-    "kanji": "貸す",
-    "romaji": "kasu",
+    "spanish": "prestar",
+    "pronunciation": "pres-TAR",
     "english": "to lend",
-    "parts": [
-      { "kanji": "貸", "romaji": ["ka"] },
-      { "kanji": "す", "romaji": ["su"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -ar",
+      "forms": {
+        "infinitive": "prestar",
+        "present": {
+          "yo": "presto",
+          "tú": "prestas",
+          "él/ella/usted": "presta",
+          "nosotros": "prestamos",
+          "vosotros": "prestáis",
+          "ellos/ellas/ustedes": "prestan"
+        }
+      }
+    }
   },
   {
-    "kanji": "習う",
-    "romaji": "narau",
+    "spanish": "aprender",
+    "pronunciation": "a-pren-DER",
     "english": "to learn",
-    "parts": [
-      { "kanji": "習", "romaji": ["na", "ra"] },
-      { "kanji": "う", "romaji": ["u"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -er",
+      "forms": {
+        "infinitive": "aprender",
+        "present": {
+          "yo": "aprendo",
+          "tú": "aprendes",
+          "él/ella/usted": "aprende",
+          "nosotros": "aprendemos",
+          "vosotros": "aprendéis",
+          "ellos/ellas/ustedes": "aprenden"
+        }
+      }
+    }
   },
   {
-    "kanji": "教える",
-    "romaji": "oshieru",
+    "spanish": "enseñar",
+    "pronunciation": "en-se-ÑAR",
     "english": "to teach",
-    "parts": [
-      { "kanji": "教", "romaji": ["o", "shi"] },
-      { "kanji": "え", "romaji": ["e"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -ar",
+      "forms": {
+        "infinitive": "enseñar",
+        "present": {
+          "yo": "enseño",
+          "tú": "enseñas",
+          "él/ella/usted": "enseña",
+          "nosotros": "enseñamos",
+          "vosotros": "enseñáis",
+          "ellos/ellas/ustedes": "enseñan"
+        }
+      }
+    }
   },
   {
-    "kanji": "もらう",
-    "romaji": "morau",
+    "spanish": "recibir",
+    "pronunciation": "re-ci-BIR",
     "english": "to receive",
-    "parts": [
-      { "kanji": "も", "romaji": ["mo"] },
-      { "kanji": "ら", "romaji": ["ra"] },
-      { "kanji": "う", "romaji": ["u"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -ir",
+      "forms": {
+        "infinitive": "recibir",
+        "present": {
+          "yo": "recibo",
+          "tú": "recibes",
+          "él/ella/usted": "recibe",
+          "nosotros": "recibimos",
+          "vosotros": "recibís",
+          "ellos/ellas/ustedes": "reciben"
+        }
+      }
+    }
   },
   {
-    "kanji": "あげる",
-    "romaji": "ageru",
+    "spanish": "dar",
+    "pronunciation": "dar",
     "english": "to give",
-    "parts": [
-      { "kanji": "あ", "romaji": ["a"] },
-      { "kanji": "げ", "romaji": ["ge"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "irregular",
+      "forms": {
+        "infinitive": "dar",
+        "present": {
+          "yo": "doy",
+          "tú": "das",
+          "él/ella/usted": "da",
+          "nosotros": "damos",
+          "vosotros": "dais",
+          "ellos/ellas/ustedes": "dan"
+        }
+      }
+    }
   },
   {
-    "kanji": "会う",
-    "romaji": "au",
+    "spanish": "encontrarse",
+    "pronunciation": "en-con-TRAR-se",
     "english": "to meet",
-    "parts": [
-      { "kanji": "会", "romaji": ["a"] },
-      { "kanji": "う", "romaji": ["u"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "reflexive",
+      "forms": {
+        "infinitive": "encontrarse",
+        "present": {
+          "yo": "me encuentro",
+          "tú": "te encuentras",
+          "él/ella/usted": "se encuentra",
+          "nosotros": "nos encontramos",
+          "vosotros": "os encontráis",
+          "ellos/ellas/ustedes": "se encuentran"
+        }
+      }
+    }
   },
   {
-    "kanji": "下車する",
-    "romaji": "geshasuru",
+    "spanish": "bajarse",
+    "pronunciation": "ba-JAR-se",
     "english": "to get off (vehicle)",
-    "parts": [
-      { "kanji": "下", "romaji": ["ge"] },
-      { "kanji": "車", "romaji": ["sha"] },
-      { "kanji": "す", "romaji": ["su"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "reflexive",
+      "forms": {
+        "infinitive": "bajarse",
+        "present": {
+          "yo": "me bajo",
+          "tú": "te bajas",
+          "él/ella/usted": "se baja",
+          "nosotros": "nos bajamos",
+          "vosotros": "os bajáis",
+          "ellos/ellas/ustedes": "se bajan"
+        }
+      }
+    }
   },
   {
-    "kanji": "始める",
-    "romaji": "hajimeru",
+    "spanish": "empezar",
+    "pronunciation": "em-pe-ZAR",
     "english": "to start",
-    "parts": [
-      { "kanji": "始", "romaji": ["ha", "ji"] },
-      { "kanji": "め", "romaji": ["me"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "irregular",
+      "forms": {
+        "infinitive": "empezar",
+        "present": {
+          "yo": "empiezo",
+          "tú": "empiezas",
+          "él/ella/usted": "empieza",
+          "nosotros": "empezamos",
+          "vosotros": "empezáis",
+          "ellos/ellas/ustedes": "empiezan"
+        }
+      }
+    }
   },
   {
-    "kanji": "見せる",
-    "romaji": "miseru",
+    "spanish": "mostrar",
+    "pronunciation": "mos-TRAR",
     "english": "to show",
-    "parts": [
-      { "kanji": "見", "romaji": ["mi"] },
-      { "kanji": "せ", "romaji": ["se"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "irregular",
+      "forms": {
+        "infinitive": "mostrar",
+        "present": {
+          "yo": "muestro",
+          "tú": "muestras",
+          "él/ella/usted": "muestra",
+          "nosotros": "mostramos",
+          "vosotros": "mostráis",
+          "ellos/ellas/ustedes": "muestran"
+        }
+      }
+    }
   },
   {
-    "kanji": "降りる",
-    "romaji": "oriru",
+    "spanish": "bajarse",
+    "pronunciation": "ba-JAR-se",
     "english": "to get off",
-    "parts": [
-      { "kanji": "降", "romaji": ["o", "ri"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "reflexive",
+      "forms": {
+        "infinitive": "bajarse",
+        "present": {
+          "yo": "me bajo",
+          "tú": "te bajas",
+          "él/ella/usted": "se baja",
+          "nosotros": "nos bajamos",
+          "vosotros": "os bajáis",
+          "ellos/ellas/ustedes": "se bajan"
+        }
+      }
+    }
   },
   {
-    "kanji": "止める",
-    "romaji": "tomeru",
+    "spanish": "detener",
+    "pronunciation": "de-te-NER",
     "english": "to stop",
-    "parts": [
-      { "kanji": "止", "romaji": ["to"] },
-      { "kanji": "め", "romaji": ["me"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "irregular",
+      "forms": {
+        "infinitive": "detener",
+        "present": {
+          "yo": "detengo",
+          "tú": "detienes",
+          "él/ella/usted": "detiene",
+          "nosotros": "detenemos",
+          "vosotros": "detenéis",
+          "ellos/ellas/ustedes": "detienen"
+        }
+      }
+    }
   },
   {
-    "kanji": "消す",
-    "romaji": "kesu",
+    "spanish": "borrar",
+    "pronunciation": "bo-RRAR",
     "english": "to turn off; to erase",
-    "parts": [
-      { "kanji": "消", "romaji": ["ke"] },
-      { "kanji": "す", "romaji": ["su"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -ar",
+      "forms": {
+        "infinitive": "borrar",
+        "present": {
+          "yo": "borro",
+          "tú": "borras",
+          "él/ella/usted": "borra",
+          "nosotros": "borramos",
+          "vosotros": "borráis",
+          "ellos/ellas/ustedes": "borran"
+        }
+      }
+    }
   },
   {
-    "kanji": "つける",
-    "romaji": "tsukeru",
+    "spanish": "encender",
+    "pronunciation": "en-cen-DER",
     "english": "to turn on",
-    "parts": [
-      { "kanji": "つ", "romaji": ["tsu"] },
-      { "kanji": "け", "romaji": ["ke"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "irregular",
+      "forms": {
+        "infinitive": "encender",
+        "present": {
+          "yo": "enciendo",
+          "tú": "enciendes",
+          "él/ella/usted": "enciende",
+          "nosotros": "encendemos",
+          "vosotros": "encendéis",
+          "ellos/ellas/ustedes": "encienden"
+        }
+      }
+    }
   },
   {
-    "kanji": "急ぐ",
-    "romaji": "isogu",
+    "spanish": "apresurarse",
+    "pronunciation": "a-pre-su-RAR-se",
     "english": "to hurry",
-    "parts": [
-      { "kanji": "急", "romaji": ["i", "so"] },
-      { "kanji": "ぐ", "romaji": ["gu"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "reflexive",
+      "forms": {
+        "infinitive": "apresurarse",
+        "present": {
+          "yo": "me apresuro",
+          "tú": "te apresuras",
+          "él/ella/usted": "se apresura",
+          "nosotros": "nos apresuramos",
+          "vosotros": "os apresuráis",
+          "ellos/ellas/ustedes": "se apresuran"
+        }
+      }
+    }
   },
   {
-    "kanji": "手伝う",
-    "romaji": "tetsudau",
+    "spanish": "ayudar",
+    "pronunciation": "a-yu-DAR",
     "english": "to help",
-    "parts": [
-      { "kanji": "手", "romaji": ["te"] },
-      { "kanji": "伝", "romaji": ["tsu", "da"] },
-      { "kanji": "う", "romaji": ["u"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -ar",
+      "forms": {
+        "infinitive": "ayudar",
+        "present": {
+          "yo": "ayudo",
+          "tú": "ayudas",
+          "él/ella/usted": "ayuda",
+          "nosotros": "ayudamos",
+          "vosotros": "ayudáis",
+          "ellos/ellas/ustedes": "ayudan"
+        }
+      }
+    }
   },
   {
-    "kanji": "取る",
-    "romaji": "toru",
+    "spanish": "tomar",
+    "pronunciation": "to-MAR",
     "english": "to take",
-    "parts": [
-      { "kanji": "取", "romaji": ["to"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -ar",
+      "forms": {
+        "infinitive": "tomar",
+        "present": {
+          "yo": "tomo",
+          "tú": "tomas",
+          "él/ella/usted": "toma",
+          "nosotros": "tomamos",
+          "vosotros": "tomáis",
+          "ellos/ellas/ustedes": "toman"
+        }
+      }
+    }
   },
   {
-    "kanji": "持つ",
-    "romaji": "motsu",
+    "spanish": "sostener",
+    "pronunciation": "so-ste-NER",
     "english": "to hold",
-    "parts": [
-      { "kanji": "持", "romaji": ["mo"] },
-      { "kanji": "つ", "romaji": ["tsu"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "irregular",
+      "forms": {
+        "infinitive": "sostener",
+        "present": {
+          "yo": "sostengo",
+          "tú": "sostienes",
+          "él/ella/usted": "sostiene",
+          "nosotros": "sostenemos",
+          "vosotros": "sostenéis",
+          "ellos/ellas/ustedes": "sostienen"
+        }
+      }
+    }
   },
   {
-    "kanji": "待つ",
-    "romaji": "matsu",
+    "spanish": "esperar",
+    "pronunciation": "es-pe-RAR",
     "english": "to wait",
-    "parts": [
-      { "kanji": "待", "romaji": ["ma"] },
-      { "kanji": "つ", "romaji": ["tsu"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -ar",
+      "forms": {
+        "infinitive": "esperar",
+        "present": {
+          "yo": "espero",
+          "tú": "esperas",
+          "él/ella/usted": "espera",
+          "nosotros": "esperamos",
+          "vosotros": "esperáis",
+          "ellos/ellas/ustedes": "esperan"
+        }
+      }
+    }
   },
   {
-    "kanji": "歩く",
-    "romaji": "aruku",
+    "spanish": "caminar",
+    "pronunciation": "ca-mi-NAR",
     "english": "to walk",
-    "parts": [
-      { "kanji": "歩", "romaji": ["a", "ru"] },
-      { "kanji": "く", "romaji": ["ku"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -ar",
+      "forms": {
+        "infinitive": "caminar",
+        "present": {
+          "yo": "camino",
+          "tú": "caminas",
+          "él/ella/usted": "camina",
+          "nosotros": "caminamos",
+          "vosotros": "camináis",
+          "ellos/ellas/ustedes": "caminan"
+        }
+      }
+    }
   },
   {
-    "kanji": "閉める",
-    "romaji": "shimeru",
+    "spanish": "cerrar",
+    "pronunciation": "ce-RRAR",
     "english": "to close",
-    "parts": [
-      { "kanji": "閉", "romaji": ["shi"] },
-      { "kanji": "め", "romaji": ["me"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "irregular",
+      "forms": {
+        "infinitive": "cerrar",
+        "present": {
+          "yo": "cierro",
+          "tú": "cierras",
+          "él/ella/usted": "cierra",
+          "nosotros": "cerramos",
+          "vosotros": "cerráis",
+          "ellos/ellas/ustedes": "cierran"
+        }
+      }
+    }
   },
   {
-    "kanji": "休む",
-    "romaji": "yasumu",
+    "spanish": "descansar",
+    "pronunciation": "des-can-SAR",
     "english": "to rest",
-    "parts": [
-      { "kanji": "休", "romaji": ["ya", "su"] },
-      { "kanji": "む", "romaji": ["mu"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -ar",
+      "forms": {
+        "infinitive": "descansar",
+        "present": {
+          "yo": "descanso",
+          "tú": "descansas",
+          "él/ella/usted": "descansa",
+          "nosotros": "descansamos",
+          "vosotros": "descansáis",
+          "ellos/ellas/ustedes": "descansan"
+        }
+      }
+    }
   },
   {
-    "kanji": "終わる",
-    "romaji": "owaru",
+    "spanish": "terminar",
+    "pronunciation": "ter-mi-NAR",
     "english": "to finish",
-    "parts": [
-      { "kanji": "終", "romaji": ["o"] },
-      { "kanji": "わ", "romaji": ["wa"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -ar",
+      "forms": {
+        "infinitive": "terminar",
+        "present": {
+          "yo": "termino",
+          "tú": "terminas",
+          "él/ella/usted": "termina",
+          "nosotros": "terminamos",
+          "vosotros": "termináis",
+          "ellos/ellas/ustedes": "terminan"
+        }
+      }
+    }
   },
   {
-    "kanji": "働く",
-    "romaji": "hataraku",
+    "spanish": "trabajar",
+    "pronunciation": "tra-ba-JAR",
     "english": "to work",
-    "parts": [
-      { "kanji": "働", "romaji": ["ha", "ta", "ra"] },
-      { "kanji": "く", "romaji": ["ku"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -ar",
+      "forms": {
+        "infinitive": "trabajar",
+        "present": {
+          "yo": "trabajo",
+          "tú": "trabajas",
+          "él/ella/usted": "trabaja",
+          "nosotros": "trabajamos",
+          "vosotros": "trabajáis",
+          "ellos/ellas/ustedes": "trabajan"
+        }
+      }
+    }
   },
   {
-    "kanji": "開ける",
-    "romaji": "akeru",
+    "spanish": "abrir",
+    "pronunciation": "a-BRIR",
     "english": "to open",
-    "parts": [
-      { "kanji": "開", "romaji": ["a"] },
-      { "kanji": "け", "romaji": ["ke"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -ir",
+      "forms": {
+        "infinitive": "abrir",
+        "present": {
+          "yo": "abro",
+          "tú": "abres",
+          "él/ella/usted": "abre",
+          "nosotros": "abrimos",
+          "vosotros": "abrís",
+          "ellos/ellas/ustedes": "abren"
+        }
+      }
+    }
   },
   {
-    "kanji": "呼ぶ",
-    "romaji": "yobu",
+    "spanish": "llamar",
+    "pronunciation": "lla-MAR",
     "english": "to call",
-    "parts": [
-      { "kanji": "呼", "romaji": ["yo"] },
-      { "kanji": "ぶ", "romaji": ["bu"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -ar",
+      "forms": {
+        "infinitive": "llamar",
+        "present": {
+          "yo": "llamo",
+          "tú": "llamas",
+          "él/ella/usted": "llama",
+          "nosotros": "llamamos",
+          "vosotros": "llamáis",
+          "ellos/ellas/ustedes": "llaman"
+        }
+      }
+    }
   },
   {
-    "kanji": "送る",
-    "romaji": "okuru",
+    "spanish": "enviar",
+    "pronunciation": "en-VIAR",
     "english": "to send",
-    "parts": [
-      { "kanji": "送", "romaji": ["o", "ku"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "irregular",
+      "forms": {
+        "infinitive": "enviar",
+        "present": {
+          "yo": "envío",
+          "tú": "envías",
+          "él/ella/usted": "envía",
+          "nosotros": "enviamos",
+          "vosotros": "enviáis",
+          "ellos/ellas/ustedes": "envían"
+        }
+      }
+    }
   },
   {
-    "kanji": "切る",
-    "romaji": "kiru",
+    "spanish": "cortar",
+    "pronunciation": "cor-TAR",
     "english": "to cut",
-    "parts": [
-      { "kanji": "切", "romaji": ["ki"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -ar",
+      "forms": {
+        "infinitive": "cortar",
+        "present": {
+          "yo": "corto",
+          "tú": "cortas",
+          "él/ella/usted": "corta",
+          "nosotros": "cortamos",
+          "vosotros": "cortáis",
+          "ellos/ellas/ustedes": "cortan"
+        }
+      }
+    }
   },
   {
-    "kanji": "撮る",
-    "romaji": "toru",
+    "spanish": "sacar",
+    "pronunciation": "sa-CAR",
     "english": "to take (a photo)",
-    "parts": [
-      { "kanji": "撮", "romaji": ["to"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -ar",
+      "forms": {
+        "infinitive": "sacar",
+        "present": {
+          "yo": "saco",
+          "tú": "sacas",
+          "él/ella/usted": "saca",
+          "nosotros": "sacamos",
+          "vosotros": "sacáis",
+          "ellos/ellas/ustedes": "sacan"
+        }
+      }
+    }
   },
   {
-    "kanji": "言う",
-    "romaji": "iu",
+    "spanish": "decir",
+    "pronunciation": "de-CIR",
     "english": "to say",
-    "parts": [
-      { "kanji": "言", "romaji": ["i"] },
-      { "kanji": "う", "romaji": ["u"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "irregular",
+      "forms": {
+        "infinitive": "decir",
+        "present": {
+          "yo": "digo",
+          "tú": "dices",
+          "él/ella/usted": "dice",
+          "nosotros": "decimos",
+          "vosotros": "decís",
+          "ellos/ellas/ustedes": "dicen"
+        }
+      }
+    }
   },
   {
-    "kanji": "見れる",
-    "romaji": "mireru",
+    "spanish": "poder ver",
+    "pronunciation": "po-DER ver",
     "english": "to be able to see",
-    "parts": [
-      { "kanji": "見", "romaji": ["mi"] },
-      { "kanji": "れ", "romaji": ["re"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "irregular",
+      "forms": {
+        "infinitive": "poder ver",
+        "present": {
+          "yo": "puedo ver",
+          "tú": "puedes ver",
+          "él/ella/usted": "puede ver",
+          "nosotros": "podemos ver",
+          "vosotros": "podéis ver",
+          "ellos/ellas/ustedes": "pueden ver"
+        }
+      }
+    }
   },
   {
-    "kanji": "作る",
-    "romaji": "tsukuru",
+    "spanish": "hacer",
+    "pronunciation": "a-CER",
     "english": "to make",
-    "parts": [
-      { "kanji": "作", "romaji": ["tsu", "ku"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "irregular",
+      "forms": {
+        "infinitive": "hacer",
+        "present": {
+          "yo": "hago",
+          "tú": "haces",
+          "él/ella/usted": "hace",
+          "nosotros": "hacemos",
+          "vosotros": "hacéis",
+          "ellos/ellas/ustedes": "hacen"
+        }
+      }
+    }
   },
   {
-    "kanji": "使う",
-    "romaji": "tsukau",
+    "spanish": "usar",
+    "pronunciation": "u-SAR",
     "english": "to use",
-    "parts": [
-      { "kanji": "使", "romaji": ["tsu", "ka"] },
-      { "kanji": "う", "romaji": ["u"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -ar",
+      "forms": {
+        "infinitive": "usar",
+        "present": {
+          "yo": "uso",
+          "tú": "usas",
+          "él/ella/usted": "usa",
+          "nosotros": "usamos",
+          "vosotros": "usáis",
+          "ellos/ellas/ustedes": "usan"
+        }
+      }
+    }
   },
   {
-    "kanji": "有る",
-    "romaji": "aru",
+    "spanish": "existir",
+    "pronunciation": "ex-is-TIR",
     "english": "to exist (inanimate)",
-    "parts": [
-      { "kanji": "有", "romaji": ["a"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -ir",
+      "forms": {
+        "infinitive": "existir",
+        "present": {
+          "yo": "existo",
+          "tú": "existes",
+          "él/ella/usted": "existe",
+          "nosotros": "existimos",
+          "vosotros": "existís",
+          "ellos/ellas/ustedes": "existen"
+        }
+      }
+    }
   },
   {
-    "kanji": "居る",
-    "romaji": "iru",
+    "spanish": "existir",
+    "pronunciation": "ex-is-TIR",
     "english": "to exist (animate)",
-    "parts": [
-      { "kanji": "居", "romaji": ["i"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -ir",
+      "forms": {
+        "infinitive": "existir",
+        "present": {
+          "yo": "existo",
+          "tú": "existes",
+          "él/ella/usted": "existe",
+          "nosotros": "existimos",
+          "vosotros": "existís",
+          "ellos/ellas/ustedes": "existen"
+        }
+      }
+    }
   },
   {
-    "kanji": "困る",
-    "romaji": "komaru",
+    "spanish": "estar en problemas",
+    "pronunciation": "es-TAR en pro-BLE-mas",
     "english": "to be troubled",
-    "parts": [
-      { "kanji": "困", "romaji": ["ko", "ma"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "irregular",
+      "forms": {
+        "infinitive": "estar en problemas",
+        "present": {
+          "yo": "estoy en problemas",
+          "tú": "estás en problemas",
+          "él/ella/usted": "está en problemas",
+          "nosotros": "estamos en problemas",
+          "vosotros": "estáis en problemas",
+          "ellos/ellas/ustedes": "están en problemas"
+        }
+      }
+    }
   },
   {
-    "kanji": "泳ぐ",
-    "romaji": "oyogu",
+    "spanish": "nadar",
+    "pronunciation": "na-DAR",
     "english": "to swim",
-    "parts": [
-      { "kanji": "泳", "romaji": ["o", "yo"] },
-      { "kanji": "ぐ", "romaji": ["gu"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -ar",
+      "forms": {
+        "infinitive": "nadar",
+        "present": {
+          "yo": "nado",
+          "tú": "nadas",
+          "él/ella/usted": "nada",
+          "nosotros": "nadamos",
+          "vosotros": "nadáis",
+          "ellos/ellas/ustedes": "nadan"
+        }
+      }
+    }
   },
   {
-    "kanji": "散歩する",
-    "romaji": "sanposuru",
+    "spanish": "pasear",
+    "pronunciation": "pa-se-AR",
     "english": "to stroll",
-    "parts": [
-      { "kanji": "散", "romaji": ["san"] },
-      { "kanji": "歩", "romaji": ["po"] },
-      { "kanji": "す", "romaji": ["su"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "regular -ar",
+      "forms": {
+        "infinitive": "pasear",
+        "present": {
+          "yo": "paseo",
+          "tú": "paseas",
+          "él/ella/usted": "pasea",
+          "nosotros": "paseamos",
+          "vosotros": "paseáis",
+          "ellos/ellas/ustedes": "pasean"
+        }
+      }
+    }
   },
   {
-    "kanji": "運転する",
-    "romaji": "untensuru",
+    "spanish": "conducir",
+    "pronunciation": "con-du-CIR",
     "english": "to drive",
-    "parts": [
-      { "kanji": "運", "romaji": ["un"] },
-      { "kanji": "転", "romaji": ["ten"] },
-      { "kanji": "す", "romaji": ["su"] },
-      { "kanji": "る", "romaji": ["ru"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "irregular",
+      "forms": {
+        "infinitive": "conducir",
+        "present": {
+          "yo": "conduzco",
+          "tú": "conduces",
+          "él/ella/usted": "conduce",
+          "nosotros": "conducimos",
+          "vosotros": "conducís",
+          "ellos/ellas/ustedes": "conducen"
+        }
+      }
+    }
   },
   {
-    "kanji": "合う",
-    "romaji": "au",
+    "spanish": "encontrarse",
+    "pronunciation": "en-con-TRAR-se",
     "english": "to meet; to fit",
-    "parts": [
-      { "kanji": "合", "romaji": ["a"] },
-      { "kanji": "う", "romaji": ["u"] }
-    ]
+    "parts_of_speech": {
+      "type": "verb",
+      "conjugation": "reflexive",
+      "forms": {
+        "infinitive": "encontrarse",
+        "present": {
+          "yo": "me encuentro",
+          "tú": "te encuentras",
+          "él/ella/usted": "se encuentra",
+          "nosotros": "nos encontramos",
+          "vosotros": "os encontráis",
+          "ellos/ellas/ustedes": "se encuentran"
+        }
+      }
+    }
   }
 ]
