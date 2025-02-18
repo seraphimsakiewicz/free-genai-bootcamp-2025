@@ -11,9 +11,9 @@ end
 
 task :txt2voice do
   Text2Voice.run(
-    data_path: 'public/src/datadata_verbs.json', 
+    data_path: 'public/src/spanish_words.json', 
     output_path: 'public/audio',
-    voiceid: ['Tomoko','Salli'],
+    voiceid: ['Lupe', 'Salli'],  # Lupe is AWS Polly's Spanish voice
     override: true
   )
 end

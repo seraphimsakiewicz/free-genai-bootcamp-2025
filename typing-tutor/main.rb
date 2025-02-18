@@ -11,18 +11,17 @@ class Text2Voice
 
   # override existing files
   def self.run data_path:, output_path:, voiceid:, override: false
-
     json = File.read(data_path)
     data = JSON.parse json
     
-    FileUtils.mkdir_p(output_path + '/jp')
+    FileUtils.mkdir_p(output_path + '/es')
     FileUtils.mkdir_p(output_path + '/en')
 
     data.each_with_index do |t,i|
-      text = t['romaji']
-      audio_path = File.join(output_path, 'jp', "#{text.gsub(/ /,'_')}.mp3")
+      text = t['spanish']
+      audio_path = File.join(output_path, 'es', "#{text.gsub(/ /,'_')}.mp3")
       if override && File.exist?(audio_path)
-        puts "Japanese file: #{audio_path} already exists. Skipping synthesis."
+        puts "Spanish file: #{audio_path} already exists. Skipping synthesis."
       else
         self.synth text: text, audio_path: audio_path, client: client, voiceid: voiceid[0]
       end

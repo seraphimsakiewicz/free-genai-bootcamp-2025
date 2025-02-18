@@ -24,8 +24,8 @@ class DatabaseSetup
 
   # Inserts data from a JSON file into the 'words' table
   #
-  # @param db_file [String] Path to the SQLite database file
-  # @param json_file [String] Path to the JSON file containing word data
+  # @param db_file [String] Path to the SQLite database file @param json_file [String] Path to the
+  # JSON file containing word data
   def self.insert_words(db_file, json_file)
     unless File.exist?(json_file)
       puts "JSON file '#{json_file}' not found."
@@ -77,10 +77,10 @@ class DatabaseSetup
     create_words_table_sql = <<-SQL
       CREATE TABLE IF NOT EXISTS words (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        kanji TEXT NOT NULL,
-        romaji TEXT NOT NULL,
+        spanish TEXT NOT NULL,
+        pronunciation TEXT NOT NULL,
         english TEXT NOT NULL,
-        parts TEXT -- Stored as JSON string
+        parts_of_speech TEXT -- Stored as JSON string
       );
     SQL
 
@@ -103,11 +103,11 @@ class DatabaseSetup
 
   # Inserts words into the 'words' table from parsed JSON data
   #
-  # @param db [SQLite3::Database] The database connection
-  # @param json_data [Array<Hash>] Array of word objects
+  # @param db [SQLite3::Database] The database connection @param json_data [Array<Hash>] Array of
+  # word objects
   def self.insert_words_into_db(db, json_data)
     insert_word_sql = <<-SQL
-      INSERT INTO words (kanji, romaji, english, parts)
+      INSERT INTO words (spanish, pronunciation, english, parts_of_speech)
       VALUES (?, ?, ?, ?);
     SQL
 
@@ -116,19 +116,19 @@ class DatabaseSetup
 
     json_data.each_with_index do |word, index|
       # Validate required fields
-      unless word.key?('kanji') && word.key?('romaji') && word.key?('english') && word.key?('parts')
+      unless word.key?('spanish') && word.key?('pronunciation') && word.key?('english') && word.key?('parts_of_speech')
         puts "Skipping entry at index #{index}: Missing required fields."
         next
       end
 
-      kanji = word['kanji']
-      romaji = word['romaji']
+      spanish = word['spanish']
+      pronunciation = word['pronunciation']
       english = word['english']
-      parts = word['parts'].to_json # Convert parts hash to JSON string
+      parts = word['parts_of_speech'].to_json
 
       begin
-        stmt.execute(kanji, romaji, english, parts)
-        puts "Inserted word: #{kanji} (#{romaji}) - #{english}"
+        stmt.execute(spanish, pronunciation, english, parts)
+        puts "Inserted word: #{spanish} (#{pronunciation}) - #{english}"
       rescue SQLite3::Exception => e
         puts "Failed to insert word at index #{index}: #{e.message}"
         next

@@ -77,11 +77,11 @@ export default function StudyActivityLaunch() {
        // Debug log
        console.log('Attempting to launch activity at URL:', launchUrl.toString());
 
-      // Navigate to the launch URL in the same window instead of opening a new tab
-      window.location.href = launchUrl.toString();
-
-      // Note: The navigation to sessions/${sessionId} won't happen now since we're redirecting the
-      // current window to the launch URL
+      // Open the modified URL in a new tab
+      window.open(launchUrl.toString(), '_blank');
+      
+      // Navigate to the session show page
+      navigate(`/sessions/${sessionId}`);
     } catch (error) {
       console.error('Failed to launch activity:', error);
     }
