@@ -48,6 +48,31 @@ pointed out that we need to do an api/pull first of the Ollama Model.
 When we sent the curl /api/request asking "why is the sky blue?", it returned a big stream blob that
 we will need to clean and make more presentable.
 
+## Mega Service
+
+1. Run app.py
+2. Run docker container on port 8008, or whatever you want.
+3. Run 
+``
+curl http://localhost:8008/api/pull -d '{
+  "model": "llama3.2:1b"
+}'
+``
+4. Run 
+``curl -N http://localhost:8009/api/generate \
+  -H "Content-Type: application/json" \
+  -d '{"model":"llama3.2:1b", "prompt":"Why is the sky blue?"}' \
+  > out.json
+``
+if you'd like to see the return from the model saved to a json file.
+
+## Next steps... 
+
+Going forward, if I had more time I would definitely try to get a client running to interact with
+the running Ollama model, and have it more smooth to interact with. Also, the response definitely
+needs to be cleaned up hahah.
+
+
 
 
 

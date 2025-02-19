@@ -1,1 +1,4 @@
-opea-comps
+opea-comps 
+fastapi 
+uvicorn 
+pydantic
