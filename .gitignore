@@ -4,7 +4,10 @@ __pycache__/
 *$py.class
 
 # Virtual environment directories
-.env/
+# Ignore environment files anywhere
+**/.env
+.env
+.env/*
 .venv/
 env/
 venv/
