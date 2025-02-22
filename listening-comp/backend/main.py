@@ -40,3 +40,8 @@ async def api_generate_questions(req: VideoRequest):
         "questions": questions,  # Plain text string
         "audio_paths": audio_paths
     }
+    
+    # TODO
+    # need to fix to separate listening from reading comprehension 
+    # generate listening part using 3 diff voices... narrator, male, and female
+    # generate reading part based on a document instead of a video link.
