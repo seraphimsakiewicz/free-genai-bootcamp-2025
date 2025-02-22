@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+youtube_transcript_api
+google-genai
+soundfile
+python-dotenv
+boto3
