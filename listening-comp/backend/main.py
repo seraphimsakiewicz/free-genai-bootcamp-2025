@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import os
@@ -9,6 +10,15 @@ from gemini_question_generator import generate_questions_gemini
 from polly import generate_audio_polly 
 
 app = FastAPI()
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # Your frontend URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Serve generated audio files
 app.mount("/static_audio", StaticFiles(directory="static_audio"), name="static_audio")
@@ -34,6 +44,12 @@ async def api_generate_questions(req: VideoRequest):
     audio_file = f"static_audio/listening_{unique_id}.mp3"
     # await generate_audio_polly(questions, audio_file)  # Just pass the string directly to Polly
     audio_paths.append(audio_file)
+    
+    print({
+        "transcript": transcript_text,
+        "questions": questions,  # Plain text string
+        "audio_paths": audio_paths
+    })
 
     return {
         "transcript": transcript_text,
