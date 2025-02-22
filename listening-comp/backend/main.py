@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import os
+import uuid
 
 from transcript_utils import get_transcript_text
 from gemini_question_generator import generate_questions_gemini
@@ -21,19 +22,21 @@ async def api_generate_questions(req: VideoRequest):
     if not transcript_text:
         raise HTTPException(status_code=400, detail="Could not fetch transcript")
 
-    questions = generate_questions_gemini(transcript_text)
+    questions = generate_questions_gemini(transcript_text)  # This returns a text string
     if not questions:
         raise HTTPException(status_code=500, detail="Question generation failed")
 
     audio_paths = []
     os.makedirs("static_audio", exist_ok=True)
-    for idx, q in enumerate(questions):
-        audio_file = f"static_audio/question_{idx}.wav"
-        generate_audio_polly(q["question_text"], audio_file)  # Use Polly TTS
-        audio_paths.append(audio_file)
+    
+    # Generate single audio file for all questions
+    unique_id = str(uuid.uuid4())
+    audio_file = f"static_audio/listening_{unique_id}.mp3"
+    # await generate_audio_polly(questions, audio_file)  # Just pass the string directly to Polly
+    audio_paths.append(audio_file)
 
     return {
         "transcript": transcript_text,
-        "questions": questions,
+        "questions": questions,  # Plain text string
         "audio_paths": audio_paths
     }

@@ -26,7 +26,7 @@ def generate_questions_gemini(transcript_text: str, num_questions: int = 5):
 
     # Define the prompt in English
     prompt = f"""
-    You are a Spanish teacher. Generate a NEW piece of text based on the provided transcript and make {num_questions} B2-level listening comprehension questions for
+    You are a Spanish teacher. Generate a NEW and SHORT piece of text based on the provided video transcript and make {num_questions} B2-level listening comprehension questions for
     the DELE exam. The DELE exam is conducted entirely in Spanish, so the questions and all of the text
     should be in Spanish.
     Each question should have 3 options (A, B, C) and one correct answer.
@@ -144,7 +144,7 @@ def test_gemini():
     ¡No lo olvides "Glotta Milhoja"!"""
 
     
-    return generate_questions_gemini(sample_text, num_questions=3)
+    return generate_questions_gemini(sample_text, num_questions=1)
 
 if __name__ == "__main__":
     output = test_gemini()
