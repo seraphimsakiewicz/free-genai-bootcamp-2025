@@ -35,7 +35,7 @@ def test_transcript_utils():
         print(f"URL: {url}\nExtracted ID: {video_id}\n")
 
     # Test transcript fetching
-    spanish_video_url = "https://www.youtube.com/watch?v=uQk7-sSRljc"
+    spanish_video_url = "https://youtu.be/uQk7-sSRljc?si=5RB0YMGuoVy1fsRD"
     transcript = get_transcript_text(spanish_video_url, language="es")
     print(f"Transcript:\n{transcript}")
 

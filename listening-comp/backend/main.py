@@ -30,13 +30,14 @@ class VideoRequest(BaseModel):
 
 @app.post("/api/generate-questions")
 async def api_generate_questions(req: VideoRequest):
-    # Check if content already exists
-    existing_content = vector_store.get_content(req.url)
-    if existing_content:
-        return existing_content
+
+    youtube_url = "https://youtu.be/uQk7-sSRljc?si=5RB0YMGuoVy1fsRD"
 
     # If not found, generate new content
-    transcript_text = get_transcript_text(req.url, language="es")
+    transcript_text = get_transcript_text("", language="es")
+    
+    # vector store get content somewhere around here...
+
     if not transcript_text:
         raise HTTPException(status_code=400, detail="Could not fetch transcript")
 
