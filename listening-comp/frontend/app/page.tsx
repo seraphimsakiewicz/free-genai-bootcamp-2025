@@ -118,33 +118,34 @@ export default function Home() {
                         Your browser does not support the audio element.
                       </audio>
                       <h3 className="text-lg font-semibold">{practiceContent.question}</h3>
-                      <RadioGroup
-                        value={selectedAnswers[0]?.toString()}
-                        onValueChange={(value) => handleAnswerSelect(0, value)}
-                        className="space-y-2"
-                      >
-                        {practiceContent.options.map((option: string, index: number) => (
-                          <div key={index} className="flex items-center space-x-2">
-                            <RadioGroupItem value={index.toString()} id={`option-${index}`} />
-                            <label htmlFor={`option-${index}`} className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                              {option}
-                            </label>
-                          </div>
-                        ))}
-                      </RadioGroup>
+                      {practiceContent?.options && (
+                        <RadioGroup
+                          value={selectedAnswers[0]?.toString()}
+                          onValueChange={(value) => handleAnswerSelect(0, value)}
+                          className="space-y-2"
+                        >
+                          {practiceContent.options.map((option: string, index: number) => (
+                            <div key={index} className="flex items-center space-x-2">
+                              <RadioGroupItem value={index.toString()} id={`option-${index}`} />
+                              <label htmlFor={`option-${index}`} className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                                {option}
+                              </label>
+                            </div>
+                          ))}
+                        </RadioGroup>
+                      )}
                       <div className="pt-4">
-                        <Button 
-                          onClick={() => handleSubmitAnswer(0)} 
+                        <Button
+                          onClick={() => handleSubmitAnswer(0)}
                           disabled={selectedAnswers[0] === undefined}
                         >
                           Submit Answer
                         </Button>
                         {showResults[0] && (
-                          <div className={`mt-4 p-4 rounded-md ${
-                            isAnswerCorrect(0)
-                              ? 'bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-100'
-                              : 'bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-100'
-                          }`}>
+                          <div className={`mt-4 p-4 rounded-md ${isAnswerCorrect(0)
+                            ? 'bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-100'
+                            : 'bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-100'
+                            }`}>
                             {isAnswerCorrect(0)
                               ? '¡Correcto! Well done!'
                               : '¡Incorrecto! Try again.'}
@@ -158,7 +159,7 @@ export default function Home() {
                         <ReactMarkdown>{practiceContent.text}</ReactMarkdown>
                       </div>
                       <div className="space-y-6">
-                        {practiceContent.questions.map((q: any, qIndex: number) => (
+                        {practiceContent?.questions?.map((q: any, qIndex: number) => (
                           <div key={qIndex} className="space-y-4">
                             <h3 className="text-lg font-semibold">{q.question}</h3>
                             <RadioGroup
@@ -176,18 +177,17 @@ export default function Home() {
                               ))}
                             </RadioGroup>
                             <div className="pt-4">
-                              <Button 
+                              <Button
                                 onClick={() => handleSubmitAnswer(qIndex)}
                                 disabled={selectedAnswers[qIndex] === undefined}
                               >
                                 Submit Answer
                               </Button>
                               {showResults[qIndex] && (
-                                <div className={`mt-4 p-4 rounded-md ${
-                                  isAnswerCorrect(qIndex)
-                                    ? 'bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-100'
-                                    : 'bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-100'
-                                }`}>
+                                <div className={`mt-4 p-4 rounded-md ${isAnswerCorrect(qIndex)
+                                  ? 'bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-100'
+                                  : 'bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-100'
+                                  }`}>
                                   {isAnswerCorrect(qIndex)
                                     ? '¡Correcto! Well done!'
                                     : '¡Incorrecto! Try again.'}

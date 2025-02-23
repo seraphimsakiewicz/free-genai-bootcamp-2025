@@ -26,23 +26,36 @@ def generate_questions_gemini(transcript_text: str, num_questions: int = 5):
 
     # Define the prompt in English
     prompt = f"""
-    You are a Spanish teacher. Generate a NEW and SHORT piece of text based on the provided video transcript and make {num_questions} B2-level listening comprehension questions for
-    the DELE exam. The DELE exam is conducted entirely in Spanish, so the questions and all of the text
-    should be in Spanish.
-    Each question should have 3 options (A, B, C) and one correct answer.
+Your task is to help a student prepare for the Spanish DELE exam. Using the transcript provided below, generate a NEW and SHORT conversation in Spanish along with one unique B2-level listening comprehension question. The conversation should consist of three parts with distinct voices:
+- Narrator (Narrador)
+- Interlocutor1 (choose either male or female)
+- Interlocutor2 (the opposite gender of Interlocutor1)
 
-    Return the response as a **plain text list** of questions and answers, with each question formatted as follows:
-    
-    Pregunta <question_number>: <question_text>
-    A) <option_1>
-    B) <option_2>
-    C) <option_3>
-    
-    Do NOT return JSON, markdown, or explanations. Only return the formatted text.
-    Do not return the correct answer in the response.
-    
-    Transcript: {transcript_text}
-    """
+After the conversation, create one listening comprehension question that includes:
+- A question text in Spanish.
+- Three answer options labeled A, B, and C.
+- The correct answer indicated as an index (0 for A, 1 for B, or 2 for C).
+
+Return your response strictly as a JSON string with the exact following structure, ensuring that all text (conversation and question) is in Spanish:
+
+{
+  "conversation": [
+    {"speaker": "Narrador", "text": "<narration in Spanish>"},
+    {"speaker": "Interlocutor1", "text": "<dialogue in Spanish>"},
+    {"speaker": "Interlocutor2", "text": "<dialogue in Spanish>"}
+  ],
+  "question": {
+    "text": "<listening comprehension question in Spanish>",
+    "options": ["<option A>", "<option B>", "<option C>"],
+    "correctAnswer": <index of correct answer: 0, 1, or 2>
+  }
+}
+
+Use the transcript provided below as inspiration. The exercise and question should always be unique.
+
+Transcript: {transcript_text}
+"""
+
 
     # Start a chat session and send the prompt
     chat_session = model.start_chat()
