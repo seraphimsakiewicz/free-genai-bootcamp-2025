@@ -8,8 +8,10 @@ import uuid
 from transcript_utils import get_transcript_text
 from gemini_question_generator import generate_questions_gemini
 from polly import generate_audio_polly 
+from vector_store import VectorStore
 
 app = FastAPI()
+vector_store = VectorStore()
 
 # Add CORS middleware
 app.add_middleware(
@@ -28,36 +30,40 @@ class VideoRequest(BaseModel):
 
 @app.post("/api/generate-questions")
 async def api_generate_questions(req: VideoRequest):
+    # Check if content already exists
+    existing_content = vector_store.get_content(req.url)
+    if existing_content:
+        return existing_content
+
+    # If not found, generate new content
     transcript_text = get_transcript_text(req.url, language="es")
     if not transcript_text:
         raise HTTPException(status_code=400, detail="Could not fetch transcript")
 
-    questions = generate_questions_gemini(transcript_text)  # This returns a text string
+    questions = generate_questions_gemini(transcript_text)
     if not questions:
         raise HTTPException(status_code=500, detail="Question generation failed")
 
-    audio_paths = []
-    os.makedirs("static_audio", exist_ok=True)
-    
-    # Generate single audio file for all questions
+    # Generate audio file
     unique_id = str(uuid.uuid4())
     audio_file = f"static_audio/listening_{unique_id}.mp3"
-    # await generate_audio_polly(questions, audio_file)  # Just pass the string directly to Polly
-    audio_paths.append(audio_file)
-    
-    print({
-        "transcript": transcript_text,
-        "questions": questions,  # Plain text string
-        "audio_paths": audio_paths
-    })
+    os.makedirs("static_audio", exist_ok=True)
+    await generate_audio_polly(questions, audio_file)
+
+    # Store in vector database
+    vector_store.store_content(
+        url=req.url,
+        transcript=transcript_text,
+        questions=questions,
+        audio_path=audio_file
+    )
 
     return {
         "transcript": transcript_text,
-        "questions": questions,  # Plain text string
-        "audio_paths": audio_paths
+        "questions": questions,
+        "audio_paths": [audio_file]
     }
     
-    # TODO
-    # need to fix to separate listening from reading comprehension 
-    # generate listening part using 3 diff voices... narrator, male, and female
-    # generate reading part based on a document instead of a video link.
+    # TODO need to fix to separate listening from reading comprehension generate listening part
+    # using 3 diff voices... narrator, male, and female generate reading part based on a document
+    # instead of a video link.

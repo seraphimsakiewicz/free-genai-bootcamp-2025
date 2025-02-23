@@ -5,3 +5,4 @@ google-genai
 soundfile
 python-dotenv
 boto3
+chromadb
