@@ -1,43 +1,84 @@
 "use client";
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { mockListeningPractice, mockReadingPractice } from '@/lib/mock-data';
 import ReactMarkdown from 'react-markdown';
-
-type SavedQuestion = {
-  id: string;
-  title: string;
-  date: string;
-};
-
-const mockSavedQuestions: SavedQuestion[] = [
-  {
-    id: '1',
-    title: 'Comprensión de lectura - Viajes',
-    date: '2024-03-15 14:30',
-  },
-  {
-    id: '2',
-    title: 'Comprensión auditiva - Restaurante',
-    date: '2024-03-15 15:45',
-  },
-];
+import { generatePractice, getSavedPractices, getPracticeById, Practice } from '@/lib/api';
+import { format } from 'date-fns';
 
 export default function Home() {
   const [practiceType, setPracticeType] = useState<string>('');
   const [practiceContent, setPracticeContent] = useState<any>(null);
   const [selectedAnswers, setSelectedAnswers] = useState<{ [key: number]: number }>({});
   const [showResults, setShowResults] = useState<{ [key: number]: boolean }>({});
+  const [savedPractices, setSavedPractices] = useState<Practice[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [isCreatingNew, setIsCreatingNew] = useState(true);
 
-  const handleGeneratePractice = () => {
-    setPracticeContent(practiceType === 'listening' ? mockListeningPractice : mockReadingPractice);
+  useEffect(() => {
+    // Fetch saved practices when component mounts
+    fetchSavedPractices();
+  }, []);
+
+  const fetchSavedPractices = async () => {
+    try {
+      const practices = await getSavedPractices();
+      setSavedPractices(practices);
+    } catch (error) {
+      console.error('Failed to fetch saved practices:', error);
+      setError('Failed to load saved practices');
+    }
+  };
+
+  const handleGeneratePractice = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const content = await generatePractice(practiceType as 'listening' | 'reading');
+      setPracticeContent(content);
+      setSelectedAnswers({});
+      setShowResults({});
+      setIsCreatingNew(false);
+      // Refresh the saved practices list
+      fetchSavedPractices();
+    } catch (error) {
+      console.error('Failed to generate practice:', error);
+      setError('Failed to generate practice');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handlePracticeSelect = async (practice: Practice) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const content = await getPracticeById(practice.id);
+      setPracticeType(practice.type);
+      setPracticeContent(content);
+      setSelectedAnswers({});
+      setShowResults({});
+      setIsCreatingNew(false);
+    } catch (error) {
+      console.error('Failed to load practice:', error);
+      setError('Failed to load practice');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleCreateNew = () => {
+    setPracticeType('');
+    setPracticeContent(null);
     setSelectedAnswers({});
     setShowResults({});
+    setIsCreatingNew(true);
+    setError(null);
   };
 
   const handleAnswerSelect = (questionIndex: number, value: string) => {
@@ -58,7 +99,7 @@ export default function Home() {
 
   const isAnswerCorrect = (questionIndex: number) => {
     if (practiceType === 'listening') {
-      return selectedAnswers[questionIndex] === practiceContent.correctAnswer;
+      return selectedAnswers[questionIndex] === practiceContent.question.correctAnswer;
     } else {
       return selectedAnswers[questionIndex] === practiceContent.questions[questionIndex].correctAnswer;
     }
@@ -72,10 +113,18 @@ export default function Home() {
           <div className="mb-6">
             <h2 className="text-lg font-semibold mb-4">Preguntas guardadas</h2>
             <div className="space-y-2">
-              {mockSavedQuestions.map((question) => (
-                <Card key={question.id} className="p-3 hover:bg-accent cursor-pointer">
-                  <h3 className="font-medium text-sm">{question.title}</h3>
-                  <p className="text-xs text-muted-foreground">{question.date}</p>
+              {savedPractices.map((practice) => (
+                <Card
+                  key={practice.id}
+                  className="p-3 hover:bg-accent cursor-pointer transition-colors"
+                  onClick={() => handlePracticeSelect(practice)}
+                >
+                  <h3 className="font-medium text-sm">
+                    {practice.type === 'listening' ? 'Comprensión auditiva' : 'Comprensión de lectura'}
+                  </h3>
+                  <p className="text-xs text-muted-foreground">
+                    {format(new Date(practice.timestamp), 'PPpp')}
+                  </p>
                 </Card>
               ))}
             </div>
@@ -90,25 +139,46 @@ export default function Home() {
               <ThemeToggle />
             </div>
 
-            <div className="space-y-6">
-              <div className="flex items-center gap-4">
-                <div className="w-full max-w-xs">
-                  <Select value={practiceType} onValueChange={setPracticeType}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select practice type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="listening">Comprensión auditiva</SelectItem>
-                      <SelectItem value="reading">Comprensión de lectura</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                {practiceType && (
-                  <Button onClick={handleGeneratePractice} className="bg-blue-600 hover:bg-blue-700">
-                    Generate Question
-                  </Button>
-                )}
+            {error && (
+              <div className="mb-4 p-4 bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-100 rounded-md">
+                {error}
               </div>
+            )}
+
+            <div className="space-y-6">
+              {isCreatingNew ? (
+                <div className="flex items-center gap-4">
+                  <div className="w-full max-w-xs">
+                    <Select value={practiceType} onValueChange={setPracticeType}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select practice type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="listening">Comprensión auditiva</SelectItem>
+                        <SelectItem value="reading">Comprensión de lectura</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  {practiceType && (
+                    <Button
+                      onClick={handleGeneratePractice}
+                      className="bg-blue-600 hover:bg-blue-700"
+                      disabled={loading}
+                    >
+                      {loading ? 'Generating...' : 'Generate Question'}
+                    </Button>
+                  )}
+                </div>
+              ) : (
+                <div className="flex justify-end mb-4">
+                  <Button
+                    onClick={handleCreateNew}
+                    className="bg-blue-600 hover:bg-blue-700"
+                  >
+                    Create New Question
+                  </Button>
+                </div>
+              )}
 
               {practiceContent && (
                 <div className="bg-card rounded-lg p-6 shadow-sm space-y-6">
@@ -117,23 +187,21 @@ export default function Home() {
                       <audio controls className="w-full" src={practiceContent.audioPath}>
                         Your browser does not support the audio element.
                       </audio>
-                      <h3 className="text-lg font-semibold">{practiceContent.question}</h3>
-                      {practiceContent?.options && (
-                        <RadioGroup
-                          value={selectedAnswers[0]?.toString()}
-                          onValueChange={(value) => handleAnswerSelect(0, value)}
-                          className="space-y-2"
-                        >
-                          {practiceContent.options.map((option: string, index: number) => (
-                            <div key={index} className="flex items-center space-x-2">
-                              <RadioGroupItem value={index.toString()} id={`option-${index}`} />
-                              <label htmlFor={`option-${index}`} className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                                {option}
-                              </label>
-                            </div>
-                          ))}
-                        </RadioGroup>
-                      )}
+                      <h3 className="text-lg font-semibold">{practiceContent?.question?.text}</h3>
+                      <RadioGroup
+                        value={selectedAnswers[0]?.toString()}
+                        onValueChange={(value) => handleAnswerSelect(0, value)}
+                        className="space-y-2"
+                      >
+                        {practiceContent.question.options.map((option: string, index: number) => (
+                          <div key={index} className="flex items-center space-x-2">
+                            <RadioGroupItem value={index.toString()} id={`option-${index}`} />
+                            <label htmlFor={`option-${index}`} className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                              {option}
+                            </label>
+                          </div>
+                        ))}
+                      </RadioGroup>
                       <div className="pt-4">
                         <Button
                           onClick={() => handleSubmitAnswer(0)}
@@ -159,7 +227,7 @@ export default function Home() {
                         <ReactMarkdown>{practiceContent.text}</ReactMarkdown>
                       </div>
                       <div className="space-y-6">
-                        {practiceContent?.questions?.map((q: any, qIndex: number) => (
+                        {practiceContent.questions.map((q: any, qIndex: number) => (
                           <div key={qIndex} className="space-y-4">
                             <h3 className="text-lg font-semibold">{q.question}</h3>
                             <RadioGroup
