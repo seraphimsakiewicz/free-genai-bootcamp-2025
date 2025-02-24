@@ -8,32 +8,45 @@ from dotenv import load_dotenv
 load_dotenv()
 
 async def generate_audio_polly(text: str, voice_id: str, output_file: str):
+    print(f"Starting audio generation for voice {voice_id}")
     # Retrieve AWS region from environment variables, defaulting to "us-west-2" if not provided.
     aws_region = os.getenv("AWS_REGION", "us-east-1")
+    print(f"Using AWS region: {aws_region}")
     
     # Initialize Polly client using the specified AWS region.
-    polly = boto3.client("polly", region_name=aws_region)
+    try:
+        polly = boto3.client("polly", region_name=aws_region)
+        print("Successfully initialized Polly client")
+    except Exception as e:
+        print(f"Failed to initialize Polly client: {e}")
+        return False
     
     try:
         # Request speech synthesis from Polly
+        print("Requesting speech synthesis from Polly...")
         response = polly.synthesize_speech(
             Text=text,  # The input text to be converted to speech
             OutputFormat="mp3",  # Output format of the speech
             VoiceId=voice_id,  # Voice selection
             LanguageCode="es-ES"  # Spanish (Spain) language selection
         )
+        print("Speech synthesis request completed")
 
         # Write the audio stream to a file if the response contains audio data
         if "AudioStream" in response:
+            print(f"Writing audio stream to {output_file}")
             with open(output_file, "wb") as file:
                 file.write(response["AudioStream"].read())
             print(f"Audio content written to {output_file}")
             return True
         else:
             print("Error: Polly response did not contain audio data.")
+            print("Response keys:", response.keys())
             return False
     except Exception as e:
         print(f"Error generating speech: {e}")
+        if hasattr(e, 'response'):
+            print("Error response:", e.response)
         return False
 
 async def combine_audio_files(file_paths: list[str], output_file: str):
@@ -87,9 +100,12 @@ async def combine_audio_files(file_paths: list[str], output_file: str):
                     print(f"Warning: Could not remove temporary file {file_path}: {cleanup_error}")
         return False
 
-async def generate_conversation_audio(conversation_data: list, output_dir: str) -> str:
-    # Create output directory if it doesn't exist
-    os.makedirs(output_dir, exist_ok=True)
+async def generate_conversation_audio(conversation_data: list, output_path: str) -> str:
+    # Create static_audio directory if it doesn't exist
+    print("HELLO WORLD")
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    
+    print("conversation_data: ", conversation_data)
     
     # Define voice mapping
     voice_mapping = {
@@ -99,6 +115,7 @@ async def generate_conversation_audio(conversation_data: list, output_dir: str) 
     }
     
     temp_files = []
+    output_dir = os.path.dirname(output_path)
     
     try:
         # Generate audio for each part of the conversation
@@ -124,14 +141,13 @@ async def generate_conversation_audio(conversation_data: list, output_dir: str) 
             if not success:
                 raise Exception(f"Failed to generate audio for {speaker}")
         
-        # Combine all audio files
-        final_output = os.path.join(output_dir, "final_conversation.mp3")
-        success = await combine_audio_files(temp_files, final_output)
+        # Combine all audio files into the final output path
+        success = await combine_audio_files(temp_files, output_path)
         
         if not success:
             raise Exception("Failed to combine audio files")
             
-        return final_output
+        return output_path
             
     except Exception as e:
         print(f"Error in generate_conversation_audio: {e}")
@@ -163,7 +179,7 @@ async def test_tts():
 
     try:
         # Generate conversation audio
-        output_file = await generate_conversation_audio(test_conversation, "test_audio")
+        output_file = await generate_conversation_audio(test_conversation, "test_audio/final_conversation.mp3")
         if output_file:
             print(f"Conversation audio generated successfully at: {output_file}")
         else:
