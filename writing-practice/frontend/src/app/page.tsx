@@ -23,6 +23,7 @@ export default function Home() {
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [feedback, setFeedback] = useState<string>("");
   const [showConfetti, setShowConfetti] = useState(false);
+  const [eraseMode, setEraseMode] = useState(false);
 
   const getWord = async () => {
     setIsLoading(true);
@@ -49,34 +50,26 @@ export default function Home() {
   const handleSubmit = async () => {
     if (!canvasRef.current || !word) return;
 
-    setIsLoading(true);
+    // setIsLoading(true);
     try {
       const imageData = await canvasRef.current.exportImage("png");
+
 
       const chatSession = model.startChat({
         generationConfig,
         history: [],
       });
 
-      const prompt = `I'm showing you a handwritten Spanish word. The original English word was "${word}". 
-    Please analyze if this drawing represents the correct Spanish translation and spelling.
+      const prompt = `I'm showing you a handwritten Spanish word. 
+      The original English word was "${word}". 
+    Please analyze if this drawing represents the correct Spanish translation 
+    and spelling.
+    Drawing: ${imageData}
     Respond in this exact format:
     CORRECT: true/false
     FEEDBACK: your feedback here`;
 
-      const result = await chatSession.sendMessage({
-        contents: [{
-          parts: [
-            { text: prompt },
-            {
-              inlineData: {
-                mimeType: "image/png",
-                data: imageData.split(',')[1] // Remove the data:image/png;base64, prefix
-              }
-            }
-          ]
-        }]
-      });
+      const result = await chatSession.sendMessage(prompt);
 
       const response = result.response.text();
       const isCorrectMatch = response.match(/CORRECT:\s*(true|false)/i);
@@ -101,6 +94,32 @@ export default function Home() {
     }
   };
 
+  const handleEraserClick = () => {
+    setEraseMode(true);
+    canvasRef.current?.eraseMode(true);
+  };
+
+  const handlePenClick = () => {
+    setEraseMode(false);
+    canvasRef.current?.eraseMode(false);
+  };
+
+  const handleUndoClick = () => {
+    canvasRef.current?.undo();
+  };
+
+  const handleRedoClick = () => {
+    canvasRef.current?.redo();
+  };
+
+  const handleClearClick = () => {
+    canvasRef.current?.clearCanvas();
+  };
+
+  const handleResetClick = () => {
+    canvasRef.current?.resetCanvas();
+  };
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       {showConfetti && <Confetti />}
@@ -121,6 +140,56 @@ export default function Home() {
           </div>
         )}
 
+        <div className="flex flex-col gap-2 items-center">
+          <h2 className="text-2xl font-bold">Tools</h2>
+          <div className="flex flex-row gap-2">
+            <button
+              type="button"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              disabled={!eraseMode}
+              onClick={handlePenClick}
+            >
+              Pen
+            </button>
+            <button
+              type="button"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              disabled={eraseMode}
+              onClick={handleEraserClick}
+            >
+              Eraser
+            </button>
+            <div className="vr" />
+            <button
+              type="button"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              onClick={handleUndoClick}
+            >
+              Undo
+            </button>
+            <button
+              type="button"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              onClick={handleRedoClick}
+            >
+              Redo
+            </button>
+            <button
+              type="button"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              onClick={handleClearClick}
+            >
+              Clear
+            </button>
+            <button
+              type="button"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              onClick={handleResetClick}
+            >
+              Reset
+            </button>
+          </div>
+        </div>
         <ReactSketchCanvas
           width="100%"
           height="100%"
