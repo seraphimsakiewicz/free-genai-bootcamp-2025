@@ -1,0 +1,153 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "video_metadata": null,
+            "thought": null,
+            "code_execution_result": null,
+            "executable_code": null,
+            "file_data": null,
+            "function_call": null,
+            "function_response": null,
+            "inline_data": null,
+            "text": "The population of France is estimated to be around 66.65 million in 2024/2025.\n"
+          }
+        ],
+        "role": "model"
+      },
+      "citation_metadata": null,
+      "finish_message": null,
+      "token_count": null,
+      "avg_logprobs": -0.008629211064042717,
+      "finish_reason": "STOP",
+      "grounding_metadata": null,
+      "index": null,
+      "logprobs_result": null,
+      "safety_ratings": null
+    }
+  ],
+  "model_version": "gemini-2.0-flash",
+  "prompt_feedback": null,
+  "usage_metadata": {
+    "cached_content_token_count": null,
+    "candidates_token_count": 29,
+    "prompt_token_count": 1066,
+    "total_token_count": 1095
+  },
+  "automatic_function_calling_history": [
+    {
+      "parts": [
+        {
+          "video_metadata": null,
+          "thought": null,
+          "code_execution_result": null,
+          "executable_code": null,
+          "file_data": null,
+          "function_call": null,
+          "function_response": null,
+          "inline_data": null,
+          "text": "You have a access to a tool that can search the web. What is the population of france?"
+        }
+      ],
+      "role": "user"
+    },
+    {
+      "parts": [
+        {
+          "video_metadata": null,
+          "thought": null,
+          "code_execution_result": null,
+          "executable_code": null,
+          "file_data": null,
+          "function_call": {
+            "id": null,
+            "args": {
+              "query": "population of france"
+            },
+            "name": "ddgs_search"
+          },
+          "function_response": null,
+          "inline_data": null,
+          "text": null
+        }
+      ],
+      "role": "model"
+    },
+    {
+      "parts": [
+        {
+          "video_metadata": null,
+          "thought": null,
+          "code_execution_result": null,
+          "executable_code": null,
+          "file_data": null,
+          "function_call": null,
+          "function_response": {
+            "id": null,
+            "name": "ddgs_search",
+            "response": {
+              "result": [
+                {
+                  "title": "France Population (2025) - Worldometer",
+                  "href": "https://www.worldometers.info/world-population/france-population/",
+                  "body": "The current population of France is 66,616,847 as of Sunday, March 2, 2025, based on Worldometer's elaboration of the latest United Nations data 1. France 2025 population is estimated at 66,650,804 people at mid year. France population is equivalent to 0.81% of the total world population."
+                },
+                {
+                  "title": "Population by Country (2025) - Worldometer",
+                  "href": "https://www.worldometers.info/world-population/population-by-country/",
+                  "body": "Countries in the world by population (2025) This list includes both countries and dependent territories. Data based on the latest United Nations Population Division estimates. Click on the name of the country or dependency for current estimates (live population clock), historical data, and projected figures. See also: World Population #"
+                },
+                {
+                  "title": "Demographics of France - Wikipedia",
+                  "href": "https://en.wikipedia.org/wiki/Demographics_of_France",
+                  "body": "The population of France is predicted to hit the 70 million mark between the year 2025/2030 and to overtake Germany's between 2050/2060, with 75.6 million French for 71 million Germans in 2060, while the UK is predicted to overtake France by 2030. By 2080, the population of France is estimated to reach 78.8 million (including the overseas ..."
+                },
+                {
+                  "title": "France Population 2024 (Live) - World Population Review",
+                  "href": "https://worldpopulationreview.com/countries/france",
+                  "body": "Find out the current and projected population of France based on UN data, as well as its growth rate, density, and rank. See the largest cities, population clock, and density map of France."
+                },
+                {
+                  "title": "France Demographics 2024 (Population, Age, Sex, Trends ... - Worldometer",
+                  "href": "https://www.worldometers.info/demographics/france-demographics/",
+                  "body": "Find out the latest statistics and trends of France's population, including median age, fertility rate, life expectancy, urbanization, and more. See live charts, maps, and sources of data from various international organizations."
+                },
+                {
+                  "title": "France population (2025) live — Countrymeters",
+                  "href": "https://countrymeters.info/en/France",
+                  "body": "The population of France will be increasing by 822 persons daily in 2025. Demographics of France 2024. As of 1 January 2025, the population of France was estimated to be 66,682,322 people. This is an increase of 0.45 % (298,726 people) compared to population of 66,383,596 the year before. In 2024 the natural increase was positive, as the number ..."
+                },
+                {
+                  "title": "Demographics in France - Statistics & Facts | Statista",
+                  "href": "https://www.statista.com/topics/5677/demography-in-france/",
+                  "body": "Learn about the population, life expectancy, density, and foreign-born share of France from various sources and charts. Find the latest data and trends on demographics in France from Statista."
+                },
+                {
+                  "title": "France Population 1950-2025 - Macrotrends",
+                  "href": "https://www.macrotrends.net/global-metrics/countries/FRA/france/population",
+                  "body": "See the chart and table of France population from 1950 to 2025, based on United Nations projections. The current population of France in 2025 is estimated at 65 million, with a growth rate of 0.19%."
+                },
+                {
+                  "title": "France demographics 2025 - StatisticsTimes.com",
+                  "href": "https://statisticstimes.com/demographics/country/france-demographics.php",
+                  "body": "Find out the projected population, growth rate, gender ratio, life expectancy, median age and fertility rate of France in 2024. Compare the demographics indicators of France with other countries and dependent territories."
+                },
+                {
+                  "title": "France population 2025 - StatisticsTimes.com",
+                  "href": "https://statisticstimes.com/demographics/country/france-population.php",
+                  "body": "The population of France is projected at 66,650,804, or 66.65 million, as of July 1, 2025. The total population in France is projected at 66,548,530, or 66.55 million people, for the year 2024. France is the fourth-most populous country in Europe and is in the 23rd position in the world on the list of 237 countries and territories."
+                }
+              ]
+            }
+          },
+          "inline_data": null,
+          "text": null
+        }
+      ],
+      "role": "user"
+    }
+  ],
+  "parsed": null
+}
