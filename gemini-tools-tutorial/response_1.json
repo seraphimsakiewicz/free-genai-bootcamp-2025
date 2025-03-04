@@ -1,0 +1,106 @@
+{
+    "candidates": [
+        {
+            "content": {
+                "parts": [
+                    {
+                        "video_metadata": null,
+                        "thought": null,
+                        "code_execution_result": null,
+                        "executable_code": null,
+                        "file_data": null,
+                        "function_call": null,
+                        "function_response": null,
+                        "inline_data": null,
+                        "text": "OK. I've set the lights to 20% brightness and a warm color temperature.\n"
+                    }
+                ],
+                "role": "model"
+            },
+            "citation_metadata": null,
+            "finish_message": null,
+            "token_count": null,
+            "avg_logprobs": -0.019943536747069585,
+            "finish_reason": "STOP",
+            "grounding_metadata": null,
+            "index": null,
+            "logprobs_result": null,
+            "safety_ratings": null
+        }
+    ],
+    "model_version": "gemini-2.0-flash",
+    "prompt_feedback": null,
+    "usage_metadata": {
+        "cached_content_token_count": null,
+        "candidates_token_count": 21,
+        "prompt_token_count": 126,
+        "total_token_count": 147
+    },
+    "automatic_function_calling_history": [
+        {
+            "parts": [
+                {
+                    "video_metadata": null,
+                    "thought": null,
+                    "code_execution_result": null,
+                    "executable_code": null,
+                    "file_data": null,
+                    "function_call": null,
+                    "function_response": null,
+                    "inline_data": null,
+                    "text": "Turn the lights down to a romantic level"
+                }
+            ],
+            "role": "user"
+        },
+        {
+            "parts": [
+                {
+                    "video_metadata": null,
+                    "thought": null,
+                    "code_execution_result": null,
+                    "executable_code": null,
+                    "file_data": null,
+                    "function_call": {
+                        "id": null,
+                        "args": {
+                            "brightness": 20,
+                            "color_temp": "warm"
+                        },
+                        "name": "set_light_values"
+                    },
+                    "function_response": null,
+                    "inline_data": null,
+                    "text": null
+                }
+            ],
+            "role": "model"
+        },
+        {
+            "parts": [
+                {
+                    "video_metadata": null,
+                    "thought": null,
+                    "code_execution_result": null,
+                    "executable_code": null,
+                    "file_data": null,
+                    "function_call": null,
+                    "function_response": {
+                        "id": null,
+                        "name": "set_light_values",
+                        "response": {
+                            "result": {
+                                "brightness": 20,
+                                "colorTemperature": "warm"
+                            }
+                        }
+                    },
+                    "inline_data": null,
+                    "text": null
+                }
+            ],
+            "role": "user"
+        }
+    ],
+    "parsed": null
+}
