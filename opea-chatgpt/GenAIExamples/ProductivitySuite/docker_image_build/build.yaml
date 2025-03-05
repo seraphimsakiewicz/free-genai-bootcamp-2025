@@ -1,0 +1,85 @@
+# Copyright (C) 2024 Intel Corporation
+# SPDX-License-Identifier: Apache-2.0
+
+services:
+  chatqna:
+    build:
+      args:
+        http_proxy: ${http_proxy}
+        https_proxy: ${https_proxy}
+        no_proxy: ${no_proxy}
+      context: ../../ChatQnA/
+      dockerfile: ./Dockerfile
+    image: ${REGISTRY:-opea}/chatqna:${TAG:-latest}
+  embedding:
+    build:
+      context: GenAIComps
+      dockerfile: comps/embeddings/src/Dockerfile
+    extends: chatqna
+    image: ${REGISTRY:-opea}/embedding:${TAG:-latest}
+  retriever:
+    build:
+      context: GenAIComps
+      dockerfile: comps/retrievers/src/Dockerfile
+    extends: chatqna
+    image: ${REGISTRY:-opea}/retriever:${TAG:-latest}
+  reranking:
+    build:
+      context: GenAIComps
+      dockerfile: comps/rerankings/src/Dockerfile
+    extends: chatqna
+    image: ${REGISTRY:-opea}/reranking:${TAG:-latest}
+  llm-textgen:
+    build:
+      context: GenAIComps
+      dockerfile: comps/llms/src/text-generation/Dockerfile
+    extends: chatqna
+    image: ${REGISTRY:-opea}/llm-textgen:${TAG:-latest}
+  dataprep:
+    build:
+      context: GenAIComps
+      dockerfile: comps/dataprep/src/Dockerfile
+    extends: chatqna
+    image: ${REGISTRY:-opea}/dataprep:${TAG:-latest}
+  promptregistry-mongo:
+    build:
+      context: GenAIComps
+      dockerfile: comps/prompt_registry/src/Dockerfile
+    extends: chatqna
+    image: ${REGISTRY:-opea}/promptregistry-mongo:${TAG:-latest}
+  chathistory-mongo:
+    build:
+      context: GenAIComps
+      dockerfile: comps/chathistory/src/Dockerfile
+    extends: chatqna
+    image: ${REGISTRY:-opea}/chathistory-mongo:${TAG:-latest}
+  productivity-suite-react-ui-server:
+    build:
+      context: ../ui
+      dockerfile: ./docker/Dockerfile.react
+    extends: chatqna
+    image: ${REGISTRY:-opea}/productivity-suite-react-ui-server:${TAG:-latest}
+  codegen:
+    build:
+      args:
+        http_proxy: ${http_proxy}
+        https_proxy: ${https_proxy}
+        no_proxy: ${no_proxy}
+      context: ../../CodeGen/
+      dockerfile: ./Dockerfile
+    image: ${REGISTRY:-opea}/codegen:${TAG:-latest}
+  faqgen:
+    build:
+      args:
+        http_proxy: ${http_proxy}
+        https_proxy: ${https_proxy}
+        no_proxy: ${no_proxy}
+      context: ../../FaqGen/
+      dockerfile: ./Dockerfile
+    image: ${REGISTRY:-opea}/faqgen:${TAG:-latest}
+  llm-faqgen:
+    build:
+      context: GenAIComps
+      dockerfile: comps/llms/src/faq-generation/Dockerfile
+    extends: faqgen
+    image: ${REGISTRY:-opea}/llm-faqgen:${TAG:-latest}

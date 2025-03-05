@@ -1,0 +1,43 @@
+# Copyright (C) 2024 Intel Corporation
+# SPDX-License-Identifier: Apache-2.0
+
+services:
+  searchqna:
+    build:
+      args:
+        http_proxy: ${http_proxy}
+        https_proxy: ${https_proxy}
+        no_proxy: ${no_proxy}
+      context: ../
+      dockerfile: ./Dockerfile
+    image: ${REGISTRY:-opea}/searchqna:${TAG:-latest}
+  searchqna-ui:
+    build:
+      context: ../ui
+      dockerfile: ./docker/Dockerfile
+    extends: searchqna
+    image: ${REGISTRY:-opea}/searchqna-ui:${TAG:-latest}
+  embedding:
+    build:
+      context: GenAIComps
+      dockerfile: comps/embeddings/src/Dockerfile
+    extends: searchqna
+    image: ${REGISTRY:-opea}/embedding:${TAG:-latest}
+  web-retriever:
+    build:
+      context: GenAIComps
+      dockerfile: comps/web_retrievers/src/Dockerfile
+    extends: searchqna
+    image: ${REGISTRY:-opea}/web-retriever:${TAG:-latest}
+  reranking:
+    build:
+      context: GenAIComps
+      dockerfile: comps/rerankings/src/Dockerfile
+    extends: searchqna
+    image: ${REGISTRY:-opea}/reranking:${TAG:-latest}
+  llm-textgen:
+    build:
+      context: GenAIComps
+      dockerfile: comps/llms/src/text-generation/Dockerfile
+    extends: searchqna
+    image: ${REGISTRY:-opea}/llm-textgen:${TAG:-latest}

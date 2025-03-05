@@ -1,0 +1,43 @@
+# Copyright (C) 2024 Intel Corporation
+# SPDX-License-Identifier: Apache-2.0
+
+name: Freeze OPEA images release tag
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        default: "1.1.0"
+        description: "Tag to apply to images"
+        required: true
+        type: string
+
+jobs:
+  freeze-tag:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.ref }}
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "CICD-at-OPEA"
+          git config --global user.email "CICD@opea.dev"
+          git remote set-url origin https://CICD-at-OPEA:"${{ secrets.ACTION_TOKEN }}"@github.com/opea-project/GenAIExamples.git
+
+      - name: Run script
+        run: |
+          IFS='.' read -r major minor patch <<< "${{ github.event.inputs.tag }}"
+          echo "VERSION_MAJOR ${major}"  > version.txt
+          echo "VERSION_MINOR ${minor}" >> version.txt
+          echo "VERSION_PATCH ${patch}" >> version.txt
+
+      - name: Commit changes
+        run: |
+          git add .
+          git commit -s -m "Freeze OPEA images tag"
+          git push

@@ -1,0 +1,35 @@
+# Copyright (C) 2024 Intel Corporation
+# SPDX-License-Identifier: Apache-2.0
+# Test
+name: Build latest images on push event
+
+on:
+  push:
+    branches: [ 'main' ]
+    paths:
+      - "**.py"
+      - "**Dockerfile*"
+      - "**docker_image_build/build.yaml"
+      - "**/ui/**"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-on-push
+  cancel-in-progress: true
+
+jobs:
+  job1:
+    uses: ./.github/workflows/_get-test-matrix.yml
+    with:
+      test_mode: "docker_image_build"
+
+  image-build:
+    needs: job1
+    if: ${{ needs.job1.outputs.run_matrix != '{"include":[]}' }}
+    strategy:
+      matrix: ${{ fromJSON(needs.job1.outputs.run_matrix) }}
+      fail-fast: false
+    uses: ./.github/workflows/_example-workflow.yml
+    with:
+      node: ${{ matrix.hardware }}
+      example: ${{ matrix.example }}
+    secrets: inherit
