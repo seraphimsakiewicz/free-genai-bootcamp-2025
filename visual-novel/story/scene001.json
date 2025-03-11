@@ -1,0 +1,217 @@
+{
+  "id": "scene001",
+  "title": "Welcome to Japan",
+  "description": "First day in Japan, meeting your roommate Alex",
+  "location": {
+    "id": "apartment",
+    "name": "Shared Apartment",
+    "backgroundImage": "apartment-interior.jpg"
+  },
+  "character": {
+    "id": "alex",
+    "name": "Alex Thompson",
+    "defaultImage": "alex-neutral.png"
+  },
+  "languageDifficulty": "beginner",
+  "dialog": [
+    {
+      "speaker": "narrator",
+      "text": "You wake up in your new apartment in Japan. The morning sunlight streams through the blinds as you hear someone in the kitchen.",
+      "languageVersion": null
+    },
+    {
+      "speaker": "alex",
+      "text": "Oh, you're up! Good morning!",
+      "languageVersion": "おはよう！起きた？",
+      "characterImage": "alex-happy.png",
+      "audioFile": "alex-greeting.mp3"
+    },
+    {
+      "speaker": "player",
+      "text": "Good morning. You must be Alex?",
+      "options": [
+        {
+          "text": "Good morning. You must be Alex?",
+          "languageVersion": "おはようございます。アレックスさんですか？",
+          "languageLevel": "beginner"
+        },
+        {
+          "text": "Hello. Nice to meet you.",
+          "languageVersion": "こんにちは。はじめまして。",
+          "languageLevel": "beginner"
+        }
+      ]
+    },
+    {
+      "speaker": "alex",
+      "text": "That's right! Welcome to Japan! I'm Alex Thompson, your roommate for the month. I'm from Canada, but I've been in Japan for about two years now.",
+      "languageVersion": "そうだよ！日本へようこそ！アレックス・トンプソンだよ。１ヶ月間のルームメイトになる。カナダ出身だけど、日本には２年ぐらい住んでいるよ。",
+      "characterImage": "alex-neutral.png",
+      "audioFile": "alex-introduction.mp3"
+    },
+    {
+      "speaker": "player",
+      "text": "Thanks for having me. I'm excited to be here.",
+      "options": [
+        {
+          "text": "Thanks for having me. I'm excited to be here.",
+          "languageVersion": "よろしくお願いします。楽しみにしています。",
+          "languageLevel": "beginner"
+        }
+      ]
+    },
+    {
+      "speaker": "alex",
+      "text": "I made some coffee. Would you like some before we head out? Your language school orientation starts at 10:00.",
+      "languageVersion": "コーヒーを入れたよ。出かける前に飲む？君の語学学校のオリエンテーションは10時からだよ。",
+      "characterImage": "alex-coffee.png",
+      "audioFile": "alex-coffee.mp3"
+    },
+    {
+      "speaker": "player",
+      "text": "Coffee sounds great, thanks!",
+      "options": [
+        {
+          "text": "Coffee sounds great, thanks!",
+          "languageVersion": "コーヒーいいですね、ありがとう！",
+          "languageLevel": "beginner"
+        },
+        {
+          "text": "What time is it now?",
+          "languageVersion": "今、何時ですか？",
+          "languageLevel": "beginner"
+        }
+      ]
+    },
+    {
+      "speaker": "alex",
+      "text": "It's about 8:30 now. The school is a 15-minute walk from here. I'll show you the way today.",
+      "languageVersion": "今8時30分ごろだよ。学校はここから歩いて15分だよ。今日は道を案内するね。",
+      "characterImage": "alex-pointing.png",
+      "audioFile": "alex-time.mp3"
+    }
+  ],
+  "languageLearning": {
+    "vocabulary": [
+      {
+        "word": "おはよう",
+        "romaji": "ohayou",
+        "translation": "Good morning (casual)",
+        "usage": "Morning greeting with friends",
+        "example": "おはよう、元気？ (Good morning, how are you?)"
+      },
+      {
+        "word": "おはようございます",
+        "romaji": "ohayou gozaimasu",
+        "translation": "Good morning (formal)",
+        "usage": "Morning greeting in formal situations",
+        "example": "先生、おはようございます。(Good morning, teacher.)"
+      },
+      {
+        "word": "はじめまして",
+        "romaji": "hajimemashite",
+        "translation": "Nice to meet you",
+        "usage": "First-time introductions",
+        "example": "はじめまして、田中です。(Nice to meet you, I'm Tanaka.)"
+      },
+      {
+        "word": "よろしくお願いします",
+        "romaji": "yoroshiku onegaishimasu",
+        "translation": "Please treat me well/I look forward to working with you",
+        "usage": "After introductions or when asking for assistance",
+        "example": "これから一緒に働きます。よろしくお願いします。(We'll be working together from now on. I look forward to it.)"
+      },
+      {
+        "word": "何時",
+        "romaji": "nanji",
+        "translation": "What time",
+        "usage": "Asking for the time",
+        "example": "今、何時ですか？ (What time is it now?)"
+      },
+      {
+        "word": "ありがとう",
+        "romaji": "arigatou",
+        "translation": "Thank you (casual)",
+        "usage": "Expressing gratitude to friends/family",
+        "example": "コーヒーをありがとう。(Thanks for the coffee.)"
+      }
+    ],
+    "grammar": [
+      {
+        "pattern": "〜ます/です (formal speech)",
+        "explanation": "Basic formal sentence endings used in polite speech",
+        "examples": [
+          {
+            "japanese": "私は学生です。",
+            "romaji": "Watashi wa gakusei desu.",
+            "translation": "I am a student."
+          },
+          {
+            "japanese": "毎日勉強します。",
+            "romaji": "Mainichi benkyou shimasu.",
+            "translation": "I study every day."
+          }
+        ]
+      },
+      {
+        "pattern": "〜から (because/from)",
+        "explanation": "Used to indicate reason or point of origin",
+        "examples": [
+          {
+            "japanese": "カナダから来ました。",
+            "romaji": "Kanada kara kimashita.",
+            "translation": "I came from Canada."
+          },
+          {
+            "japanese": "学校はここから15分です。",
+            "romaji": "Gakkou wa koko kara juugo-fun desu.",
+            "translation": "The school is 15 minutes from here."
+          }
+        ]
+      }
+    ],
+    "culturalNotes": [
+      {
+        "title": "Greetings in Japan",
+        "content": "In Japan, greetings change based on time of day and formality level. 'Ohayou gozaimasu' is for mornings, 'Konnichiwa' for daytime, and 'Konbanwa' for evening. Always use the more formal versions when speaking to teachers or elders."
+      },
+      {
+        "title": "Japanese Coffee Culture",
+        "content": "While traditionally a tea-drinking nation, coffee has become very popular in Japan. Japanese coffee shops (kissaten) often serve meticulously prepared pour-over coffee and are places for quiet conversation."
+      }
+    ],
+    "exercises": [
+      {
+        "type": "vocabulary-matching",
+        "instructions": "Match the Japanese words with their English meanings",
+        "items": [
+          {"japanese": "おはよう", "english": "Good morning"},
+          {"japanese": "ありがとう", "english": "Thank you"},
+          {"japanese": "はじめまして", "english": "Nice to meet you"},
+          {"japanese": "何時", "english": "What time"}
+        ]
+      },
+      {
+        "type": "dialog-completion",
+        "instructions": "Fill in the blanks with appropriate responses",
+        "dialog": [
+          {"speaker": "Alex", "text": "おはよう！"},
+          {"speaker": "You", "text": "[        ]"},
+          {"speaker": "Alex", "text": "コーヒーを飲みますか？"},
+          {"speaker": "You", "text": "[        ]"}
+        ],
+        "answers": [
+          {"correct": "おはようございます", "alternatives": ["おはよう"]},
+          {"correct": "はい、お願いします", "alternatives": ["はい、ありがとう"]}
+        ]
+      }
+    ],
+    "progressTrackingPoints": {
+      "vocabulary": ["greeting", "time", "basic-conversation"],
+      "grammar": ["formal-speech", "from-location"],
+      "comprehension": 5
+    }
+  },
+  "nextScene": "scene002",
+  "branchOptions": null
+}

@@ -1,0 +1,79 @@
+{
+    "id": "scene001",
+    "title": "Welcome to Japan",
+    "location_id": "apartment",
+    "character_id": "alex",
+    "startsAt": "000",
+    "dialog": {
+        "000": {
+            "speakerId": "player",
+            "audio": "wake-up",
+            "japanese": "あなたは新しいアパートにおり、朝日の光が窓の中を流すように、あなたは起きた。",
+            "english": "You wake up in your new apartment in Japan. The morning sunlight streams through the blinds as you hear someone in the kitchen.",
+            "default_next_id": "001"
+        },
+        "001": {
+            "speakerId": "alex",
+            "japanese": "おはよう！起きたんだね！",
+            "english": "Oh, you're up! Good morning!",
+            "choices": [
+                {
+                    "english": "Good morning. You must be Alex?",
+                    "japanese": "おはようございます。アレックスさんですか？",
+                    "next_id": "002"
+                },
+                {
+                    "english": "Hello. Nice to meet you.",
+                    "japanese": "こんにちは。はじめまして。",
+                    "next_id": "002"
+                }
+            ]
+        },
+        "002": {
+            "speakerId": "alex",
+            "japanese": "そうだよ！日本へようこそ！アレックス・トンプソンだよ。１ヶ月間のルームメイトになる。カナダ出身だけど、日本には２年ぐらい住んでいるよ。",
+            "english": "That's right! Welcome to Japan! I'm Alex Thompson, your roommate for the month. I'm from Canada, but I've been in Japan for about two years now.",
+            "choices": [
+                {
+                    "english": "Thanks for having me. I'm excited to be here.",
+                    "japanese": "よろしくお願いします。楽しみにしています。",
+                    "next_id": "003"
+                },
+                {
+                    "english": "Your Japanese must be pretty good after two years.",
+                    "japanese": "二年間で日本語が上手になったでしょうね。",
+                    "next_id": "003"
+                }
+            ]
+        },
+        "003": {
+            "speakerId": "alex",
+            "japanese": "コーヒーを入れたよ。出かける前に飲む？君の語学学校のオリエンテーションは10時からだよ。",
+            "english": "I made some coffee. Would you like some before we head out? Your language school orientation starts at 10:00.",
+            "choices": [
+                {
+                    "english": "Coffee sounds great, thanks!",
+                    "japanese": "コーヒーいいですね、ありがとう！",
+                    "next_id": "004"
+                },
+                {
+                    "english": "What time is it now?",
+                    "japanese": "今、何時ですか？",
+                    "next_id": "004"
+                }
+            ]
+        },
+        "004": {
+            "speakerId": "alex",
+            "japanese": "今8時30分ごろだよ。学校はここから歩いて15分だよ。今日は道を案内するね。",
+            "english": "It's about 8:30 now. The school is a 15-minute walk from here. I'll show you the way today.",
+            "default_next_id": "005"
+        },
+        "005": {
+            "speakerId": "player",
+            "japanese": "アレックスは親切にコーヒーを渡してくれた。彼と少し話した後、学校に向かう準備を始めた。",
+            "english": "Alex hands you the coffee. After chatting with him a bit more, you start getting ready for school.",
+            "ends": true
+        }
+    }
+}

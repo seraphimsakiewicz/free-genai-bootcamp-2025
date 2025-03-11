@@ -1,0 +1,81 @@
+{
+  "id": "scene001",
+  "title": "Welcome to Japan",
+  "location": "apartment",
+  "character": "alex",
+  "backgroundImage": "apartment-interior.jpg",
+  "dialog": [
+    {
+      "speaker": "narrator",
+      "text": "You wake up in your new apartment in Japan. The morning sunlight streams through the blinds.",
+      "japanese": null
+    },
+    {
+      "speaker": "alex",
+      "text": "Oh, you're up! Good morning!",
+      "japanese": "おはよう！起きたんだね！",
+      "image": "alex-happy.png"
+    },
+    {
+      "speaker": "player",
+      "text": "Good morning. You must be Alex?",
+      "japanese": "おはようございます。アレックスさんですか？"
+    },
+    {
+      "speaker": "alex",
+      "text": "That's right! Welcome to Japan! I'm Alex Thompson, your roommate for the month.",
+      "japanese": "そうだよ！日本へようこそ！アレックス・トンプソンだよ。１ヶ月間のルームメイトになる。",
+      "image": "alex-neutral.png"
+    },
+    {
+      "speaker": "player",
+      "text": "Thanks for having me. I'm excited to be here.",
+      "japanese": "よろしくお願いします。楽しみにしています。"
+    },
+    {
+      "speaker": "alex",
+      "text": "I made some coffee. Would you like some before we head out? Your language school orientation starts at 10:00.",
+      "japanese": "コーヒーを入れたよ。出かける前に飲む？君の語学学校のオリエンテーションは10時からだよ。",
+      "image": "alex-coffee.png"
+    },
+    {
+      "speaker": "player",
+      "text": "Coffee sounds great, thanks!",
+      "japanese": "コーヒーいいですね、ありがとう！"
+    },
+    {
+      "speaker": "alex",
+      "text": "It's about 8:30 now. The school is a 15-minute walk from here. I'll show you the way today.",
+      "japanese": "今8時30分ごろだよ。学校はここから歩いて15分だよ。今日は道を案内するね。",
+      "image": "alex-pointing.png"
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "おはよう",
+      "translation": "Good morning (casual)"
+    },
+    {
+      "word": "おはようございます",
+      "translation": "Good morning (formal)"
+    },
+    {
+      "word": "よろしくお願いします",
+      "translation": "Nice to meet you/Please treat me well"
+    },
+    {
+      "word": "ありがとう",
+      "translation": "Thank you"
+    },
+    {
+      "word": "学校",
+      "translation": "School"
+    },
+    {
+      "word": "何時",
+      "translation": "What time"
+    }
+  ],
+  "nextScene": "scene002",
+  "choices": null
+}
