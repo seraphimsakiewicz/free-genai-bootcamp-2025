@@ -28,6 +28,7 @@ eggs/
 .eggs/
 lib/
 lib64/
+!visual-novel/lib/
 parts/
 sdist/
 var/
