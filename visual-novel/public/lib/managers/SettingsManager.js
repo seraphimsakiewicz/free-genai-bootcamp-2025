@@ -9,7 +9,7 @@ class SettingsManager {
         
         // Default settings
         this.defaultSettings = {
-            language: 'dual',   // english, japanese, dual
+            language: 'dual',   // english, spanish, dual
             textSpeed: 30,         // ms per character
             autoAdvanced: false,   // auto-advance dialog
             autoSpeed: 2000,       // ms to wait before advancing in auto mode

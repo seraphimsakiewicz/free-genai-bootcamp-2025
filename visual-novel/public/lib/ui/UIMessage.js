@@ -1,8 +1,5 @@
-// The UIMessage is the following:
-// its message bubble that can have its colour set.
-// it has text label who the speaker is.
-// it has text for japanese dialog.
-// it has text for english dialog
+// The UIMessage is the following: its message bubble that can have its colour set. it has text
+// label who the speaker is. it has text for spanish dialog. it has text for english dialog
 class UIMessage extends UIItem{
     constructor(scene,options) {
         super('message')
@@ -14,7 +11,7 @@ class UIMessage extends UIItem{
 
         const width = this.scene.cameras.main.width;
         this.maxWidth = width / 2;
-        this.japaneseText = null;
+        this.spanishText = null;
         this.englishText = null;
         this.nameText = null;
         this.create();
@@ -23,7 +20,7 @@ class UIMessage extends UIItem{
     create() {
         this.createBubble();
         this.createNameText();
-        this.createJapaneseText();
+        this.createSpanishText();
         this.createEnglishText();
         this.createPlayButton();
     }
@@ -36,12 +33,12 @@ class UIMessage extends UIItem{
 
     update(options){
         this.nameText.setText(options.name);
-        if (options.japaneseText) {
-            this.japaneseText.setText(options.japaneseText);
-            this.japaneseText.setVisible(true);
+        if (options.spanishText) {
+            this.spanishText.setText(options.spanishText);
+            this.spanishText.setVisible(true);
         } else {
-            this.japaneseText.setText('');
-            this.japaneseText.setVisible(false);
+            this.spanishText.setText('');
+            this.spanishText.setVisible(false);
         }
         if (options.englishText) {
             this.englishText.setText(options.englishText);
@@ -91,19 +88,19 @@ class UIMessage extends UIItem{
         this.bubblePanel.addItem(this.nameText);
     }
 
-    createJapaneseText() {
+    createSpanishText() {
         const width = this.scene.cameras.main.width * 0.8;
-        this.japaneseText = this.scene.g.ui.createLabel({
+        this.spanishText = this.scene.g.ui.createLabel({
             position: [0,0],
             text: '',
             style: {
-                fontFamily: 'Noto Sans JP',
+                fontFamily: 'Source Sans Pro',
                 fontSize: '32px',
                 color: '#ffffff',
                 wordWrap: { width: width, useAdvancedWrap: true }
             }
         });
-        this.bubblePanel.addItem(this.japaneseText);
+        this.bubblePanel.addItem(this.spanishText);
     }
 
     createEnglishText() {
@@ -133,8 +130,7 @@ class UIMessage extends UIItem{
     }
 
     getDimensions() {
-        // TODO - if the item is not visible, show this return 0,0?
-        // What should happen in this case?
+        // TODO - if the item is not visible, show this return 0,0? What should happen in this case?
         return this.bubblePanel.getDimensions();
     }
 }

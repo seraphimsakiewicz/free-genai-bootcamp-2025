@@ -1,6 +1,5 @@
 /**
- * UIManager.js
- * Manages all UI components in the game
+ * UIManager.js Manages all UI components in the game
  */
 class DialogUI  extends BaseUI {
     constructor(UIManager,dialogManager,scene) {
@@ -39,14 +38,14 @@ class DialogUI  extends BaseUI {
         const attrs = {}           
         attrs.name = this.d.getSpeakerName();
         switch(this.scene.g.settings.get('language')) { 
-            case 'japanese':
-                attrs.japaneseText = this.d.getJapaneseText();
+            case 'spanish':
+                attrs.spanishText = this.d.getSpanishText();
                 break;
             case 'english':
                 attrs.englishText = this.d.getEnglishText();
                 break;
             case 'dual':
-                attrs.japaneseText = this.d.getJapaneseText();
+                attrs.spanishText = this.d.getSpanishText();
                 attrs.englishText = this.d.getEnglishText();
                 break;
             default:
@@ -64,7 +63,7 @@ class DialogUI  extends BaseUI {
                 this.choices[i].setText('')
                 this.choices[i].setVisible(false)
             } else {
-                this.choices[i].setText(choices[i].japanese)
+                this.choices[i].setText(choices[i].spanish)
                 this.choices[i].setVisible(true)
             }
         }

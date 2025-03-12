@@ -22,7 +22,7 @@ class MenuScene extends BaseScene {
         
         // Add title text
         const mainTitle = this.add.text(width / 2, 0, 'Novela visual para aprender español', {
-            fontFamily: 'Noto Sans JP',
+            fontFamily: 'Source Sans Pro',
             fontSize: '80px',
             color: '#ffffff',
             stroke: '#000000',

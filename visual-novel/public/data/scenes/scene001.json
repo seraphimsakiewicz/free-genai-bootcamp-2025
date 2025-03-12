@@ -1,78 +1,78 @@
 {
     "id": "scene001",
-    "title": "Welcome to Japan",
+    "title": "Welcome to Madrid",
     "location_id": "apartment",
-    "character_id": "alex",
+    "character_id": "brian",
     "startsAt": "000",
     "dialog": {
         "000": {
             "speakerId": "player",
             "audio": "wake-up",
-            "japanese": "あなたは新しいアパートにおり、朝日の光が窓の中を流すように、あなたは起きた。",
-            "english": "You wake up in your new apartment in Japan. The morning sunlight streams through the blinds as you hear someone in the kitchen.",
+            "spanish": "Te despiertas en tu nuevo apartamento en Madrid. La luz del sol de la mañana entra por las persianas mientras escuchas a alguien en la cocina.",
+            "english": "You wake up in your new apartment in Madrid. The morning sunlight streams through the blinds as you hear someone in the kitchen.",
             "default_next_id": "001"
         },
         "001": {
-            "speakerId": "alex",
-            "japanese": "おはよう！起きたんだね！",
+            "speakerId": "brian",
+            "spanish": "¡Buenos días! ¿Ya te has despertado?",
             "english": "Oh, you're up! Good morning!",
             "choices": [
                 {
-                    "english": "Good morning. You must be Alex?",
-                    "japanese": "おはようございます。アレックスさんですか？",
+                    "english": "Good morning. You must be Brian?",
+                    "spanish": "Buenos días. ¿Tú debes ser Brian?",
                     "next_id": "002"
                 },
                 {
                     "english": "Hello. Nice to meet you.",
-                    "japanese": "こんにちは。はじめまして。",
+                    "spanish": "Hola. Encantado de conocerte.",
                     "next_id": "002"
                 }
             ]
         },
         "002": {
-            "speakerId": "alex",
-            "japanese": "そうだよ！日本へようこそ！アレックス・トンプソンだよ。１ヶ月間のルームメイトになる。カナダ出身だけど、日本には２年ぐらい住んでいるよ。",
-            "english": "That's right! Welcome to Japan! I'm Alex Thompson, your roommate for the month. I'm from Canada, but I've been in Japan for about two years now.",
+            "speakerId": "brian",
+            "spanish": "¡Exacto! ¡Bienvenido a Madrid! Soy Brian Johnson, tu compañero de piso durante el mes. Soy estadounidense, pero llevo viviendo en España unos dos años.",
+            "english": "That's right! Welcome to Madrid! I'm Brian Johnson, your roommate for the month. I'm from the United States, but I've been in Spain for about two years now.",
             "choices": [
                 {
                     "english": "Thanks for having me. I'm excited to be here.",
-                    "japanese": "よろしくお願いします。楽しみにしています。",
+                    "spanish": "Gracias por acogerme. Estoy emocionado de estar aquí.",
                     "next_id": "003"
                 },
                 {
-                    "english": "Your Japanese must be pretty good after two years.",
-                    "japanese": "二年間で日本語が上手になったでしょうね。",
+                    "english": "Your Spanish must be pretty good after two years.",
+                    "spanish": "Tu español debe ser bastante bueno después de dos años.",
                     "next_id": "003"
                 }
             ]
         },
         "003": {
-            "speakerId": "alex",
-            "japanese": "コーヒーを入れたよ。出かける前に飲む？君の語学学校のオリエンテーションは10時からだよ。",
+            "speakerId": "brian",
+            "spanish": "He preparado café. ¿Quieres un poco antes de salir? La orientación de tu escuela de idiomas empieza a las 10:00.",
             "english": "I made some coffee. Would you like some before we head out? Your language school orientation starts at 10:00.",
             "choices": [
                 {
                     "english": "Coffee sounds great, thanks!",
-                    "japanese": "コーヒーいいですね、ありがとう！",
+                    "spanish": "Un café suena genial, ¡gracias!",
                     "next_id": "004"
                 },
                 {
                     "english": "What time is it now?",
-                    "japanese": "今、何時ですか？",
+                    "spanish": "¿Qué hora es ahora?",
                     "next_id": "004"
                 }
             ]
         },
         "004": {
-            "speakerId": "alex",
-            "japanese": "今8時30分ごろだよ。学校はここから歩いて15分だよ。今日は道を案内するね。",
+            "speakerId": "brian",
+            "spanish": "Son aproximadamente las 8:30. La escuela está a 15 minutos a pie desde aquí. Hoy te mostraré el camino.",
             "english": "It's about 8:30 now. The school is a 15-minute walk from here. I'll show you the way today.",
             "default_next_id": "005"
         },
         "005": {
             "speakerId": "player",
-            "japanese": "アレックスは親切にコーヒーを渡してくれた。彼と少し話した後、学校に向かう準備を始めた。",
-            "english": "Alex hands you the coffee. After chatting with him a bit more, you start getting ready for school.",
+            "spanish": "Brian te entrega amablemente el café. Después de charlar un poco más con él, empiezas a prepararte para ir a la escuela.",
+            "english": "Brian hands you the coffee. After chatting with him a bit more, you start getting ready for school.",
             "ends": true
         }
     }

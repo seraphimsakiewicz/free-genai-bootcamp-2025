@@ -9,7 +9,7 @@ html, body {
 } 
 
 body {
-    font-family: 'Noto Sans JP', 'Arial', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,10 +32,3 @@ canvas {
     height: 100%;
 }
 
-/* Font loading for Japanese text */
-@font-face {
-    font-family: 'Noto Sans JP';
-    src: url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap');
-    font-weight: normal;
-    font-style: normal;
-}

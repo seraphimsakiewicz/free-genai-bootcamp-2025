@@ -1,6 +1,5 @@
 /**
- * DialogManager.js
- * Handles dialog display, progression, and choices
+ * DialogManager.js Handles dialog display, progression, and choices
  */
 class DialogManager {
     constructor(globalManagers,scene) {
@@ -20,12 +19,11 @@ class DialogManager {
     }
     
     create() {
-        // This will be called after the UI is created
-        //const language = this.g.settings.get('language');
-        //const textSpedd = this.g.settings.get('textSpeed');
-        //const autoAdvanced = this.g.settings.get('autoAdvanced');
-        //const autoSpeed = this.g.settings.get('autoSpeed');
-        //const typewriterEffect = this.g.settings.get('typewriterEffect');
+        // This will be called after the UI is created const language =
+        //this.g.settings.get('language'); const textSpedd = this.g.settings.get('textSpeed'); const
+        //autoAdvanced = this.g.settings.get('autoAdvanced'); const autoSpeed =
+        //this.g.settings.get('autoSpeed'); const typewriterEffect =
+        //this.g.settings.get('typewriterEffect');
         this.loadMappings();
         this.loadSceneData();
         this.loadDialogNode();
@@ -71,9 +69,7 @@ class DialogManager {
         return this.dialogNode.choices && this.dialogNode.choices.length > 0;
     }    
 
-    // next
-    // choice
-    // response
+    // next choice response
     advance(action,value=null) {
         console.log('advance',arguments)
         if (action == 'next') {
@@ -96,8 +92,8 @@ class DialogManager {
                 this.dialogNode = this.dialogData.dialog[this.dialogId];
             }
             console.log(choice)
-            // if there is a response we need to show it.
-            // if we are advancing from response lets check for next_id otherwise fallback to default_next_id
+            // if there is a response we need to show it. if we are advancing from response lets
+            // check for next_id otherwise fallback to default_next_id
         }
     }
     
@@ -131,8 +127,8 @@ class DialogManager {
         return this.dialogNode.choices;
     }
 
-    getJapaneseText(){
-        return this.dialogNode.japanese;
+    getSpanishText(){
+        return this.dialogNode.spanish;
     }
 
     getEnglishText(){

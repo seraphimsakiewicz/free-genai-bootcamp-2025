@@ -129,7 +129,7 @@ class PreloadScene extends Phaser.Scene {
     loadDialogAudioAssets() {
         // Define audio assets to load
         const audioAssets = [
-            { id: 'dialog-wake-up', path: 'dialog/wake_up.wav' },
+            { id: 'dialog-wake-up', path: 'dialog/wake-up.mp3' },
         ];
         
         // Load audio assets using AssetLoader

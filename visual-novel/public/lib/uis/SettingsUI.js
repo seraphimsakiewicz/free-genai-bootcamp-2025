@@ -174,7 +174,7 @@ class SettingsUI extends BaseUI {
             position: [0, 0],  // Position will be set by the Fields container
             inputType: 'toggle',
             inputOptions: {
-                values: ['English', 'Dual', 'Japanese'],  // The options to cycle through
+                values: ['English', 'Dual', 'Spanish'],  // The options to cycle through
                 initialIndex: 0,                         // Start with English selected
                 size: [90, 40],                          // Width, Height of each pill
                 spacing: 5,                              // Space between pills
