@@ -56,7 +56,7 @@ This is an example of a story scene in JSON format that is stored in the outputs
 - if there is no choices that the default_next_id will transition to the next scene
 - choices are always from the perspective of the player
 
-Sometimes you want to have a response for a specific choice but the choice always leads to the next default is so there there is a nested response eg.
+Sometimes you want to have a response for a specific choice but the choice always leads to the next default is so there is a nested response eg.
 ```json
 {
     "id": "scene002",
