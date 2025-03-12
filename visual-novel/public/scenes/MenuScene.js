@@ -21,7 +21,7 @@ class MenuScene extends BaseScene {
             .setDisplaySize(width, height);
         
         // Add title text
-        const mainTitle = this.add.text(width / 2, 0, '日本語学習ビジュアルノベル', {
+        const mainTitle = this.add.text(width / 2, 0, 'Novela visual para aprender español', {
             fontFamily: 'Noto Sans JP',
             fontSize: '80px',
             color: '#ffffff',
@@ -30,7 +30,7 @@ class MenuScene extends BaseScene {
             align: 'center'
         }).setOrigin(0.5);
 
-        const subTitle = this.add.text(width / 2, height / 4 + 80, 'Japanese Language Learning Visual Novel', {
+        const subTitle = this.add.text(width / 2, height / 4 + 80, 'Spanish Language Learning Visual Novel', {
             fontFamily: 'Arial',
             fontSize: '40px',
             color: '#ffffff',
