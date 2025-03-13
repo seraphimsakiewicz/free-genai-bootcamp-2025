@@ -1,8 +1,8 @@
 /**
  * UIManager.js Manages all UI components in the game
  */
-class DialogUI  extends BaseUI {
-    constructor(UIManager,dialogManager,scene) {
+class DialogUI extends BaseUI {
+    constructor(UIManager, dialogManager, scene) {
         super(scene);
         this.uim = UIManager;
         this.d = dialogManager;
@@ -13,18 +13,18 @@ class DialogUI  extends BaseUI {
         this.choices = []
 
         this.spacing = 12;
-        
+
         // Get reference to the event bus from the scene
         this.eventBus = window.eventBus;
 
         this.margin = 32;
         this.padding = 32;
-        
+
         // UI components
         this.nextButton = null;
     }
-    
-    create(x,y) {
+
+    create(x, y) {
         this.x = x;
         this.y = y;
         this.createMessagesContainer();
@@ -34,10 +34,10 @@ class DialogUI  extends BaseUI {
 
     }
 
-    updateMessageText(){
-        const attrs = {}           
+    updateMessageText() {
+        const attrs = {}
         attrs.name = this.d.getSpeakerName();
-        switch(this.scene.g.settings.get('language')) { 
+        switch (this.scene.g.settings.get('language')) {
             case 'spanish':
                 attrs.spanishText = this.d.getSpanishText();
                 break;
@@ -56,7 +56,7 @@ class DialogUI  extends BaseUI {
         this.message.input.update(attrs);
     }
 
-    updateChoicesText(){
+    updateChoicesText() {
         for (let i = 0; i < 7; i++) {
             const choices = this.d.getChoices()
             if (choices[i] === undefined) {
@@ -70,10 +70,10 @@ class DialogUI  extends BaseUI {
     }
 
     update() {
-        if (!this.d.isLoaded()){ return }
+        if (!this.d.isLoaded()) { return }
         this.updateMessageText()
 
-        if (this.d.isChoices()){
+        if (this.d.isChoices()) {
             this.choicesContainer.setVisible(true)
             this.nextButton.setVisible(false)
             this.updateChoicesText()
@@ -84,29 +84,29 @@ class DialogUI  extends BaseUI {
         this.messagesContainer.update();
     }
 
-    createMessagesContainer(){
+    createMessagesContainer() {
         this.messagesContainer = this.uim.createContainer({
             layout: 'vertical',
-            position: [this.x,this.y],
+            position: [this.x, this.y],
             spacing: this.spacing,
-            origin: [0,1]
+            origin: [0, 1]
         });
         this.registerElement(this.messagesContainer);
     }
 
-    createChoices(){
+    createChoices() {
         this.choicesContainer = this.uim.createContainer({
             layout: 'vertical',
-            position: [this.x,this.y],
+            position: [this.x, this.y],
             spacing: this.spacing,
-            origin: [0,0]
+            origin: [0, 0]
         });
 
         for (let i = 0; i < 7; i++) {
             this.choices[i] = this.uim.createButton({
-                position: [0,0],
+                position: [0, 0],
                 text: `Choice ${i}`,
-                size: [80,50],
+                size: [80, 50],
                 textAlign: 'left',
                 image: 'small-button',
                 image_hover: 'small-button-hover',
@@ -117,24 +117,24 @@ class DialogUI  extends BaseUI {
         this.messagesContainer.addItem(this.choicesContainer);
     }
 
-    createMessage(){
+    createMessage() {
         this.message = this.uim.createField({
             inputType: 'message',
-            position: [0,0], // the container is will override the position
+            position: [0, 0], // the container is will override the position
             inputOptions: {}
         });
         this.messagesContainer.addItem(this.message);
     }
-    
+
     createNextButton() {
         this.nextButton = this.uim.createButton({
-            position: [0,0], // the container is will override the position
+            position: [0, 0], // the container is will override the position
             text: 'Next',
-            size: [80,50],
+            size: [80, 50],
             image: 'small-button',
             image_hover: 'small-button-hover',
             eventHandle: 'dialog-next'
-        })       
+        })
         this.messagesContainer.addItem(this.nextButton);
     }
 
