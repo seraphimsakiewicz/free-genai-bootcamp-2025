@@ -86,7 +86,7 @@ class PreloadScene extends Phaser.Scene {
     loadCharacterAssets() {
         // Load character sprites
         const characters = [
-            { id: 'alex', path: 'characters/alex.png', name: 'Alex Thompson' },
+            { id: 'brian', path: 'characters/brian.png', name: 'Brian Johnson' },
             { id: 'yamamoto', path: 'characters/yamamoto.png', name: 'Yamamoto Sensei' },
             { id: 'minji', path: 'characters/minji.png', name: 'Kim Min-ji' },
             { id: 'carlos', path: 'characters/carlos.png', name: 'Garcia Carlos' },
