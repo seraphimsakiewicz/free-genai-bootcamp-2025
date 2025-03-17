@@ -1,4 +1,3 @@
-
 class SettingsUI extends BaseUI {
     constructor(UIManager, scene) {
         super(scene); // Call BaseUI constructor
@@ -10,10 +9,10 @@ class SettingsUI extends BaseUI {
         this.createSettingsFields();
         this.createActions();
     }
-    
+
     createSettingsFields() {
         const { width, height } = this.scene.game.canvas;
-        
+
         // Create a fields container for all settings
         this.settingsFields = this.uim.createContainer({
             position: [width * 0.5, height * 0.3], // Centered horizontally
@@ -21,10 +20,10 @@ class SettingsUI extends BaseUI {
             spacing: 32,
             origin: [0.5, 0]  // Center horizontally, align to top
         });
-        
+
         // Register the fields container with BaseUI
         this.registerElement(this.settingsFields);
-        
+
         this.createVolumeSlider({
             settingsKey: 'bgmVolume',
             label: 'BGM Volume',
@@ -40,22 +39,24 @@ class SettingsUI extends BaseUI {
             label: 'Voice Volume',
             eventHandle: 'settings-voice-volume'
         });
-        
+
         // Add language toggle field
         this.createLanguageToggle();
 
         // Add Name input field
         this.createNameTextInput();
-        
-        // Future settings could be added here
-        //this.createFontSlider();
+
+        // Add Gemini API key input field
+        this.createGeminiAPIKeyInput();
+
+        // Future settings could be added here this.createFontSlider();
         this.registerEvents();
     }
 
     registerEvents() {
-        this.scene.g.eventBus.on('ui:slider:settings-bgm-volume:change',this.bgmVolumeChange)
-        this.scene.g.eventBus.on('ui:slider:settings-sfx-volume:change',this.sfxVolumeChange)
-        this.scene.g.eventBus.on('ui:slider:settings-voice-volume:change',this.voiceVolumeChange)
+        this.scene.g.eventBus.on('ui:slider:settings-bgm-volume:change', this.bgmVolumeChange)
+        this.scene.g.eventBus.on('ui:slider:settings-sfx-volume:change', this.sfxVolumeChange)
+        this.scene.g.eventBus.on('ui:slider:settings-voice-volume:change', this.voiceVolumeChange)
     }
 
     bgmVolumeChange(ev) {
@@ -87,7 +88,7 @@ class SettingsUI extends BaseUI {
         super.hide(); // Call BaseUI's hide method
     }
 
-    createBg(){
+    createBg() {
         const width = this.scene.cameras.main.width;
         const height = this.scene.cameras.main.height;
         const x = width / 2;
@@ -95,20 +96,20 @@ class SettingsUI extends BaseUI {
 
         // Create panel background with semi-transparency
         this.panel = this.scene.add.rectangle(x, y, width, height, 0x222222, 0.9);
-        
+
         // Create title text
         this.title = this.scene.add.text(x, y - height / 2 + 30, 'Settings', {
             fontFamily: 'Arial',
             fontSize: '28px',
             color: '#ffffff'
         }).setOrigin(0.5, 0.5);
-        
+
         // Register these elements with BaseUI so they respond to show/hide
         this.registerElement(this.panel);
         this.registerElement(this.title);
     }
 
-    createNameTextInput(){
+    createNameTextInput() {
         // Create a field with label and text input
         const nameInputField = this.uim.createField({
             label: 'Player Name',
@@ -146,7 +147,7 @@ class SettingsUI extends BaseUI {
         });
     }
 
-    createVolumeSlider(options){
+    createVolumeSlider(options) {
         // Calculate volume from settings (convert from 0-0.2 to 0-100)
         let volume = this.scene.g.settings.get(options.settingsKey)
         volume = (volume / 0.2) * 100
@@ -167,7 +168,7 @@ class SettingsUI extends BaseUI {
         this.settingsFields.addItem(volumeField);
     }
 
-    createLanguageToggle(){
+    createLanguageToggle() {
         // Create a field with label and language toggle
         const languageField = this.uim.createField({
             label: 'Language',
@@ -181,38 +182,37 @@ class SettingsUI extends BaseUI {
                 eventHandle: 'language-setting'          // Event handle for identifying this toggle
             }
         });
-        
+
         // Add field to the container
         this.settingsFields.addItem(languageField);
-        
+
         // Get the toggle component from the field
         const languageToggle = languageField.getInput();
 
         // Listen for changes
         this.scene.g.eventBus.on('ui:toggle:language-setting:change', (data) => {
             console.log(`Language changed to: ${data.value}`);
-            // Update game language based on selection
-            //updateGameLanguage(data.value);
+            // Update game language based on selection updateGameLanguage(data.value);
         });
     }
 
-    createActions(){
-        // Create our actions withint horizontal fields container
-        // position in the bottom left of the screen.
+    createActions() {
+        // Create our actions withint horizontal fields container position in the bottom left of the
+        // screen.
         const { width, height } = this.scene.game.canvas;
         const padding = 32;
         this.actionsContainer = this.uim.createContainer({
-            position: [width-padding, height-padding],
+            position: [width - padding, height - padding],
             layout: 'horizontal',
             spacing: 20,
-            origin: [1,1]
+            origin: [1, 1]
         });
         this.registerElement(this.actionsContainer);
         this.createButtonClose();
     }
 
 
-    createButtonClose(){
+    createButtonClose() {
         const buttonWidth = 300;
         const buttonHeight = 80;
         const buttonField = this.uim.createButton({
@@ -220,12 +220,45 @@ class SettingsUI extends BaseUI {
             image: 'small-button',
             image_hover: 'small-button',
             text: "Close",
-            size: [buttonWidth,buttonHeight],
+            size: [buttonWidth, buttonHeight],
             eventHandle: "settings-close"
         })
         this.actionsContainer.addItem(buttonField);
 
 
+    }
+
+    createGeminiAPIKeyInput() {
+        // Create a field with label and text input for Gemini API key
+        const apiKeyInputField = this.uim.createField({
+            label: 'Gemini API Key',
+            position: [0, 0],  // Position will be set by the Fields container
+            inputType: 'textinput',
+            inputOptions: {
+                size: [300, 40],        // Size of the text input
+                placeholder: 'Enter your Gemini API key...',
+                defaultValue: window.geminiAPI ? window.geminiAPI.getApiKey() : '',
+                maxLength: 100,         // Limit characters
+                eventHandle: 'settings-gemini-api-key',
+                style: {
+                    fontFamily: 'Arial',
+                    fontSize: '18px',
+                    color: '#000000'
+                }
+            }
+        });
+
+        // Add field to the container
+        this.settingsFields.addItem(apiKeyInputField);
+
+        // Listen for value changes
+        this.scene.g.eventBus.on('ui:textinput:settings-gemini-api-key:change', (data) => {
+            console.log('Gemini API key changed');
+            // Update the API key in real-time
+            if (window.geminiAPI) {
+                window.geminiAPI.setApiKey(data.value);
+            }
+        });
     }
 
 }

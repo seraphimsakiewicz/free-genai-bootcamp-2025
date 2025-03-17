@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spanish Language Learning Visual Novel</title>
     <link rel="stylesheet" href="styles.css">
-    <script 
-        src="https://cdn.jsdelivr.net/npm/phaser@3.88.2/dist/phaser.min.js"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.88.2/dist/phaser.min.js"></script>
+    <!-- Google Generative AI SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@google/generative-ai@0.2.0/dist/web/index.js"></script>
 </head>
+
 <body>
     <div id="game-container"></div>
     <script src="config.js"></script>
-    
+
     <!-- Library Modules - Utilities -->
     <script src="lib/utils/EventBus.js"></script>
     <script src="lib/utils/AssetLoader.js"></script>
     <script src="lib/utils/SceneTransition.js"></script>
+    <script src="lib/utils/GeminiAPI.js"></script>
 
     <!-- UIComponents  -->
     <script src="lib/ui/UIItem.js"></script>
@@ -49,16 +52,17 @@
     <script src="lib/managers/SettingsManager.js"></script>
     <script src="lib/managers/StoryManager.js"></script>
     <script src="lib/GlobalManagers.js"></script>
-    
-    
+
+
     <!-- Game Scenes -->
     <script src="scenes/BaseScene.js"></script>
     <script src="scenes/BootScene.js"></script>
     <script src="scenes/PreloadScene.js"></script>
     <script src="scenes/MenuScene.js"></script>
     <script src="scenes/GameScene.js"></script>
-    
+
     <!-- Main Game Entry Point -->
     <script src="main.js"></script>
 </body>
+
 </html>
