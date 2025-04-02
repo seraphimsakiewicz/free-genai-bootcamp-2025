@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import styles from './AdventureGame.module.css';
-import { nodes } from '../gameData';
+import { nodes } from '@/app/gameData';
 
 const AdventureGame = () => {
   // State variables for the game
@@ -85,13 +85,6 @@ const AdventureGame = () => {
         // Set guiding question
         setGuidingQuestion(data.guidingQuestion || '¿Qué harás ahora?');
         
-        if (data.explanation) {
-          setHistory(prev => [...prev, {
-            type: 'hint',
-            text: data.explanation,
-          }]);
-        }
-
         if (data.error) {
           setError('Error al comunicarse con la IA. Intenta de nuevo.');
         }

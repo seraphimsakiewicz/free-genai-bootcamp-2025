@@ -1,5 +1,5 @@
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from '@google/generative-ai';
-import { nodes } from '../../gameData';
+import { nodes } from '../../gameData.js';
 import { NextResponse } from 'next/server';
 
 // Initialize the Google Generative AI with the API key
@@ -29,31 +29,46 @@ const safetySettings = [
 const functionDeclarations = [
     {
         name: "choose_node",
-        description: "Selecciona el siguiente nodo basado en la entrada del usuario",
+        description: "Select the next node based on the user's input",
         parameters: {
             type: "object",
             properties: {
                 destination: {
                     type: "string",
-                    description: "El ID del nodo de destino",
+                    description: "The ID of the next node",
                 },
                 explanation: {
                     type: "string",
-                    description: "Explicación en español de por qué se eligió este nodo",
+                    description: "Explanation in Spanish of why this node was chosen",
                 },
             },
             required: ["destination", "explanation"],
         },
     },
     {
+        name: "game_over",
+        description: "End the game due to inappropriate content",
+        parameters: {
+            type: "object",
+            properties: {
+                reason: {
+                    type: "string",
+                    enum: ["violence", "profanity", "inappropriate", "offensive"],
+                    description: "The category of inappropriate content detected",
+                },
+            },
+            required: ["reason"],
+        },
+    },
+    {
         name: "generate_question",
-        description: "Genera una pregunta de guía para el usuario en español",
+        description: "Generate a guiding question for the user in Spanish",
         parameters: {
             type: "object",
             properties: {
                 question: {
                     type: "string",
-                    description: "Una pregunta en español que guía al usuario sobre qué hacer a continuación",
+                    description: "A question in Spanish that guides the user on what to do next",
                 },
             },
             required: ["question"],
@@ -70,8 +85,10 @@ export async function POST(request) {
         // Get the current node data
         const currentNodeData = nodes[currentNode];
 
+        console.log("currentNodeData=====>", currentNodeData);
+
         if (!currentNodeData) {
-            return NextResponse.json({ error: 'Nodo no encontrado' }, { status: 400 });
+            return NextResponse.json({ error: 'Node not found' }, { status: 400 });
         }
 
         // Get the available options for the current node
@@ -98,6 +115,8 @@ export async function POST(request) {
             });
         }
 
+        console.log("availableOptions=====>", availableOptions);
+
         // Prepare the available options for the AI prompt
         const optionsText = availableOptions.map(optionId => {
             const nodeData = nodes[optionId];
@@ -109,30 +128,39 @@ export async function POST(request) {
             model: "gemini-2.0-flash",
             safetySettings,
             generationConfig: {
-                temperature: 0.2, // Lower temperature for more predictable outputs
+                temperature: 0.2,
                 maxOutputTokens: 1024,
             },
-            tools: [{ functionDeclarations }],
+            tools: {
+                functionDeclarations: functionDeclarations
+            },
+            toolConfig: {
+                functionCallingConfig: {
+                    mode: "ANY"
+                }
+            }
         });
 
         // Create the prompt for the AI
         const prompt = `
-    Estás ayudando con un juego de aventura de texto en español. El jugador está actualmente en este nodo:
+    You are helping with a text adventure game in Spanish. The player is currently in this node:
     
     "${currentNodeData.text}"
     
-    El jugador ha ingresado: "${userInput}"
+    The player has entered: "${userInput}"
     
-    Basado en su entrada, debes determinar cuál de los siguientes nodos de destino es el más apropiado:
+    Based on their input, you must:
+    1. Analyze if the content is appropriate for all ages.
+    2. If you detect violence, profanity, sexual content, or offensive language, use the game_over function.
+    3. If the content is appropriate, determine which of the following nodes is the most appropriate:
     
     ${optionsText}
     
-    Reglas:
-    1. Si el usuario responde en inglés o cualquier idioma que no sea español, debes pedirle que escriba en español.
-    2. Si la entrada del usuario no coincide claramente con ninguna opción, pídele una aclaración en español.
-    3. Siempre elige el nodo más apropiado basado en la intención del usuario.
-    
-    Usa la función choose_node para seleccionar el próximo nodo y luego genera_question para crear una pregunta guía.
+    Rules:
+    1. If the user responds in English or any language other than Spanish, ask them to write in Spanish.
+    2. If the user's input does not clearly match any option, ask for clarification in Spanish.
+    3. If the input contains inappropriate content, YOU MUST use game_over.
+    4. If the input is appropriate, use choose_node to select the next node.
     `;
 
         try {
@@ -142,19 +170,53 @@ export async function POST(request) {
             });
 
             const response = result.response;
+            console.log("response=====>", response);
 
-            // Check if the AI returned function calls
-            if (!response.functionCalls || response.functionCalls.length === 0) {
+            // Use function call method instead of property
+            const functionCalls = response.functionCalls();
+            console.log("functionCalls=====>", functionCalls);
+            if (!functionCalls || functionCalls.length === 0) {
                 // If no function calls, ask the user to clarify in Spanish
                 return NextResponse.json({
                     nextNode: currentNode,
                     nodeText: currentNodeData.text,
-                    guidingQuestion: "No entiendo lo que quieres hacer. Por favor, expresa tu acción en español de manera más clara."
+                    guidingQuestion: "No entiendo lo que quieres hacer. Por favor, expresa tu acción en español de manera más clara. "
+                });
+            }
+
+            // Get the game_over function call if it exists
+            const gameOverCall = functionCalls.find(call => call.name === 'game_over');
+            if (gameOverCall) {
+                const { reason } = gameOverCall.args;
+                let gameOverMessage = "";
+                
+                switch(reason) {
+                    case "violence":
+                        gameOverMessage = "Tu aventura ha terminado debido a acciones violentas. Este es un juego pacífico.";
+                        break;
+                    case "profanity":
+                        gameOverMessage = "Tu aventura ha terminado debido al uso de lenguaje inapropiado.";
+                        break;
+                    case "inappropriate":
+                        gameOverMessage = "Tu aventura ha terminado debido a comportamiento inapropiado.";
+                        break;
+                    case "offensive":
+                        gameOverMessage = "Tu aventura ha terminado debido a contenido ofensivo.";
+                        break;
+                    default:
+                        gameOverMessage = "Tu aventura ha terminado debido a comportamiento inaceptable.";
+                }
+                
+                return NextResponse.json({
+                    nextNode: 'final',
+                    nodeText: gameOverMessage,
+                    isEndNode: true,
+                    guidingQuestion: "La aventura ha terminado. ¿Quieres empezar de nuevo y mantener el juego apropiado para todos?"
                 });
             }
 
             // Get the function call for choosing the next node
-            const chooseNodeCall = response.functionCalls.find(call => call.name === 'choose_node');
+            const chooseNodeCall = functionCalls.find(call => call.name === 'choose_node');
 
             if (!chooseNodeCall) {
                 return NextResponse.json({
@@ -165,7 +227,7 @@ export async function POST(request) {
             }
 
             // Parse the function arguments
-            const args = JSON.parse(chooseNodeCall.args);
+            const args = chooseNodeCall.args;
             const { destination, explanation } = args;
 
             // Validate the destination node exists
@@ -181,11 +243,11 @@ export async function POST(request) {
             const nextNodeData = nodes[destination];
 
             // Get the guiding question function call if it exists
-            const questionCall = response.functionCalls.find(call => call.name === 'generate_question');
+            const questionCall = functionCalls.find(call => call.name === 'generate_question');
             let guidingQuestion = "¿Qué harás ahora?"; // Default question
 
             if (questionCall) {
-                const questionArgs = JSON.parse(questionCall.args);
+                const questionArgs = questionCall.args;
                 guidingQuestion = questionArgs.question;
             }
 
@@ -199,7 +261,18 @@ export async function POST(request) {
             });
         } catch (error) {
             console.error('Error calling Gemini API:', error);
-            // Return a friendly error response if Gemini API fails
+            
+            // Check if it's a safety error
+            if (error.message?.includes('SAFETY')) {
+                return NextResponse.json({
+                    nextNode: 'final', // Force game over for unsafe content
+                    nodeText: "¡Has tomado una decisión peligrosa! Tu aventura ha terminado prematuramente debido a tus acciones imprudentes.",
+                    isEndNode: true,
+                    guidingQuestion: "La aventura ha terminado. ¿Quieres empezar de nuevo con más precaución?"
+                });
+            }
+
+            // Handle other API errors normally
             return NextResponse.json({
                 nextNode: currentNode,
                 nodeText: currentNodeData.text,
