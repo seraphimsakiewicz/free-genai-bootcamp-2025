@@ -57,7 +57,7 @@ export const nodes = {
         options: ["entrar_templo", "rodear_templo", "volver_colina"]
     },
     descender_colina: {
-        text: "Desciendes la colina y regresas al río.",
+        text: "Desciendes la colina y regresas al río. Aquí puedes decidir nadar a través de él, caminar por la orilla, o volver al inicio.",
         options: ["nadar", "caminar_orilla"]
     },
     tomar_llave: {
@@ -109,7 +109,7 @@ export const nodes = {
         options: ["entrar_templo", "rodear_templo", "volver_colina"]
     },
     entrar_lateral: {
-        text: "Entras por la abertura lateral y llegas directamente a la sala del altar con el cofre.",
+        text: "Entras por la abertura lateral y llegas directamente a la sala del altar con un cofre.",
         options: ["acercarse_altar", "salir_templo"]
     },
     volver_colina: {

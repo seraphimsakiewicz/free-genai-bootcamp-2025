@@ -9,7 +9,7 @@ const AdventureGame = () => {
   const [currentNode, setCurrentNode] = useState('inicio');
   const [history, setHistory] = useState([]);
   const [userInput, setUserInput] = useState('');
-  const [guidingQuestion, setGuidingQuestion] = useState('¿Qué harás ahora?');
+  const [guidingQuestion, setGuidingQuestion] = useState('<p>¿Qué harás ahora?</p>');
   const [isLoading, setIsLoading] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
   const [error, setError] = useState('');
@@ -83,7 +83,7 @@ const AdventureGame = () => {
         }]);
         
         // Set guiding question
-        setGuidingQuestion(data.guidingQuestion || '¿Qué harás ahora?');
+        setGuidingQuestion(data.guidingQuestion || '<p>¿Qué harás ahora?</p>');
         
         if (data.error) {
           setError('Error al comunicarse con la IA. Intenta de nuevo.');
@@ -105,7 +105,7 @@ const AdventureGame = () => {
     
     setCurrentNode('inicio');
     setUserInput('');
-    setGuidingQuestion('¿Qué harás ahora?');
+    setGuidingQuestion('<p>¿Qué harás ahora?</p>');
     setIsLoading(false);
     setIsGameOver(false);
     setError('');
@@ -145,7 +145,7 @@ const AdventureGame = () => {
       <div className={styles.inputArea}>
         {!isGameOver ? (
           <form onSubmit={handleSubmit} className={styles.inputForm}>
-            <p className={styles.guidingQuestion}>{guidingQuestion}</p>
+            <div className={styles.guidingQuestion} dangerouslySetInnerHTML={{ __html: guidingQuestion }} />
             <div className={styles.inputWrapper}>
               <input
                 type="text"

@@ -100,7 +100,7 @@ export async function POST(request) {
                 nextNode: currentNode,
                 nodeText: currentNodeData.text,
                 isEndNode: true,
-                guidingQuestion: "La aventura ha terminado. ¿Quieres empezar de nuevo?"
+                guidingQuestion: '<p>La aventura ha terminado. ¿Quieres empezar de nuevo?</p>'
             });
         }
 
@@ -110,7 +110,7 @@ export async function POST(request) {
             return NextResponse.json({
                 nextNode: currentNode,
                 nodeText: currentNodeData.text,
-                guidingQuestion: "¿Qué harás ahora?",
+                guidingQuestion: '<p>¿Qué harás ahora?</p>',
                 isEndNode: false
             });
         }
@@ -180,7 +180,7 @@ export async function POST(request) {
                 return NextResponse.json({
                     nextNode: currentNode,
                     nodeText: currentNodeData.text,
-                    guidingQuestion: "No entiendo lo que quieres hacer. Por favor, expresa tu acción en español de manera más clara. "
+                    guidingQuestion: "<p>No entiendo lo que quieres hacer. Por favor, expresa tu acción en español de manera más clara.</p>"
                 });
             }
 
@@ -211,7 +211,7 @@ export async function POST(request) {
                     nextNode: 'final',
                     nodeText: gameOverMessage,
                     isEndNode: true,
-                    guidingQuestion: "La aventura ha terminado. ¿Quieres empezar de nuevo y mantener el juego apropiado para todos?"
+                    guidingQuestion: '<p>La aventura ha terminado. ¿Quieres empezar de nuevo y mantener el juego apropiado para todos?</p>'
                 });
             }
 
@@ -222,7 +222,7 @@ export async function POST(request) {
                 return NextResponse.json({
                     nextNode: currentNode,
                     nodeText: currentNodeData.text,
-                    guidingQuestion: "No entiendo lo que quieres hacer. Por favor, expresa tu acción en español de manera más clara."
+                    guidingQuestion: "<p>No entiendo lo que quieres hacer. Por favor, expresa tu acción en español de manera más clara.</p>"
                 });
             }
 
@@ -235,7 +235,7 @@ export async function POST(request) {
                 return NextResponse.json({
                     nextNode: currentNode,
                     nodeText: currentNodeData.text,
-                    guidingQuestion: "Lo siento, esa acción no es posible en este momento. ¿Qué más te gustaría hacer?"
+                    guidingQuestion: "<p>Lo siento, esa acción no es posible en este momento. ¿Qué más te gustaría hacer?</p>"
                 });
             }
 
@@ -244,7 +244,7 @@ export async function POST(request) {
 
             // Get the guiding question function call if it exists
             const questionCall = functionCalls.find(call => call.name === 'generate_question');
-            let guidingQuestion = "¿Qué harás ahora?"; // Default question
+            let guidingQuestion = '<p>¿Qué harás ahora?</p>'; // Default question
 
             if (questionCall) {
                 const questionArgs = questionCall.args;
@@ -268,7 +268,7 @@ export async function POST(request) {
                     nextNode: 'final', // Force game over for unsafe content
                     nodeText: "¡Has tomado una decisión peligrosa! Tu aventura ha terminado prematuramente debido a tus acciones imprudentes.",
                     isEndNode: true,
-                    guidingQuestion: "La aventura ha terminado. ¿Quieres empezar de nuevo con más precaución?"
+                    guidingQuestion: '<p>La aventura ha terminado. ¿Quieres empezar de nuevo con más precaución?</p>'
                 });
             }
 
@@ -276,7 +276,7 @@ export async function POST(request) {
             return NextResponse.json({
                 nextNode: currentNode,
                 nodeText: currentNodeData.text,
-                guidingQuestion: "Lo siento, estoy teniendo problemas para procesar tu solicitud. Por favor, inténtalo de nuevo o prueba con otra acción.",
+                guidingQuestion: "<p>Lo siento, estoy teniendo problemas para procesar tu solicitud. Por favor, inténtalo de nuevo o prueba con otra acción.</p>",
                 error: true
             });
         }
