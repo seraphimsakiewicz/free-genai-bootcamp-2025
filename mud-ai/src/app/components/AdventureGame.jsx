@@ -13,6 +13,7 @@ const AdventureGame = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
   const [error, setError] = useState('');
+  const [inventory, setInventory] = useState([""]);
   
   // Ref for auto-scrolling
   const historyEndRef = useRef(null);
@@ -64,6 +65,7 @@ const AdventureGame = () => {
         body: JSON.stringify({
           userInput: inputText,
           currentNode,
+          inventory,
         }),
       });
       
@@ -72,6 +74,15 @@ const AdventureGame = () => {
       if (response.ok) {
         // Update state with the response
         setCurrentNode(data.nextNode);
+        
+        // Update inventory if key was picked up
+        if (data.nextNode === 'tomar_llave' && !inventory.includes('llave')) {
+          setInventory(prev => [...prev, 'llave']);
+          setHistory(prev => [...prev, {
+            type: 'hint',
+            text: '¡Has encontrado una llave antigua!',
+          }]);
+        }
         
         // Check if game over
         setIsGameOver(data.isEndNode || false);
@@ -109,6 +120,7 @@ const AdventureGame = () => {
     setIsLoading(false);
     setIsGameOver(false);
     setError('');
+    setInventory([]);
     
     // Set initial history with the starting node
     setHistory([{
@@ -120,6 +132,20 @@ const AdventureGame = () => {
   return (
     <div className={styles.gameContainer}>
       <h1 className={styles.gameTitle}>Aventura de Texto</h1>
+      
+      {/* Add inventory display */}
+      <div className={styles.inventoryContainer}>
+        <h3>Inventario:</h3>
+        {inventory.length === 0 ? (
+          <p>No tienes objetos</p>
+        ) : (
+          <ul>
+            {inventory.map(item => (
+              <li key={item}>{item === 'llave' ? 'Llave antigua' : item}</li>
+            ))}
+          </ul>
+        )}
+      </div>
       
       <div className={styles.gameHistory}>
         {history.map((entry, index) => (

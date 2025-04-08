@@ -80,12 +80,11 @@ export async function POST(request) {
     try {
         // Parse the request body
         const body = await request.json();
-        const { userInput, currentNode } = body;
+        const { userInput, currentNode, inventory = [] } = body;
 
         // Get the current node data
         const currentNodeData = nodes[currentNode];
 
-        console.log("currentNodeData=====>", currentNodeData);
 
         if (!currentNodeData) {
             return NextResponse.json({ error: 'Node not found' }, { status: 400 });
@@ -115,13 +114,37 @@ export async function POST(request) {
             });
         }
 
-        console.log("availableOptions=====>", availableOptions);
-
         // Prepare the available options for the AI prompt
         const optionsText = availableOptions.map(optionId => {
             const nodeData = nodes[optionId];
             return `${optionId}: ${nodeData.text}`;
         }).join('\n');
+
+        // Create the prompt for the AI
+        const prompt = `
+    You are helping with a text adventure game in Spanish. The player is currently in this node:
+    
+    "${currentNodeData.text}"
+    
+    The player has entered: "${userInput}"
+    
+    The player's inventory contains: ${inventory.join(', ') || 'nothing'}
+    
+    IMPORTANT GAME RULES:
+    1. The player CANNOT open the stone door without having the key in their inventory
+    2. If they try to open the door without the key, tell them they need to find a key first
+    3. The key can be found in the forest clearing on a pedestal
+    
+    Based on their input and inventory, determine which of the following nodes is most appropriate:
+    
+    ${optionsText}
+    
+    Rules:
+    1. If the user responds in English or any language other than Spanish, ask them to write in Spanish.
+    2. If the user's input does not clearly match any option, ask for clarification in Spanish.
+    3. If the input contains inappropriate content, YOU MUST use game_over.
+    4. If the input is appropriate, use choose_node to select the next node.
+    `;
 
         // Initialize the Gemini model with function calling
         const model = genAI.getGenerativeModel({
@@ -141,28 +164,6 @@ export async function POST(request) {
             }
         });
 
-        // Create the prompt for the AI
-        const prompt = `
-    You are helping with a text adventure game in Spanish. The player is currently in this node:
-    
-    "${currentNodeData.text}"
-    
-    The player has entered: "${userInput}"
-    
-    Based on their input, you must:
-    1. Analyze if the content is appropriate for all ages.
-    2. If you detect violence, profanity, sexual content, or offensive language, use the game_over function.
-    3. If the content is appropriate, determine which of the following nodes is the most appropriate:
-    
-    ${optionsText}
-    
-    Rules:
-    1. If the user responds in English or any language other than Spanish, ask them to write in Spanish.
-    2. If the user's input does not clearly match any option, ask for clarification in Spanish.
-    3. If the input contains inappropriate content, YOU MUST use game_over.
-    4. If the input is appropriate, use choose_node to select the next node.
-    `;
-
         try {
             // Generate content from the AI
             const result = await model.generateContent({
@@ -170,11 +171,9 @@ export async function POST(request) {
             });
 
             const response = result.response;
-            console.log("response=====>", response);
 
             // Use function call method instead of property
             const functionCalls = response.functionCalls();
-            console.log("functionCalls=====>", functionCalls);
             if (!functionCalls || functionCalls.length === 0) {
                 // If no function calls, ask the user to clarify in Spanish
                 return NextResponse.json({
@@ -228,7 +227,25 @@ export async function POST(request) {
 
             // Parse the function arguments
             const args = chooseNodeCall.args;
-            const { destination, explanation } = args;
+            let { destination, explanation } = args;
+
+            if(destination === "abrir_puerta" && inventory.includes('llave')) {
+                return NextResponse.json({
+                    nextNode: "puerta_exitosa",
+                    nodeText: nodes['puerta_exitosa'].text,
+                    explanation,
+                    guidingQuestion: '<p>¿Quieres entrar?</p>',
+                    isEndNode: nodes['puerta_exitosa'].options.length === 0
+            });
+            } else if(destination === "abrir_puerta" && !inventory.includes('llave')) {
+                // destination = "seguir_pasadizo";
+                return NextResponse.json({
+                nextNode: "seguir_pasadizo",
+                nodeText: currentNodeData.text,
+                guidingQuestion: '<p>La puerta está cerrada con llave. Necesitas encontrar una llave para abrirla.</p>',
+                isEndNode: false
+            });
+            }
 
             // Validate the destination node exists
             if (!nodes[destination]) {
