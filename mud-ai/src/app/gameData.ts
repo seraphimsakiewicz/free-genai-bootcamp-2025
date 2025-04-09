@@ -1,5 +1,16 @@
+// Define types for the game data
+export interface GameNode {
+  text: string;
+  options: string[];
+  isEndNode?: boolean;
+}
+
+export interface GameData {
+  [key: string]: GameNode;
+}
+
 // Simplified game nodes definition - focused path to finding treasure
-export const nodes = {
+export const nodes: GameData = {
     inicio: {
         text: "Despiertas en un bosque oscuro. Hay caminos que llevan al norte y al este.",
         options: ["camino_norte", "camino_este"]
@@ -65,7 +76,7 @@ export const nodes = {
         options: ["puerta_exitosa"]
     },
     puerta_exitosa: {
-        text: "Usas la llave que encontraste en el pedestal. Encaja perfectamente en la cerradura y la puerta se abre con un crujido, revelando una cámara del tesoro. Quieres entrar!",
+        text: "Usas la llave que encontraste en el pedestal. Encaja perfectamente en la cerradura y la puerta se abre con un crujido, revelando una cámara del tesoro. Quieres entrar?",
         options: ["entrar_camara_tesoro"]
     },
     entrar_camara_tesoro: {
@@ -78,7 +89,8 @@ export const nodes = {
         isEndNode: true
     },
     final: {
+        text: "Fin del juego",
         options: [],
         isEndNode: true
     }
-}; 
+};

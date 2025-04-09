@@ -1,14 +1,15 @@
 import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
+import { AuthOptions } from "next-auth"
 // import CredentialsProvider from "next-auth/providers/credentials"
 
-const authOptions = {
+const authOptions: AuthOptions = {
   // Configure one or more authentication providers
   providers: [
     // Google provider configuration
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
     // Credentials provider for custom email/password auth
     // CredentialsProvider({
