@@ -24,3 +24,29 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Auth button styles */
+.auth-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.sign-in {
+  background-color: #4285F4;
+  color: white;
+}
+
+.sign-in:hover {
+  background-color: #3367D6;
+}
+
+.sign-out {
+  background-color: #333;
+  color: white;
+}
+
+.sign-out:hover {
+  background-color: #555;
+}
