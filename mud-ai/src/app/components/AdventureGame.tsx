@@ -26,7 +26,7 @@ const AdventureGame = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isGameOver, setIsGameOver] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
-    const [inventory, setInventory] = useState<string[]>(["llave"]);
+    const [inventory, setInventory] = useState<string[]>([""]);
 
     // Ref for auto-scrolling
     const historyEndRef = useRef<HTMLDivElement>(null);
@@ -144,7 +144,7 @@ const AdventureGame = () => {
 
     return (
         <div className={styles.gameContainer}>
-            <h1 className={styles.gameTitle}>Aventura de Texto</h1>
+            <h1 className={styles.gameTitle}>Aventura por el Tesoro 💎</h1>
 
             {/* Add inventory display */}
             <div className={styles.inventoryContainer}>
