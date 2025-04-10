@@ -2,6 +2,7 @@
 
 import { signIn, signOut, useSession } from "next-auth/react"
 import AdventureGame from './components/AdventureGame';
+import DbTest from './components/DbTest';
 
 export default function Home() {
   const { data: session } = useSession()
@@ -30,7 +31,12 @@ export default function Home() {
       </div>
 
       {session ? (
-        <AdventureGame />
+        <>
+          <div className="absolute top-20 right-4 z-10 w-64">
+            <DbTest />
+          </div>
+          <AdventureGame />
+        </>
       ) : (
         <div className="flex flex-col items-center justify-center h-screen">
           <h1 className="text-2xl mb-4">Text Adventure Game</h1>
