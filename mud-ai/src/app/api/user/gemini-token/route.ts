@@ -71,8 +71,6 @@ export async function GET(request: NextRequest) {
 
     const decryptedToken = decrypt(token);
 
-    console.log("decryptedToken", decryptedToken);
-    
     return NextResponse.json({
       status: "success",
       message: "Gemini key updated successfully",

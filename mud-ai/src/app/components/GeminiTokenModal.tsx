@@ -23,8 +23,6 @@ export default function GeminiTokenModal({ isOpen, onClose }: GeminiTokenModalPr
         setDecryptedToken(data.decryptedToken);
     };
 
-    console.log("encryptedToken", encryptedToken);
-
     // Pre-fill encryptedToken from session if available
     useEffect(() => {
         if(showPassword && session?.user?.geminiToken) {
