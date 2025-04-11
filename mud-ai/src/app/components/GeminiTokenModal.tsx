@@ -10,18 +10,30 @@ interface GeminiTokenModalProps {
 
 export default function GeminiTokenModal({ isOpen, onClose }: GeminiTokenModalProps) {
     const { data: session, update } = useSession();
-    const [token, setToken] = useState("");
+    const [encryptedToken, setEncryptedToken] = useState("");
+    const [decryptedToken, setDecryptedToken] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
-    // Pre-fill token from session if available
+    const handleGetToken = async () => {
+        const response = await fetch("/api/user/gemini-token");
+        const data = await response.json();
+        setDecryptedToken(data.decryptedToken);
+    };
+
+    console.log("encryptedToken", encryptedToken);
+
+    // Pre-fill encryptedToken from session if available
     useEffect(() => {
-        if (session?.user?.geminiToken) {
-            setToken(session.user.geminiToken);
+        if(showPassword && session?.user?.geminiToken) {
+            handleGetToken();
         }
-    }, [session?.user?.geminiToken]);
+        if (session?.user?.geminiToken) {
+            setEncryptedToken(session.user.geminiToken);
+        }
+    }, [session?.user?.geminiToken, showPassword]);
 
     if (!isOpen) return null;
 
@@ -32,29 +44,29 @@ export default function GeminiTokenModal({ isOpen, onClose }: GeminiTokenModalPr
             setIsSubmitting(true);
             setError("");
 
-            const response = await fetch("/api/user/gemini-token", {
+            const response = await fetch("/api/user/gemini-encryptedToken", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ token: token.trim() }),
+                body: JSON.stringify({ encryptedToken: encryptedToken.trim() }),
             });
 
             const data = await response.json();
 
             if (!response.ok) {
-                throw new Error(data.message || "Failed to save token");
+                throw new Error(data.message || "Failed to save encryptedToken");
             }
 
             setSuccess(true);
 
-            // Update the session to include the gemini token info
+            // Update the session to include the gemini encryptedToken info
             await update();
 
             // Close the modal after a short delay
             setTimeout(() => {
                 onClose();
-                setToken("");
+                setEncryptedToken("");
                 setSuccess(false);
             }, 1500);
         } catch (err) {
@@ -75,7 +87,7 @@ export default function GeminiTokenModal({ isOpen, onClose }: GeminiTokenModalPr
 
                 {success ? (
                     <div className="mb-4 p-2 bg-green-100 text-green-800 rounded">
-                        {token.trim() === "" ? "Key removed successfully!" : "Key saved successfully!"}
+                        {encryptedToken.trim() === "" ? "Key removed successfully!" : "Key saved successfully!"}
                     </div>
                 ) : (
                     <form onSubmit={handleSubmit}>
@@ -86,15 +98,15 @@ export default function GeminiTokenModal({ isOpen, onClose }: GeminiTokenModalPr
                         )}
 
                         <div className="mb-4">
-                            <label htmlFor="token" className="block mb-2 text-sm font-medium">
+                            <label htmlFor="encryptedToken" className="block mb-2 text-sm font-medium">
                                 Gemini API Key
                             </label>
                             <div className="relative">
                                 <input
                                     type={showPassword ? "text" : "password"}
-                                    id="token"
-                                    value={token}
-                                    onChange={(e) => setToken(e.target.value)}
+                                    id="encryptedToken"
+                                    value={showPassword ? decryptedToken : encryptedToken}
+                                    onChange={(e) => setEncryptedToken(e.target.value)}
                                     className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 pr-10"
                                     placeholder="Enter your Gemini API key"
                                     disabled={isSubmitting}
@@ -130,10 +142,10 @@ export default function GeminiTokenModal({ isOpen, onClose }: GeminiTokenModalPr
                             >
                                 Cancel
                             </button>
-                            {token.trim() !== "" && (
+                            {encryptedToken.trim() !== "" && (
                                 <button
                                     type="button"
-                                    onClick={() => setToken("")}
+                                    onClick={() => setEncryptedToken("")}
                                     className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
                                     disabled={isSubmitting}
                                 >

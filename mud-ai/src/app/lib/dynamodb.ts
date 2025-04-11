@@ -30,29 +30,7 @@ export const getUserByEmail = async (email: string) => {
     };
 
     const data = await docClient.send(new ScanCommand(params));
-    const user = data.Items?.[0] || null;
-    
-    // Decrypt the Gemini token if it exists
-    if (user && user.geminiToken) {
-      try {
-        // Store the encrypted token
-        const encryptedToken = user.geminiToken.S;
-        console.log("encryptedToken", encryptedToken);
-        // Decrypt the token for use in the application (but don't modify the original object)
-        const decryptedToken = decrypt(String(encryptedToken));
-        console.log("decryptedToken", decryptedToken);
-        // Create a new object with the same properties
-        const userWithDecryptedToken = { ...user };
-        // Set the decrypted token (this avoids type issues with AttributeValue)
-        userWithDecryptedToken.geminiToken = { S: decryptedToken };
-        return userWithDecryptedToken;
-      } catch (decryptError) {
-        console.error("Error decrypting Gemini token:", decryptError);
-        // If decryption fails, don't modify the token
-      }
-    }
-    
-    return user;
+    return data.Items?.[0] || null;
   } catch (error) {
     console.error("Error getting user by email:", error);
     return null;
