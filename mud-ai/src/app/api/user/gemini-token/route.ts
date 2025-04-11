@@ -17,10 +17,11 @@ export async function POST(request: NextRequest) {
       }, { status: 401 });
     }
     
-    // // Get token from request body
+    // Get token from request body
     const { token } = await request.json();
 
-    if (!token || typeof token !== "string") {
+    // Check if token is a string (including empty string)
+    if (typeof token !== "string") {
       return NextResponse.json({
         status: "error",
         message: "Invalid key provided"

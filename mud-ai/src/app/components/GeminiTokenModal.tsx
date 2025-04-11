@@ -28,11 +28,6 @@ export default function GeminiTokenModal({ isOpen, onClose }: GeminiTokenModalPr
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (!token.trim()) {
-            setError("Please enter a valid token");
-            return;
-        }
-
         try {
             setIsSubmitting(true);
             setError("");
@@ -80,7 +75,7 @@ export default function GeminiTokenModal({ isOpen, onClose }: GeminiTokenModalPr
 
                 {success ? (
                     <div className="mb-4 p-2 bg-green-100 text-green-800 rounded">
-                        Key saved successfully!
+                        {token.trim() === "" ? "Key removed successfully!" : "Key saved successfully!"}
                     </div>
                 ) : (
                     <form onSubmit={handleSubmit}>
@@ -135,6 +130,16 @@ export default function GeminiTokenModal({ isOpen, onClose }: GeminiTokenModalPr
                             >
                                 Cancel
                             </button>
+                            {token.trim() !== "" && (
+                                <button
+                                    type="button"
+                                    onClick={() => setToken("")}
+                                    className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                                    disabled={isSubmitting}
+                                >
+                                    Clear Key
+                                </button>
+                            )}
                             <button
                                 type="submit"
                                 className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
