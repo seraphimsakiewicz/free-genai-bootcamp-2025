@@ -1,6 +1,6 @@
 import { DynamoDBClient, ScanCommand } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, PutCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
-import { encrypt, decrypt } from "./crypto";
+import { encrypt } from "./crypto";
 
 // Initialize the DynamoDB client
 const client = new DynamoDBClient({
