@@ -6,12 +6,12 @@
 
 ## User Authentication
 - [x] Check if Google sign-in already registers users or just authenticates
-- [ ] Add callbacks to NextAuth configuration to:
-  - [ ] Check if user exists in DynamoDB when they sign in
-  - [ ] Create new user record if they don't exist 
-  - [ ] Generate unique UUID for each new user
-  - [ ] Save provider ("google") and email address
-- [ ] Save Google user to DynamoDB (first user: seraphim.codes@gmail.com)
+- [x] Add callbacks to NextAuth configuration to:
+  - [x] Check if user exists in DynamoDB when they sign in
+  - [x] Create new user record if they don't exist 
+  - [x] Generate unique UUID for each new user
+  - [x] Save provider ("google") and email address
+- [x] Save Google user to DynamoDB (first user: seraphim.codes@gmail.com)
 
 ## Gemini Token Management
 - [ ] Create simple modal to input Gemini API token

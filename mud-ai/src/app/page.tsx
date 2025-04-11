@@ -2,7 +2,6 @@
 
 import { signIn, signOut, useSession } from "next-auth/react"
 import AdventureGame from './components/AdventureGame';
-import DbTest from './components/DbTest';
 
 export default function Home() {
   const { data: session } = useSession()
@@ -30,25 +29,20 @@ export default function Home() {
         )}
       </div>
 
-      {session ? (
-        <>
-          <div className="absolute top-20 right-4 z-10 w-64">
-            <DbTest />
+      {session ?
+        <AdventureGame />
+        : (
+          <div className="flex flex-col items-center justify-center h-screen">
+            <h1 className="text-2xl mb-4">Text Adventure Game</h1>
+            <p className="mb-6">Sign in to start your adventure</p>
+            <button
+              onClick={() => signIn("google")}
+              className="auth-btn sign-in"
+            >
+              Sign in with Google
+            </button>
           </div>
-          <AdventureGame />
-        </>
-      ) : (
-        <div className="flex flex-col items-center justify-center h-screen">
-          <h1 className="text-2xl mb-4">Text Adventure Game</h1>
-          <p className="mb-6">Sign in to start your adventure</p>
-          <button
-            onClick={() => signIn("google")}
-            className="auth-btn sign-in"
-          >
-            Sign in with Google
-          </button>
-        </div>
-      )}
+        )}
     </main>
   )
 }

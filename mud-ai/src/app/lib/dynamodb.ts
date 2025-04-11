@@ -1,5 +1,5 @@
 import { DynamoDBClient, ScanCommand } from "@aws-sdk/client-dynamodb";
-import { DynamoDBDocumentClient, PutCommand, QueryCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
+import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb";
 
 // Initialize the DynamoDB client
 const client = new DynamoDBClient({
@@ -19,16 +19,16 @@ export const USER_TABLE_NAME = process.env.DYNAMODB_USER_TABLE || "Users";
 // Utility function to get a user by email
 export const getUserByEmail = async (email: string) => {
   try {
+    // Use ScanCommand with a filter instead of a secondary index
     const params = {
       TableName: USER_TABLE_NAME,
-      IndexName: "EmailIndex", // Assuming you have a GSI on email
-      KeyConditionExpression: "email = :email",
-      ExpressionAttributeValues: {
-        ":email": email,
+      FilterExpression: "email = :email",
+     ExpressionAttributeValues: {
+        ":email": { S: email }
       },
     };
 
-    const data = await docClient.send(new QueryCommand(params));
+    const data = await docClient.send(new ScanCommand(params));
     return data.Items?.[0] || null;
   } catch (error) {
     console.error("Error getting user by email:", error);
@@ -54,26 +54,6 @@ export const createUser = async (userData: {
   } catch (error) {
     console.error("Error creating user:", error);
     throw error;
-  }
-};
-
-// Utility function to update a user's Gemini token
-export const updateGeminiToken = async (id: string, geminiToken: string) => {
-  try {
-    const params = {
-      TableName: USER_TABLE_NAME,
-      Key: { id },
-      UpdateExpression: "set geminiToken = :token",
-      ExpressionAttributeValues: {
-        ":token": geminiToken,
-      }
-    };
-
-    await docClient.send(new UpdateCommand(params));
-    return true;
-  } catch (error) {
-    console.error("Error updating Gemini token:", error);
-    return false;
   }
 };
 
