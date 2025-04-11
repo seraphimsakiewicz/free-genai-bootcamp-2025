@@ -1,5 +1,6 @@
 import { DynamoDBClient, ScanCommand } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, PutCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
+import { encrypt, decrypt } from "./crypto";
 
 // Initialize the DynamoDB client
 const client = new DynamoDBClient({
@@ -23,13 +24,35 @@ export const getUserByEmail = async (email: string) => {
     const params = {
       TableName: USER_TABLE_NAME,
       FilterExpression: "email = :email",
-     ExpressionAttributeValues: {
+      ExpressionAttributeValues: {
         ":email": { S: email }
       },
     };
 
     const data = await docClient.send(new ScanCommand(params));
-    return data.Items?.[0] || null;
+    const user = data.Items?.[0] || null;
+    
+    // Decrypt the Gemini token if it exists
+    if (user && user.geminiToken) {
+      try {
+        // Store the encrypted token
+        const encryptedToken = user.geminiToken.S;
+        console.log("encryptedToken", encryptedToken);
+        // Decrypt the token for use in the application (but don't modify the original object)
+        const decryptedToken = decrypt(String(encryptedToken));
+        console.log("decryptedToken", decryptedToken);
+        // Create a new object with the same properties
+        const userWithDecryptedToken = { ...user };
+        // Set the decrypted token (this avoids type issues with AttributeValue)
+        userWithDecryptedToken.geminiToken = { S: decryptedToken };
+        return userWithDecryptedToken;
+      } catch (decryptError) {
+        console.error("Error decrypting Gemini token:", decryptError);
+        // If decryption fails, don't modify the token
+      }
+    }
+    
+    return user;
   } catch (error) {
     console.error("Error getting user by email:", error);
     return null;
@@ -44,13 +67,22 @@ export const createUser = async (userData: {
   geminiToken?: string;
 }) => {
   try {
+    // Make a copy of the user data to avoid modifying the original
+    const userDataToSave = { ...userData };
+    
+    // Encrypt the Gemini token if it exists
+    if (userDataToSave.geminiToken) {
+      const encryptedToken = encrypt(userDataToSave.geminiToken);
+      userDataToSave.geminiToken = encryptedToken;
+    }
+    
     const params = {
       TableName: USER_TABLE_NAME,
-      Item: userData,
+      Item: userDataToSave,
     };
 
     await docClient.send(new PutCommand(params));
-    return userData;
+    return userData; // Return the original unencrypted user data
   } catch (error) {
     console.error("Error creating user:", error);
     throw error;
@@ -64,7 +96,10 @@ export const updateUserGeminiToken = async (id: string, geminiToken: string) => 
       throw new Error("Id not provided");
     }
 
-    // Update the user with the new token
+    // Encrypt the token before storing it
+    const encryptedToken = encrypt(geminiToken);
+
+    // Update the user with the new encrypted token
     const params = {
       TableName: USER_TABLE_NAME,
       Key: {
@@ -72,7 +107,7 @@ export const updateUserGeminiToken = async (id: string, geminiToken: string) => 
       },
       UpdateExpression: "set geminiToken = :token",
       ExpressionAttributeValues: {
-        ":token": geminiToken,
+        ":token": encryptedToken,
       },
       ReturnValues: "UPDATED_NEW" as const,
     };

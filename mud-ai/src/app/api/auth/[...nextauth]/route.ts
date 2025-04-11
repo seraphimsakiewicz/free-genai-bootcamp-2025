@@ -65,7 +65,11 @@ export const authOptions: AuthOptions = {
           const dbUser = await getUserByEmail(session.user.email);
           if (dbUser) {
             console.log("dbUser", dbUser);
+            // The ID is stored as an AttributeValue object with an S property
             session.user.id = String(dbUser.id.S);
+            
+            // The geminiToken is already decrypted in the getUserByEmail function
+            // and returned as an AttributeValue object with an S property
             session.user.geminiToken = dbUser.geminiToken ? String(dbUser.geminiToken.S) : "";
           }
         } catch (error) {
