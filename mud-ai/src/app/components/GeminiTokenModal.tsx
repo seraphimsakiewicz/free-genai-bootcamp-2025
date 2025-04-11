@@ -12,25 +12,28 @@ export default function GeminiTokenModal({ isOpen, onClose }: GeminiTokenModalPr
     const { data: session, update } = useSession();
     const [encryptedToken, setEncryptedToken] = useState("");
     const [decryptedToken, setDecryptedToken] = useState("");
+    const [newToken, setNewToken] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isDecrypting, setIsDecrypting] = useState(false);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState(false);
     const [showToken, setShowToken] = useState(false);
+    const [mode, setMode] = useState<"update" | "view">("update");
 
     // Pre-fill encryptedToken from session if available
     useEffect(() => {
         if (session?.user?.geminiToken) {
             setEncryptedToken(session.user.geminiToken);
+            setMode("view");
         }
     }, [session?.user?.geminiToken]);
 
     // Handle decryption when toggling to show password
     useEffect(() => {
-        if (showToken && encryptedToken && !decryptedToken) {
+        if (showToken && encryptedToken && !decryptedToken && mode === "view") {
             handleGetToken();
         }
-    }, [showToken, encryptedToken, decryptedToken]);
+    }, [showToken, encryptedToken, decryptedToken, mode]);
 
     // Function to get decrypted token from API
     const handleGetToken = async () => {
@@ -64,7 +67,7 @@ export default function GeminiTokenModal({ isOpen, onClose }: GeminiTokenModalPr
             setError("");
 
             // Use decrypted token if showing password, otherwise use encrypted
-            const tokenToSubmit = showToken && decryptedToken ? decryptedToken.trim() : encryptedToken.trim();
+            const tokenToSubmit = newToken.trim();
 
             const response = await fetch("/api/user/gemini-token", {
                 method: "POST",
@@ -90,6 +93,8 @@ export default function GeminiTokenModal({ isOpen, onClose }: GeminiTokenModalPr
                 onClose();
                 setEncryptedToken("");
                 setDecryptedToken("");
+                setNewToken("");
+                setMode("update");
                 setSuccess(false);
             }, 1500);
         } catch (err) {
@@ -102,6 +107,8 @@ export default function GeminiTokenModal({ isOpen, onClose }: GeminiTokenModalPr
     const toggleTokenVisibility = () => {
         setShowToken(!showToken);
     };
+
+    const tokenValue = showToken && mode === "view" ? decryptedToken : mode === "view" ? encryptedToken : newToken;
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -130,17 +137,16 @@ export default function GeminiTokenModal({ isOpen, onClose }: GeminiTokenModalPr
                                 <input
                                     type={showToken ? "text" : "password"}
                                     id="token"
-                                    value={isDecrypting ? "Decrypting..." : (showToken ? decryptedToken : encryptedToken)}
+                                    value={isDecrypting ? "Decrypting..." : tokenValue}
                                     onChange={(e) => {
-                                        if (showToken) {
-                                            setDecryptedToken(e.target.value);
-                                        } else {
-                                            setEncryptedToken(e.target.value);
+                                        if (mode === "view") {
+                                            return;
                                         }
+                                        setNewToken(e.target.value);
                                     }}
                                     className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 pr-10"
-                                    placeholder="Enter your Gemini API key"
-                                    disabled={isSubmitting || isDecrypting}
+                                    placeholder="Enter your new Gemini API key"
+                                    disabled={isSubmitting || isDecrypting || mode === "view"}
                                 />
                                 <button
                                     type="button"
@@ -182,6 +188,8 @@ export default function GeminiTokenModal({ isOpen, onClose }: GeminiTokenModalPr
                                     onClick={() => {
                                         setEncryptedToken("");
                                         setDecryptedToken("");
+                                        setNewToken("");
+                                        setMode("update");
                                     }}
                                     className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
                                     disabled={isSubmitting || isDecrypting}
@@ -189,10 +197,19 @@ export default function GeminiTokenModal({ isOpen, onClose }: GeminiTokenModalPr
                                     Clear Key
                                 </button>
                             )}
+                            {mode === "view" && (
+                                <button
+                                    type="button"
+                                    onClick={() => setMode("update")}
+                                    className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-600"
+                                >
+                                    Edit Key
+                                </button>
+                            )}
                             <button
                                 type="submit"
                                 className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                                disabled={isSubmitting || isDecrypting}
+                                disabled={isSubmitting || isDecrypting || mode === "view"}
                             >
                                 {isSubmitting ? "Saving..." : "Save Key"}
                             </button>

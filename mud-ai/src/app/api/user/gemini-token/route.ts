@@ -46,8 +46,8 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// POST endpoint to update a user's Gemini token
-export async function GET(request: NextRequest) {
+// GET endpoint to update a user's Gemini token
+export async function GET() {
   try {
     // Get session from NextAuth
     const session = await getServerSession(authOptions);
