@@ -2,7 +2,7 @@ import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold, FunctionCallingMo
 import { NextResponse } from 'next/server';
 import { nodes } from '../../gameData';
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "../../api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/lib/auth/auth-options";
 import { decrypt } from '@/app/lib/crypto';
 
 // ---------- Interfaces ----------

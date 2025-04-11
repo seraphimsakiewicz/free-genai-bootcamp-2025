@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "../../auth/[...nextauth]/route";
+import { authOptions } from "@/app/lib/auth/auth-options";
 import { updateUserGeminiToken } from "@/app/lib/dynamodb";
 import { decrypt } from "@/app/lib/crypto";
 

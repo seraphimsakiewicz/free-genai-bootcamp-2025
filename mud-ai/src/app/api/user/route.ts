@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "../auth/[...nextauth]/route";
+import { authOptions } from "@/app/lib/auth/auth-options";
 import { getUserByEmail } from "@/app/lib/dynamodb";
 
 // GET endpoint to retrieve user data
