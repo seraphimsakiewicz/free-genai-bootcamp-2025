@@ -3,6 +3,8 @@
 import { useState, useRef, useEffect, FormEvent, ChangeEvent } from 'react';
 import styles from './AdventureGame.module.css';
 import { nodes } from '@/app/gameData';
+import GeminiTokenModal from '@/app/components/GeminiTokenModal';
+import { useSession } from 'next-auth/react';
 
 interface HistoryEntry {
     type: 'system' | 'user' | 'hint';
@@ -15,10 +17,16 @@ interface ApiResponse {
     isEndNode?: boolean;
     guidingQuestion?: string;
     error?: string;
+    status?: string;
+    message?: string;
+    errorCode?: string;
 }
 
 const AdventureGame = () => {
-    // State variables for the game
+    const { data: session } = useSession();
+
+    // All state declarations must come before any conditional logic
+    const [showTokenModal, setShowTokenModal] = useState<boolean>(false);
     const [currentNode, setCurrentNode] = useState<string>('inicio');
     const [history, setHistory] = useState<HistoryEntry[]>([]);
     const [userInput, setUserInput] = useState<string>('');
@@ -31,19 +39,24 @@ const AdventureGame = () => {
     // Ref for auto-scrolling
     const historyEndRef = useRef<HTMLDivElement>(null);
 
+    // Check if user has a Gemini token
+    const hasGeminiToken = !!session?.user?.geminiToken;
+
     // Load initial node text when component mounts
     useEffect(() => {
-        // Get the initial node directly from the game data instead of making an API call
-        const initialNodeData = nodes['inicio'];
-        if (initialNodeData) {
-            setHistory([{
-                type: 'system',
-                text: initialNodeData.text,
-            }]);
-        } else {
-            setError('Error iniciando el juego. No se pudo cargar el nodo inicial.');
+        if (hasGeminiToken) {
+            // Only initialize game state if user has a token
+            const initialNodeData = nodes['inicio'];
+            if (initialNodeData) {
+                setHistory([{
+                    type: 'system',
+                    text: initialNodeData.text,
+                }]);
+            } else {
+                setError('Error iniciando el juego. No se pudo cargar el nodo inicial.');
+            }
         }
-    }, []);
+    }, [hasGeminiToken]);
 
     // Auto-scroll to the bottom of the history when it updates
     useEffect(() => {
@@ -113,7 +126,12 @@ const AdventureGame = () => {
                     setError('Error al comunicarse con la IA. Intenta de nuevo.');
                 }
             } else {
-                setError(data.error || 'Error procesando tu respuesta');
+                // Check for Gemini API key errors
+                if (data.errorCode === 'INVALID_GEMINI_KEY') {
+                    setError('Tu clave de API de Gemini es inválida o ha expirado. Por favor, actualízala para seguir jugando.');
+                } else {
+                    setError(data.error || data.message || 'Error procesando tu respuesta');
+                }
             }
         } catch (err) {
             setError('Error de conexión. Inténtalo de nuevo.');
@@ -141,6 +159,33 @@ const AdventureGame = () => {
             text: initialNodeData.text,
         }]);
     };
+
+    // If no token, show a centered button UI instead of the game
+    if (!hasGeminiToken) {
+        return (
+            <div className={styles.noTokenContainer}>
+                <div className={styles.noTokenContent}>
+                    <h2 className={styles.noTokenTitle}>¡Bienvenido a la Aventura por el Tesoro! 💎</h2>
+                    <p className={styles.noTokenMessage}>
+                        Para jugar a esta aventura, necesitas configurar tu clave API de Gemini.
+                    </p>
+                    <button
+                        onClick={() => setShowTokenModal(true)}
+                        className={styles.addKeyButton}
+                    >
+                        Añadir clave API de Gemini
+                    </button>
+                </div>
+
+                {showTokenModal && (
+                    <GeminiTokenModal
+                        isOpen={showTokenModal}
+                        onClose={() => setShowTokenModal(false)}
+                    />
+                )}
+            </div>
+        );
+    }
 
     return (
         <div className={styles.gameContainer}>
@@ -175,7 +220,17 @@ const AdventureGame = () => {
                 )}
 
                 {error && (
-                    <div className={styles.error}>{error}</div>
+                    <div className={styles.error}>
+                        {error}
+                        {error.includes('Gemini') && (
+                            <button
+                                onClick={() => setShowTokenModal(true)}
+                                className={styles.actionButton}
+                            >
+                                Actualizar clave API
+                            </button>
+                        )}
+                    </div>
                 )}
 
                 <div ref={historyEndRef} />
@@ -216,6 +271,14 @@ const AdventureGame = () => {
                     </div>
                 )}
             </div>
+
+            {/* Add token modal import and component */}
+            {showTokenModal && (
+                <GeminiTokenModal
+                    isOpen={showTokenModal}
+                    onClose={() => setShowTokenModal(false)}
+                />
+            )}
         </div>
     );
 };

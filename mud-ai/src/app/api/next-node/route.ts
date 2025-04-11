@@ -1,6 +1,9 @@
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold, FunctionCallingMode, Tool } from '@google/generative-ai';
 import { NextResponse } from 'next/server';
 import { nodes } from '../../gameData';
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../../api/auth/[...nextauth]/route";
+import { decrypt } from '@/app/lib/crypto';
 
 // ---------- Interfaces ----------
 
@@ -21,10 +24,6 @@ interface FunctionCall {
 }
 
 // ---------- Initialize the Generative Model ----------
-
-// Initialize the Google Generative AI using your API key. The non-null assertion (!) is allowed
-// here for environment variables, assuming you ensure at runtime that they are defined.
-const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GOOGLE_API_KEY!);
 
 // Set up safety settings to avoid harmful content.
 const safetySettings = [
@@ -101,9 +100,43 @@ const functionDeclarations = [
 
 export async function POST(request: Request): Promise<Response> {
   try {
-    // Parse the request body.
+    // Parse the request body
     const body = (await request.json()) as RequestBody;
     const { userInput, currentNode, inventory = [] } = body;
+
+   const session = await getServerSession(authOptions);
+    if (!session || !session.user?.id) {
+      return NextResponse.json({
+        status: "error",
+        message: "Not authenticated"
+      }, { status: 401 });
+    }
+    
+    const token = session?.user?.geminiToken;
+
+    // Check if token is a string (including empty string)
+    if (typeof token !== "string" || token === "") {
+      return NextResponse.json({
+        status: "error",
+        message: "Invalid API key",
+        errorCode: "INVALID_GEMINI_KEY"
+      }, { status: 400 });
+    }
+    
+    let decryptedToken;
+    try {
+      decryptedToken = decrypt(token);
+    } catch (error) {
+      console.error("Error decrypting token:", error);
+      return NextResponse.json({
+        status: "error",
+        message: "Error decrypting your API key",
+        errorCode: "INVALID_GEMINI_KEY"
+      }, { status: 400 });
+    }
+    
+    // Initialize with the appropriate key
+    const genAI = new GoogleGenerativeAI(decryptedToken);
 
     // Get the current node data.
     const currentNodeData = nodes[currentNode] as GameNode | undefined;
@@ -168,24 +201,23 @@ export async function POST(request: Request): Promise<Response> {
     `;
 
     // Initialize the generative model with function calling.
-const model = genAI.getGenerativeModel({
-        model: "gemini-2.0-flash",
-        safetySettings,
-        generationConfig: {
-            temperature: 0.2,
-            maxOutputTokens: 1024,
+    const model = genAI.getGenerativeModel({
+      model: "gemini-2.0-flash",
+      safetySettings,
+      generationConfig: {
+        temperature: 0.2,
+        maxOutputTokens: 1024,
+      },
+      // Pass them just like in your JS version:
+      tools: {
+        functionDeclarations,
+      } as unknown as Tool[],
+      toolConfig: {
+        functionCallingConfig: {
+          mode: FunctionCallingMode.ANY,
         },
-        // Pass them just like in your JS version:
-        tools: {
-            functionDeclarations,
-        } as unknown as Tool[],
-        toolConfig: {
-            functionCallingConfig: {
-            mode: FunctionCallingMode.ANY,
-            },
-        },
+      },
     });
-
 
     try {
       // Generate the content from the AI.
@@ -290,7 +322,22 @@ const model = genAI.getGenerativeModel({
       });
     } catch (error) {
       console.error('Error calling Gemini API:', error);
-      // Narrow error type.
+      // Check for API key related errors
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      
+      if (errorMessage.includes('API key') || 
+          errorMessage.includes('authentication') || 
+          errorMessage.includes('credential') ||
+          errorMessage.includes('unauthorized')) {
+        return NextResponse.json({
+          status: "error",
+          errorCode: "INVALID_GEMINI_KEY",
+          nextNode: currentNode,
+          nodeText: currentNodeData.text,
+        }, { status: 400 });
+      }
+      
+      // Narrow error type for other errors.
       const err = error instanceof Error ? error : new Error(String(error));
       if (err.message?.includes('SAFETY')) {
         return NextResponse.json({
