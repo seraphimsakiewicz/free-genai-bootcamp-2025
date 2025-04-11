@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
     if (!token || typeof token !== "string") {
       return NextResponse.json({
         status: "error",
-        message: "Invalid token provided"
+        message: "Invalid key provided"
       }, { status: 400 });
     }
     
@@ -32,13 +32,13 @@ export async function POST(request: NextRequest) {
     
     return NextResponse.json({
       status: "success",
-      message: "Gemini token updated successfully"
+      message: "Gemini key updated successfully"
     });
   } catch (error) {
     console.error("Error updating Gemini token:", error);
     return NextResponse.json({
       status: "error",
-      message: "Failed to update Gemini token",
+      message: "Failed to update Gemini key",
       error: error instanceof Error ? error.message : String(error)
     }, { status: 500 });
   }

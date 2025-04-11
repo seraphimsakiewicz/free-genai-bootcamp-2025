@@ -24,7 +24,7 @@ export default function GeminiTokenButton() {
                     : "bg-blue-600 hover:bg-blue-700 text-white"
                     }`}
             >
-                {hasToken ? "Update Gemini Token" : "Add Gemini Token"}
+                {hasToken ? "Update Gemini Key" : "Add Gemini Key"}
             </button>
 
             {isModalOpen && (
