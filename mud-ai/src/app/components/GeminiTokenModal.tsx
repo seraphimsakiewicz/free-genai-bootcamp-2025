@@ -99,7 +99,7 @@ export default function GeminiTokenModal({ isOpen, onClose }: GeminiTokenModalPr
         }
     };
 
-    const togglePasswordVisibility = () => {
+    const toggleTokenVisibility = () => {
         setShowToken(!showToken);
     };
 
@@ -145,7 +145,7 @@ export default function GeminiTokenModal({ isOpen, onClose }: GeminiTokenModalPr
                                 <button
                                     type="button"
                                     className="absolute inset-y-0 right-0 px-3 flex items-center text-gray-500 hover:text-gray-700"
-                                    onClick={togglePasswordVisibility}
+                                    onClick={toggleTokenVisibility}
                                     disabled={isDecrypting || isSubmitting}
                                 >
                                     {isDecrypting ? (
