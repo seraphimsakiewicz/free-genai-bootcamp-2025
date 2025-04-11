@@ -7,6 +7,7 @@ declare module "next-auth" {
   interface Session {
     user: {
       id?: string;
+      geminiToken?: string;
     } & DefaultSession["user"]
   }
 
@@ -15,5 +16,6 @@ declare module "next-auth" {
    */
   interface User {
     id?: string;
+    geminiToken?: string;
   }
 }

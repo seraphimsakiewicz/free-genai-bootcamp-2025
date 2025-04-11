@@ -64,8 +64,9 @@ export const authOptions: AuthOptions = {
         try {
           const dbUser = await getUserByEmail(session.user.email);
           if (dbUser) {
-            session.user.id = String(dbUser.id);
-            // session.user.geminiToken = dbUser.geminiToken || "";
+            console.log("dbUser", dbUser);
+            session.user.id = String(dbUser.id.S);
+            session.user.geminiToken = dbUser.geminiToken ? String(dbUser.geminiToken.S) : "";
           }
         } catch (error) {
           console.error("Error fetching user data for session:", error);

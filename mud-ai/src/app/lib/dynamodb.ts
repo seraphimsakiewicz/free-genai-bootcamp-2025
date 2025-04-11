@@ -1,5 +1,5 @@
 import { DynamoDBClient, ScanCommand } from "@aws-sdk/client-dynamodb";
-import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb";
+import { DynamoDBDocumentClient, PutCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
 
 // Initialize the DynamoDB client
 const client = new DynamoDBClient({
@@ -53,6 +53,34 @@ export const createUser = async (userData: {
     return userData;
   } catch (error) {
     console.error("Error creating user:", error);
+    throw error;
+  }
+};
+
+// Utility function to update a user's Gemini token
+export const updateUserGeminiToken = async (id: string, geminiToken: string) => {
+  try {
+    if (!id) {
+      throw new Error("Id not provided");
+    }
+
+    // Update the user with the new token
+    const params = {
+      TableName: USER_TABLE_NAME,
+      Key: {
+        id: id,
+      },
+      UpdateExpression: "set geminiToken = :token",
+      ExpressionAttributeValues: {
+        ":token": geminiToken,
+      },
+      ReturnValues: "UPDATED_NEW" as const,
+    };
+
+    await docClient.send(new UpdateCommand(params));
+    return true;
+  } catch (error) {
+    console.error("Error updating Gemini token:", error);
     throw error;
   }
 };

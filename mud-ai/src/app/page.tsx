@@ -2,6 +2,7 @@
 
 import { signIn, signOut, useSession } from "next-auth/react"
 import AdventureGame from './components/AdventureGame';
+import GeminiTokenButton from './components/GeminiTokenButton';
 
 export default function Home() {
   const { data: session } = useSession()
@@ -12,6 +13,7 @@ export default function Home() {
         {session ? (
           <>
             <span className="text-sm font-medium">{session.user?.email}</span>
+            <GeminiTokenButton />
             <button
               onClick={() => signOut()}
               className="auth-btn sign-out"
