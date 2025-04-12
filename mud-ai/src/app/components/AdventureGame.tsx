@@ -6,6 +6,50 @@ import { nodes } from '@/app/gameData';
 import GeminiTokenModal from '@/app/components/GeminiTokenModal';
 import { useSession } from 'next-auth/react';
 
+// Game Instructions Modal Component
+const InstructionsModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
+    if (!isOpen) return null;
+
+    return (
+        <div className={styles.modalOverlay}>
+            <div className={styles.instructionsModal}>
+                <h2 className={styles.instructionsTitle}>Cómo Jugar</h2>
+
+                <div className={styles.instructionsContent}>
+                    <h3>Bienvenido a &quot;Aventura por el Tesoro&quot; 💎</h3>
+
+                    <p>Esta es una aventura conversacional en español donde tú decides qué hacer a continuación.</p>
+
+                    <h4>Instrucciones básicas:</h4>
+                    <ul>
+                        <li>Escribe tus acciones en español en el campo de texto</li>
+                        <li>Sé específico con lo que quieres hacer: &quot;ir al norte&quot;, &quot;tomar la llave&quot;, etc.</li>
+                        <li>Explora tu entorno para descubrir pistas y objetos</li>
+                        <li>Los objetos recogidos aparecerán en tu inventario</li>
+                        <li>La aventura tiene múltiples caminos y finales</li>
+                    </ul>
+
+                    <h4>Consejos:</h4>
+                    <ul>
+                        <li>Presta atención a las descripciones para encontrar pistas</li>
+                        <li>Algunos obstáculos requieren objetos específicos para superarlos</li>
+                        <li>Puedes reiniciar el juego en cualquier momento con el botón &quot;Reiniciar Juego&quot;</li>
+                    </ul>
+
+                    <p className={styles.instructionsFooter}>¡Buena suerte en tu aventura!</p>
+                </div>
+
+                <button
+                    className={styles.instructionsCloseButton}
+                    onClick={onClose}
+                >
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    );
+};
+
 interface HistoryEntry {
     type: 'system' | 'user' | 'hint';
     text: string;
@@ -35,6 +79,7 @@ const AdventureGame = () => {
     const [isGameOver, setIsGameOver] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
     const [inventory, setInventory] = useState<string[]>([""]);
+    const [showInstructions, setShowInstructions] = useState<boolean>(false);
 
     // Ref for auto-scrolling
     const historyEndRef = useRef<HTMLDivElement>(null);
@@ -190,14 +235,25 @@ const AdventureGame = () => {
     return (
         <div className={styles.gameContainer}>
             <div className={styles.gameHeader}>
+                <div className={styles.headerLeft}>
+                    <button
+                        onClick={() => setShowInstructions(true)}
+                        className={styles.instructionsButton}
+                        title="Instrucciones del juego"
+                    >
+                        Cómo Jugar
+                    </button>
+                </div>
                 <h1 className={styles.gameTitle}>Aventura por el Tesoro 💎</h1>
-                <button
-                    onClick={handleReset}
-                    className={styles.restartButton}
-                    title="Reiniciar juego"
-                >
-                    Reiniciar Juego
-                </button>
+                <div className={styles.headerRight}>
+                    <button
+                        onClick={handleReset}
+                        className={styles.restartButton}
+                        title="Reiniciar juego"
+                    >
+                        Reiniciar Juego
+                    </button>
+                </div>
             </div>
 
             {/* Add inventory display */}
@@ -288,6 +344,12 @@ const AdventureGame = () => {
                     onClose={() => setShowTokenModal(false)}
                 />
             )}
+
+            {/* Instructions Modal */}
+            <InstructionsModal
+                isOpen={showInstructions}
+                onClose={() => setShowInstructions(false)}
+            />
         </div>
     );
 };
