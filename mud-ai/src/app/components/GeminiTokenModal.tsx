@@ -168,9 +168,24 @@ export default function GeminiTokenModal({ isOpen, onClose }: GeminiTokenModalPr
                                     )}
                                 </button>
                             </div>
-                            <p className="mt-1 text-xs text-gray-500">
-                                Your key will be securely stored in your user account.
-                            </p>
+                            <div className="mt-1 text-xs text-gray-500">
+                                <p>Your key will be securely stored in your user account.</p>
+                                <div className="mt-2 p-3 bg-blue-50 dark:bg-blue-900/30 rounded-md">
+                                    <h3 className="font-semibold text-blue-600 dark:text-blue-400 mb-1">
+                                        How to get your Gemini API key
+                                    </h3>
+                                    <ol className="list-decimal ml-4 space-y-1 text-gray-700 dark:text-gray-300">
+                                        <li>Visit <a href="https://makersuite.google.com/app/apikey" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 underline">Google AI Studio</a></li>
+                                        <li>Sign in with your Google account</li>
+                                        <li>Click on &quot;Create API key&quot;</li>
+                                        <li>Copy the generated API key</li>
+                                        <li>Paste it in the field above</li>
+                                    </ol>
+                                    <p className="mt-2 text-gray-600 dark:text-gray-400 italic">
+                                        Note: Google allows free use of the Gemini API with a monthly limit.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
 
                         <div className="flex justify-end space-x-2">

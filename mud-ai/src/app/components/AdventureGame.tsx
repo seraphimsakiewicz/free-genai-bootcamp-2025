@@ -189,7 +189,16 @@ const AdventureGame = () => {
 
     return (
         <div className={styles.gameContainer}>
-            <h1 className={styles.gameTitle}>Aventura por el Tesoro 💎</h1>
+            <div className={styles.gameHeader}>
+                <h1 className={styles.gameTitle}>Aventura por el Tesoro 💎</h1>
+                <button
+                    onClick={handleReset}
+                    className={styles.restartButton}
+                    title="Reiniciar juego"
+                >
+                    Reiniciar Juego
+                </button>
+            </div>
 
             {/* Add inventory display */}
             <div className={styles.inventoryContainer}>

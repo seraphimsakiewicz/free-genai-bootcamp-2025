@@ -11,11 +11,18 @@
   flex-direction: column;
 }
 
+.gameHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
 .gameTitle {
   text-align: center;
-  margin-bottom: 1.5rem;
   color: #f0d078;
   text-shadow: 0 0 10px rgba(240, 208, 120, 0.3);
+  margin: 0;
 }
 
 .gameHistory {
@@ -254,4 +261,28 @@
   background-color: #ffe090;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(240, 208, 120, 0.3);
+}
+
+.restartButton {
+  background-color: #70f0a0;
+  color: #222;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+}
+
+.restartButton:hover {
+  background-color: #90ffc0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.restartButton:active {
+  transform: translateY(0);
 } 
